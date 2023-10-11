@@ -1,0 +1,411 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+//     --LOGIN AND REGISTER--
+.tittle {
+    font-weight: 600;
+    color: #010024;
+}
+
+.tittle1 {
+    font-weight: 600;
+    color: #010024;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.wrapper {
+    background-image: url(imagenes/fondo.svg);
+    background-size: cover;
+    padding: 0 20px 0 20px;
+}
+
+.mainn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.side-image {
+    background: linear-gradient(to top, rgba(22, 41, 40, 0.4) 40%,
+            rgba(46, 94, 109, 0)), url(imagenes/besitz.gif);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 10px 0 0 10px;
+    position: relative;
+}
+
+.row {
+    width: 700px;
+    height: 550px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+.row1 {
+    width: 400px;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0px;
+    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.5);
+}
+
+.text {
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+}
+
+i {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.input-box {
+    width: 390px;
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.input-box header {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 0 10px 0 10px;
+}
+
+.regis {
+    text-align: center;
+    margin-top: 12px;
+    padding: 0 10px 0 10px;
+    font-size: 18px;
+    color: #706e6e;
+}
+
+.btn-regis {
+    border: none;
+    outline: none;
+    font-weight: 700;
+    padding: 6px;
+    color: rgb(0, 12, 26);
+    background: #ececec;
+    border-radius: 5px;
+    transition: .4s;
+    letter-spacing: 1px;
+}
+
+.btn-regis:hover {
+    background: rgb(0, 12, 26);
+    color: #fff;
+}
+
+.input {
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    margin-bottom: 20px;
+    color: #40414a;
+}
+
+.input-box .input-field label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-field input:focus~label {
+    top: -10px;
+    font-size: 13px;
+}
+
+.input-field input:valid~label {
+    top: -10px;
+    font-size: 14px;
+    color: rgb(0, 12, 26);
+}
+
+.input-field .input:focus,
+.input-field .input:valid {
+    border-bottom: 1px solid rgb(0, 12, 26);
+}
+
+.submit {
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    padding: 6px;
+    color: rgb(0, 12, 26);
+    background: #ececec;
+    border-radius: 5px;
+    transition: .4s;
+    letter-spacing: 1px;
+}
+
+.submit:hover {
+    background: rgb(0, 12, 26);
+    color: #fff;
+}
+
+.signin {
+    text-align: center;
+    font-size: small;
+    margin-top: 25px;
+}
+
+.a {
+    text-decoration: none;
+    font-weight: 700;
+    color: #706e6e;
+    transition: .5s;
+}
+
+.a:hover {
+    text-decoration: none;
+    color: #010024;
+}
+
+.a1 {
+    text-decoration: none;
+    font-weight: 500;
+    color: #706e6e;
+    transition: .5s;
+}
+
+.a1:hover {
+    text-decoration: none;
+    color: #010024;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .side-image {
+        border-radius: 10px 10px 0 0;
+    }
+
+    img {
+        width: 35px;
+        position: absolute;
+        top: 20px;
+        left: 47%;
+    }
+
+    .row {
+        max-width: 420px;
+        width: 100%;
+    }
+}
+
+//  --NavSide and Nav--
+:root {
+    --blue: #040024;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+
+   body {
+    min-height: 100vh;
+    overflow-x: hidden;
+   }
+
+.img {
+    width: 70px;
+}
+
+.containerr{
+    position: absolute;
+    width: 50%;
+}
+
+/* =============== Navigation ================ */
+.navigation {
+    position: fixed;
+    width: 300px;
+    height: 100%;
+    background: var(--blue);
+    border-left: 10px solid var(--blue);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.tittle2{
+    color: var(--white);
+    margin-top: 25px; 
+}
+
+.navigation.active {
+    width: 80px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.navigation ul li {
+    position: relative;
+    width: 100%;
+    list-style: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.navigation ul li:hover,
+.navigation ul li.hovered {
+    background-color: var(--white);
+}
+
+.navigation ul li:nth-child(1) {
+    margin-bottom: 40px;
+    pointer-events: none;
+}
+
+.navigation ul li a {
+    position: relative;
+    display: block;
+    width: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--white);
+}
+
+.navigation ul li:hover a,
+.navigation ul li.hovered a {
+    color: var(--blue);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    line-height: 75px;
+    text-align: center;
+}
+
+.navigation ul li a .icon ion-icon {
+    font-size: 1.75rem;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    padding: 0 10px;
+    height: 60px;
+    line-height: 60px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+/* --------- curve outside ---------- */
+.navigation ul li:hover a::before,
+.navigation ul li.hovered a::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation ul li:hover a::after,
+.navigation ul li.hovered a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+/* ===================== Main ===================== */
+.main {
+    position: absolute;
+    width: calc(100% - 300px);
+    left: 300px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.5s;
+}
+
+.main.active {
+    width: calc(100% - 80px);
+    left: 80px;
+}
+
+.content{
+    position: relative;
+    width: 100%;
+    padding: 20px;  
+    
+}
+
+.content .card {
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    border-color: white;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+.topbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.toggle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
