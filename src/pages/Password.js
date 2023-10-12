@@ -6,7 +6,7 @@ const Password = () => {
       <div>
           <div className="wrapper">
               <div className="container mainn">
-                  <div className="row2 justify-content-center">
+                  <div className="row justify-content-center">
                       <div className="col">
                           <div class="card text-center shadow-lg">
                               <div class="card-header">

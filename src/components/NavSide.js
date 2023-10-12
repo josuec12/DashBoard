@@ -51,6 +51,15 @@ const NavSide = () => {
           </li>
 
           <li>
+            <NavLink to="/Register">
+              <span className="icon">
+              <ion-icon name="person-add-outline"></ion-icon>
+              </span>
+              <span className="title">Registrar</span>
+            </NavLink>
+          </li>
+
+          <li>
             <NavLink to="/Login">
               <span className="icon">
                 <ion-icon name="log-out-outline"></ion-icon>
@@ -68,13 +77,4 @@ const NavSide = () => {
 
 export default NavSide
 
-let list = document.querySelectorAll(".navigation li");
 
-function activeLink() {
-  list.forEach((item) => {
-    item.classList.remove("hovered");
-  });
-  this.classList.add("hovered");
-}
-
-list.forEach((item) => item.addEventListener("mouseover", activeLink));

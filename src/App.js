@@ -18,12 +18,13 @@ function App() {
         <NavSide />
         </div>  
         <Routes>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/ReporteV" element={<ReporteV />} />
-          <Route path="/ReporteF" element={<ReporteF />} />
-          <Route path="/Tabla" element={<Tabla />}/> 
-          <Route path="/Password" element={<Password/>}/>
+          <Route exact path="/Login" element={<Login />} />
+          <Route exact path="/Register" element={<Register/>}/>
+          <Route exact path="/Home" element={<Home />} />
+          <Route exact path="/ReporteV" element={<ReporteV />} />
+          <Route exact path="/ReporteF" element={<ReporteF />} />
+          <Route exact path="/Tabla" element={<Tabla />}/> 
+          <Route exact path="/Password" element={<Password/>}/>
         </Routes>
       </Router>
     </div>

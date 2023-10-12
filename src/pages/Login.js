@@ -7,7 +7,7 @@ const Login = () => {
         <div>
             <div className="wrapper">
                 <div className="container mainn">
-                    <div className="row">
+                    <div className="login">
                         <div className="col-md-6 side-image"></div>
                         <div className="col-md-6 right">
                             <div className="input-box">
