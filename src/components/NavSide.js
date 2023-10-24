@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const NavSide = () => { 
   return (
@@ -39,25 +39,7 @@ const NavSide = () => {
               </span>
               <span className="title">Reporte Financiero</span>
             </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/Tabla">
-              <span className="icon">
-              <ion-icon name="tablet-landscape-outline"></ion-icon>
-              </span>
-              <span className="title">Tabla</span>
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/Register">
-              <span className="icon">
-              <ion-icon name="person-add-outline"></ion-icon>
-              </span>
-              <span className="title">Registrar</span>
-            </NavLink>
-          </li>
+          </li>        
 
           <li>
             <NavLink to="/Login">

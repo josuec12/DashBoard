@@ -1,7 +1,10 @@
 import React from 'react'
+import NavSideA from '../components/NavSideA'
 
 const Tabla = () => {
   return (
+    <div>
+      <NavSideA/>
     <div className="main">
       <div className="topbar">
         <div className="toggle">
@@ -9,8 +12,10 @@ const Tabla = () => {
         </div>
     </div>
     <div className="content" >
-        <div className="card">
+        <div className="dash">
+        <div className="cardHeader">
         <h2>Tabla</h2>
+        </div>
             <main>
             <table class="table table-striped table-bordered table-primary">
   <thead>
@@ -57,6 +62,7 @@ const Tabla = () => {
             </main>
             </div>
             </div>
+    </div>
     </div>
   )
 }

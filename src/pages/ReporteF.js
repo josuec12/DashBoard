@@ -1,17 +1,25 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import NavSide from '../components/NavSide'
 
 const ReporteF = () => {
   return (
+  <div>
+    <NavSide/>
    <div className="main">
     <div className="topbar">
         <div className="toggle">
             <ion-icon name="menu-outline"></ion-icon>
         </div>
+        <div class="logo">
+        {/* <img src={require('../imagenes/eagle.jpg')} /> */}
+                </div>
     </div>
       <div className="content" >
-        <div className="card">
+        <div className="dash">
+        <div className="cardHeader">
           <h2>Dashboard Financiero</h2>
+          </div>
           <main>
           <iframe title="DASHBOARDWOK" width="1100" height="646" src="https://app.powerbi.com/view?r=eyJrIjoiNmVkM2UzMDktNzMxYS00YjM4LWEzMTUtNjI1MzM0YjJjOTFmIiwidCI6IjhhNmUyOWJiLWRmNDYtNGMxOS04NWJkLTZmNTVjYmNhNzEyNCIsImMiOjR9" frameborder="0" allowFullScreen="true"></iframe>
           </main>
@@ -29,6 +37,7 @@ const ReporteF = () => {
           </footer>
         </div>
       </div>
+    </div>
     </div>
   )
 }

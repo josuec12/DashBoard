@@ -18,75 +18,81 @@
 }
 
 .wrapper {
-    background-image: url(imagenes/fondo.svg);
+    background: linear-gradient(to top, rgba(22, 41, 40, 0.103) ,
+    rgba(46, 94, 109, 0.096)), url(imagenes/fondo1.svg);
     background-size: cover;
     padding: 0 20px 0 20px;
+   
 }
 
-.mainn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+/* ----------------------------------------------
+  ANIMACIONES
+---------------------------------------------- */
+
+.scale-up-center{
+    animation:scale-up-center 1.4s; } 
+    @keyframes scale-up-center{ 
+        0%{transform:scale(.5)} 
+        100%{transform:scale(1)
+        } 
+    }
+
+.rotate-center{
+    animation:rotate-center 0.9s} 
+    @keyframes rotate-center{
+        0%{transform:rotate(0)}
+        100%{transform:rotate(360deg)
+        }
+    }
+
+.jello-horizontal{
+    animation:jello-horizontal .9s linear both}
+     @keyframes jello-horizontal{
+        0%{transform:scale3d(1,1,1)}30%
+        {transform:scale3d(1.25,.75,1)}
+        40%{transform:scale3d(.75,1.25,1)}50%
+        {transform:scale3d(1.15,.85,1)}65%
+        {transform:scale3d(.95,1.05,1)}75%
+        {transform:scale3d(1.05,.95,1)}100%
+        {transform:scale3d(1,1,1)
+        }
+    }
+
+.shadow-drop-center{
+    animation:shadow-drop-center 0.5s linear both}
+     @keyframes shadow-drop-center{
+        0%{box-shadow:0 0 0 0 transparent
+        }100%
+        {box-shadow:0 0 20px 0 rgba(255, 255, 255, 0.61)
+        }
+    }
+
+
+ .mainn {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
+ /* Estilo para ocultar las flechas de incremento y decremento en input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0; /* opcional, para ajustar el espaciado si es necesario */
 }
 
-.side-image {
-    background: linear-gradient(to top, rgba(22, 41, 40, 0.4) 40%,
-            rgba(46, 94, 109, 0)), url(imagenes/besitz.gif);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-radius: 10px 0 0 10px;
-    position: relative;
-}
-
-.login{
-    display: flex;
-    width: 700px;
-    height: 550px;
-    border-radius: 10px;
-    background: #fff;
-    padding: 0px;
-    box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.5);
-}
-
+ .img2 {
+    width: 130px;
+    margin-top: 20px;
+ }
+     
 .row1 {
     width: 400px;
     border-radius: 10px;
     background: #fff;
     padding: 0px;
     box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.5);
-}
-
-.text {
-    position: relative;
-    display: flex;
-    justify-content: center;
-
-}
-
-i {
-    font-weight: 400;
-    font-size: 15px;
-}
-
-.right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.input-box {
-    width: 390px;
-    padding: 30px;
-    box-sizing: border-box;
-}
-
-.input-box header {
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 45px;
 }
 
 .input-field {
@@ -102,16 +108,43 @@ i {
     margin-top: 30px;
 }
 
+.login{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-login {
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    width: 145px;
+    padding: 6px;
+    color: rgb(0, 12, 26);
+    background: #dddcdc;
+    border-radius: 5px;
+    transition: .4s;
+    letter-spacing: 1px;
+}
+
+.btn-login:hover {
+    background: rgb(0, 12, 26);
+    color: #fff;
+}
+
 .btn-regis{
     text-decoration: none;
     text-align: center;
     border: none;
-    width: 350px;
+    width: 450px;
     outline: none;
     font-weight: 700;
+    font-size: 22px;
     padding: 6px;
     color: rgb(0, 12, 26);
-    background: #ececec;
+    background: #dddcdc;
     border-radius: 5px;
     transition: .4s;
     letter-spacing: 1px;
@@ -143,12 +176,11 @@ i {
 
 .input-field input:focus~label {
     top: -10px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .input-field input:valid~label {
     top: -10px;
-    font-size: 14px;
     color: rgb(0, 12, 26);
 }
 
@@ -165,7 +197,7 @@ i {
     font-weight: 700;
     padding: 6px;
     color: rgb(0, 12, 26);
-    background: #ececec;
+    background: #dddcdc;
     border-radius: 5px;
     transition: .4s;
     letter-spacing: 1px;
@@ -176,15 +208,9 @@ i {
     color: #fff;
 }
 
-.signin {
-    text-align: center;
-    font-size: small;
-    margin-top: 25px;
-}
-
 .a {
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 500;
     color: #706e6e;
     transition: .5s;
 }
@@ -208,13 +234,8 @@ i {
 
 @media only screen and (max-width: 768px) {
 
-    .side-image {
-        border-radius: 10px 10px 0 0;
-    }
-
     img {
         width: 35px;
-        position: absolute;
         top: 20px;
         left: 47%;
     }
@@ -253,15 +274,21 @@ i {
     position: fixed;
     width: 300px;
     height: 100%;
-    background: var(--blue);
-    border-left: 10px solid var(--blue);
+    display: grid;
+    background:#020013;    
     transition: 0.5s;
     overflow: hidden;
+    transform: translateX(0%);
+}
+
+.navigation.close{
+    transform: translateX(-100%);
 }
 
 .tittle2{
     color: var(--white);
-    margin-top: 25px; 
+    margin-top: 32px; 
+    margin-left: 10px;
 }
 
 .navigation.active {
@@ -289,7 +316,7 @@ i {
 }
 
 .navigation ul li:nth-child(1) {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     pointer-events: none;
 }
 
@@ -381,22 +408,57 @@ i {
     
 }
 
-.content .card {
+.content .dash {
     position: relative;
     background: var(--white);
     border-color: white;
-    display: flex;
+    // display: flex;
     justify-content: space-between;
     cursor: pointer;
   }
 
-.ma{
-    margin-top: 10px;
-}
+  .cardBox {
+    position: relative;
+      width: 100%;
+      padding: 20px;  
+  }
+  
+  .cardBox .card1 {
+    position: relative;
+      background: var(--white);
+      border-color: white;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+  }
+
+  .recentCustomers {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+  }
+
+
+
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .logo img {
+    height: 100%;
+    object-fit: cover;
+  }
+  
 
 .topbar {
     width: 100%;
-    height: 60px;
+    height: 70px;
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -406,10 +468,132 @@ i {
 .toggle {
     position: relative;
     width: 60px;
-    height: 60px;
+    height: 83px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2.5rem;
-    cursor: pointer;
+    cursor: pointer;    
 }
+
+// --CALENDARIO--
+
+.cont {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 30px;
+    /* margin-top: 10px; */
+  }
+  
+  .cont .calendario {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 20px;
+  }
+  
+  .cont .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .cardHeader h2 {
+    font-weight: 600;
+    color: var(--blue);
+  }
+
+
+  .card-container.card {
+    max-width: 390px;
+    padding: 40px 40px;
+}
+
+  
+  .card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 20px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img-card {
+    width: 86px;
+    height: 86px;
+    margin: 0 auto;
+    display: block;
+}
+
+/* ====================== Responsive Design ========================== */
+@media (max-width: 991px) {
+    .navigation {
+      left: -300px;
+    }
+    .navigation.active {
+      width: 300px;
+      left: 0;
+    }
+    .main {
+      width: 100%;
+      left: 0;
+    }
+    .main.active {
+      left: 300px;
+    }
+    .cardBox {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cont {
+      grid-template-columns: 1fr;
+    }
+    .calendario {
+      overflow-x: auto;
+    }
+    .status.inProgress {
+      white-space: nowrap;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cardBox {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    .cardHeader h2 {
+      font-size: 20px;
+    }
+    .user {
+      min-width: 40px;
+    }
+    .navigation {
+      width: 100%;
+      left: -100%;
+      z-index: 1000;
+    }
+    .navigation.active {
+      width: 100%;
+      left: 0;
+    }
+    .toggle {
+      z-index: 10001;
+    }
+    .main.active .toggle {
+      color: #fff;
+      position: fixed;
+      right: 0;
+      left: initial;
+    }
+  }

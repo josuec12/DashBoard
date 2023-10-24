@@ -1,8 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import NavSideA from '../components/NavSideA'
 
 const Register = () => {
   return (
+    <div>
+      <NavSideA/>
       <div className="main">
           <div className="topbar">
               <div className="toggle">
@@ -10,8 +13,10 @@ const Register = () => {
               </div>
           </div>
           <div className="content" >
-              <div className="card">
+              <div className="dash">
+              <div className="cardHeader">
                   <h2>Registro</h2>
+                  </div>
                   <main className="ma">
                     <form action="#">
                         <div className="row">
@@ -66,6 +71,7 @@ const Register = () => {
                   </main>
               </div>
           </div>
+      </div>
       </div> 
   )
 }
