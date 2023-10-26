@@ -1,18 +1,19 @@
- import {Link} from 'react-router-dom'
- import React from 'react'
+import React from 'react'
 
- const Nav = () => {
-   return (
-    <div className="main">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <ion-icon name="menu-outline"></ion-icon>
-        </nav>
+const Nav = ({ isOpen, toggleSidebar }) => {
+  return (
+    <div>
+      <div className="topbar">
+      <div className="toggle">
+    <ion-icon onClick={toggleSidebar} name="menu-outline"></ion-icon>
+  </div>  
+        <div class="logo">
+        {/* <img src={require('../imagenes/eagle.jpg')} /> */}
+                </div>
+
     </div>
+    </div>
+  )
+}
 
-   )
- }
-
- export default Nav
-
-
- 
+export default Nav

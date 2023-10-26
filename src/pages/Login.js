@@ -5,12 +5,13 @@ const Login = () => {
     return (
         <div>
             <body className="wrapper">
-
-                <div className="container">
-                <img className="img2 scale-up-center" src={require('../imagenes/blanco.png')} />
-                    <div className="card card-container scale-up-center">                          
-                        <h3 className="tittle1">Ingresa aquí</h3>
+            <img className="img2 scale-up-center" src={require('../imagenes/blanco.png')} />  
+                <div className="container1 rounded ">                  
+                <div className="row login1 scale-up-center">
+                <div className="col side-image d-none d-lg-block"></div>                              
+                    <div className="col singin">                                           
                         <form className="form-signin">
+                        <h3 className="tittle1">Ingresa aquí</h3>
                             <div className="form-floating mb-3">
                                 <input className="form-control" id="inputNit" type="number" placeholder="654615231" />
                                 <label for="inputNit">Nit</label>
@@ -30,8 +31,10 @@ const Login = () => {
                             <Link className="btn-login" to="/HomeA">Ingresa</Link>
                             </div>
                         </form>
+                        </div> 
+                        </div> 
                     </div>
-                </div>
+                    
 
             </body>
         </div>

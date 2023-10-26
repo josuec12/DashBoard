@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavSideA from '../components/NavSideA'
+import Nav from '../components/Nav';
 
-const Tabla = () => {
+const Tabla = ({ isOpen, toggleSidebar }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggle= () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div>
-      <NavSideA/>
-    <div className="main">
-      <div className="topbar">
-        <div className="toggle">
-            <ion-icon name="menu-outline"></ion-icon>
-        </div>
-    </div>
+      <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
+        <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
+      <Nav isOpen={isSidebarOpen} toggleSidebar={toggle}/>
     <div className="content" >
         <div className="dash">
         <div className="cardHeader">

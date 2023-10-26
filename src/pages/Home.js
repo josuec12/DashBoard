@@ -1,20 +1,20 @@
-import React from 'react'
-import NavSide from '../components/NavSide'
+import React, { useState } from 'react'
+import NavSide from '../components/NavSide';
+import Nav from '../components/Nav';
 
-const Home = () => {
+const Home = (isOpen, toggleSidebar) => {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggle= () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div>
-      <NavSide/>
-    <div className="main">
-         <div className="topbar">
-        <div className="toggle">
-            <ion-icon name="menu-outline"></ion-icon>
-        </div>
-        <div class="logo">
-        {/* <img src={require('../imagenes/eagle.jpg')} /> */}
-                </div>
-
-    </div>
+      <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle}/>
+    <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
+    <Nav isOpen={isSidebarOpen} toggleSidebar={toggle}/>
           <div className="cardBox" >
         <div className="card1">
             <div className="cardHeader">

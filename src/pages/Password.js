@@ -5,8 +5,8 @@ const Password = () => {
   return (
       <div>
           <body className="wrapper">
-              <div className="container">
-              <img className="img2 scale-up-center" src={require('../imagenes/blanco.png')} />
+          <img className="img2 scale-up-center" src={require('../imagenes/blanco.png')} />    
+              <div className="container">          
                   <div className="row justify-content-center">
                       <div className="col-lg-5">
                           <div className="card shadow-lg border-0 rounded-lg mt-5 scale-up-center">

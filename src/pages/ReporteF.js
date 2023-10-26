@@ -1,20 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import NavSide from '../components/NavSide'
+import NavSide from '../components/NavSide';
+import Nav from '../components/Nav';
 
-const ReporteF = () => {
+const ReporteF = ({isOpen, toggleSidebar}) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggle= () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
   <div>
-    <NavSide/>
-   <div className="main">
-    <div className="topbar">
-        <div className="toggle">
-            <ion-icon name="menu-outline"></ion-icon>
-        </div>
-        <div class="logo">
-        {/* <img src={require('../imagenes/eagle.jpg')} /> */}
-                </div>
-    </div>
+    <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle}/>
+   <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
+   <Nav isOpen={isSidebarOpen} toggleSidebar={toggle}/>
       <div className="content" >
         <div className="dash">
         <div className="cardHeader">
