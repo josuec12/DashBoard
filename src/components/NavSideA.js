@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const NavSideA = ({ isOpen, toggleSidebar }) => {
   const [activeLink, setActiveLink] = useState(null);
 
-  const handleLinkClick = (index) => {
+  const handleLinkMouseOver  = (index) => {
     setActiveLink(index);
   };
 
@@ -39,7 +39,7 @@ const NavSideA = ({ isOpen, toggleSidebar }) => {
             <NavLink to="/HomeA">
               <span className="icon">
                 <ion-ico>
-                  <img className="img" src={require('../imagenes/blancol.png')} />
+                  <img className="img" src={require('../imagenes/blancol.png')} alt="" />
                 </ion-ico>
               </span>
               <h3 className="tittle2">Besitz</h3>
@@ -47,7 +47,7 @@ const NavSideA = ({ isOpen, toggleSidebar }) => {
           </li>
 
           {links.map((link, index) => (
-            <li key={index} onClick={() => handleLinkClick(index)} className={activeLink === index ? 'hovered' : ''}>
+            <li key={index} onMouseOver={() => handleLinkMouseOver(index)} className={activeLink === index ? 'hovered' : ''}>
               <NavLink to={link.to}>
                 <span className="icon">{link.icon}</span>
                 <span className="title">{link.title}</span>

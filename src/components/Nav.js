@@ -1,18 +1,21 @@
 import React from 'react'
 
-const Nav = ({ isOpen, toggleSidebar }) => {
+const Nav = ({ toggleSidebar }) => {
   return (
-    <div>
-      <div className="topbar">
-      <div className="toggle">
-    <ion-icon onClick={toggleSidebar} name="menu-outline"></ion-icon>
-  </div>  
-        <div class="logo">
-        {/* <img src={require('../imagenes/eagle.jpg')} /> */}
-                </div>
+    <nav className="navbar navbar-expand-lg bg-body-tertiary sombra">
+      <div className="container-fluid">
+        <div className="toggle">
+          <ion-icon onClick={toggleSidebar} name="menu-outline"></ion-icon>
+        </div>
+        <div>
+          <h2 className="welcome">Bienvenido Josue</h2>
+        </div>
+        <div className="logo">
+          <img src={require('../imagenes/descarga.png')} alt="" />
+        </div>
+      </div>
+    </nav>
 
-    </div>
-    </div>
   )
 }
 

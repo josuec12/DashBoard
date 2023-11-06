@@ -7,10 +7,10 @@ const Error500 = () => {
         <div className="row justify-content-center">
                             <div className="col-lg-6">
                                 <div className="text-center mt-4">
-                                    <img className="mb-4 img-error" src={require('../imagenes/505.png')}/>
+                                    <img className="mb-4 img-error" src={require('../imagenes/505.png')} alt="" />
                                     <p className="lead">Internal server error.</p>
                                     <Link to="/Home">
-                                    <i class="fas fa-arrow-left me-1"></i>
+                                    <i className="fas fa-arrow-left me-1"></i>
                                         Regresa al Home
                                     </Link>
                                 </div>
