@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import './styles.css';
 
 // import required modules
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+import { EffectCoverflow, FreeMode, Pagination } from 'swiper/modules';
 
 const Carrusel = () => {
   return (

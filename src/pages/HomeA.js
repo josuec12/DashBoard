@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import NavSideA from '../components/NavSideA'
 import NavA from '../components/NavA';
 import Carrusel from '../components/Carrusel';
+import Footer from '../components/Footer';
+import CarruselV from '../components/CarruselV';
 
 const HomeA = () => {
 
@@ -29,22 +31,21 @@ const HomeA = () => {
 
         <div className="cont">
           <div className="boletin">
-            <div className="cardHeader">
-              <h2>Boletín</h2>
+            <div className="cardHeader">  
+              <h2>...</h2>
             </div>
-            <iframe title="Boletin" src="" className="cyb"></iframe>
-
+            <div className='cyb'><CarruselV/></div>
           </div>
 
           <div className="calendario">
             <div className="cardHeader">
               <h2>Calendario</h2>
             </div>
-            <iframe title="calendario" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23005eff&ctz=America%2FBogota&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&src=YzIyZmY2YzU4MzEzMzk1NmE0MjBiY2JlNDk0Mjg4ZGNjNGE0YjIxZjk4MjhmNmE1NTM2M2E4YzIwYjkxMzFlMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233F51B5" className="cyb" scrolling="no"></iframe>
+            <iframe title="calendario" src="https://widget-0f36559d0fbe4ea2a3dad140b07b02ba.elfsig.ht" className="cyb"></iframe>
           </div>
 
         </div>
-
+        <Footer/>
       </div>
     </div>
 

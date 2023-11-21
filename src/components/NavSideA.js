@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavSideA = ({ isOpen, toggleSidebar }) => {
+const NavSideA = ({ isOpen}) => {
   const [activeLink, setActiveLink] = useState(null);
 
   const handleLinkMouseOver  = (index) => {
     setActiveLink(index);
   };
+
 
   const links = [
     {

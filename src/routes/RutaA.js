@@ -23,6 +23,7 @@ const RutaA = () => {
       <Router>
         <Routes>
         <Route exact path="/" element={<Login />} />
+        <Route exact path="/Login" element={<Login />} />
         <Route exact path="/HomeA" element={<HomeA isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>} />
         <Route exact path="/Register" element={<Register isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>}/>
         <Route exact path="/Tabla" element={<Tabla isOpen={isSidebarOpen} toggleSidebar={toggleSidebar}/>}/> 

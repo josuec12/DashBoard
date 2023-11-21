@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import NavSideA from '../components/NavSideA'
-import Nav from '../components/Nav';
+import NavA from '../components/NavA';
 import User from '../components/User';
 import Edit from '../components/Edit';
 import AddU from '../components/AddU';
+import Footer from '../components/Footer';
 
 
 const Tabla = () => {
@@ -14,18 +15,19 @@ const Tabla = () => {
   };
 
   return (
-    <div>
-      <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
+    <div className="body">
+        <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
         <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
-      <Nav isOpen={isSidebarOpen} toggleSidebar={toggle}/>
-    <div className="content" >
-        <div className="dash">
-            <User/>
-            <AddU/>
-            <Edit/>
+          <NavA isOpen={isSidebarOpen} toggleSidebar={toggle} />
+          <div className="content" >
+            <div className="dash">
+              <User />
+              <AddU />
+              <Edit />
             </div>
-            </div>
-    </div>
+          </div>
+          <Footer />
+        </div>  
     </div>
   )
 }

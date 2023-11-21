@@ -5,7 +5,7 @@ const Password = () => {
   return (
       <div>
           <div className="wrapper">
-          <img className="img2 scale-up-center" alt="logo" src={require('../imagenes/blanco.png')} />    
+          <img className="img-login scale-up-center" alt="logo" src={require('../imagenes/blanco.png')} />    
               <div className="container">          
                   <div className="row justify-content-center">
                       <div className="col-lg-5">
@@ -22,8 +22,8 @@ const Password = () => {
                                           <label htmlFor="inputEmail">Email</label>
                                       </div>
                                       <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                          <Link className="a1" to="/Login">Ingresa</Link>
-                                          <Link className="submit" to="/Login">Recuperar</Link>
+                                          <Link className="aP" to="/Login">Ingresa</Link>
+                                          <Link className="buttonL" to="/Login">Recuperar</Link>
                                       </div>
                                   </form>
                               </div>

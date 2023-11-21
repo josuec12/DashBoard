@@ -2,10 +2,15 @@ import React from 'react'
 
 const Nav = ({ toggleSidebar }) => {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary sombra">
+    <nav className="navbar navbar-expand-md bg-body-tertiary sombra">
       <div className="container-fluid">
         <div className="toggle">
-          <ion-icon onClick={toggleSidebar} name="menu-outline"></ion-icon>
+          <label className="buttonT" htmlFor="toggle">
+            <input type="checkbox" id="toggle" onClick={toggleSidebar} />
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
         </div>
         <div>
           <h2 className="welcome">Bienvenido Josue</h2>

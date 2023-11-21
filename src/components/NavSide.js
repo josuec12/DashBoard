@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavSide = ({ isOpen, toggleSidebar }) => {
+const NavSide = ({ isOpen}) => {
   const [activeLink, setActiveLink] = useState(null);
 
   const handleLinkMouseOver = (index) => {
@@ -36,7 +36,7 @@ const NavSide = ({ isOpen, toggleSidebar }) => {
       <div>
         <ul>
           <li>
-            <NavLink to="/HomeA">
+            <NavLink to="/Home">
               <span className="icon">
                 <ion-ico>
                   <img className="img" src={require('../imagenes/blancol.png')} alt="" />

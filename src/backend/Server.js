@@ -1,13 +1,5 @@
 const express = require('express')
 const app = express()
 
+const port = 5000
 
-const archivoDB = require('./Connection')
-app.get('/',(req,res)=>{
-    res.end('Bienvenido al servidor backend')
-})
-
-//Confi el server
-app.listen(5000, function(){
-    console.log('El servidor esta corriendo correctamente')
-})
