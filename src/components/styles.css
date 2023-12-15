@@ -1,43 +1,18 @@
 .swiper {
     width: 100%;
-    padding-top: 50px;
     padding-bottom: 50px;
   }
   
   .swiper-slide {
     background-position: center;
     background-size: cover;
-    width: 200px;
+    width: 90%;
     height: 200px;
   }
   
   .swiper-slide img {
     display: block;
     width: 100%;
-  }
-
-  .swiper {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .swiper-slide {
-    text-align: center; 
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .swiper-v {
-    background: #eee;
   }
 
   .cardn{
@@ -49,7 +24,7 @@
 
   /* Barra de desplazamiento */
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
   
   /* Barra de desplazamiento en hover */

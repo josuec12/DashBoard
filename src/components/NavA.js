@@ -1,6 +1,16 @@
 import React from 'react'
+import { useAdmin } from '../Context/AdminContext'
 
 const NavA = ({ toggleSidebar }) => {
+    const { Admin } = useAdmin();
+
+    if (!Admin) {
+        console.log('no esta autenticado');
+        return null;
+    }
+ 
+    const adminName = Admin.Admin.nom || 'Admin';
+
     return (
         <nav className="navbar navbar-expand-md bg-body-tertiary sombra">
             <div className="container-fluid">
@@ -13,7 +23,7 @@ const NavA = ({ toggleSidebar }) => {
                     </label>
                 </div>
                 <div>
-                    <h2 className="welcome">Bienvenido Admin</h2>
+                    <h2 className="welcome">Welcome {adminName}</h2>
                 </div>
                 <div className="logoA">
                     <img src={require('../imagenes/logo.png')} alt="" />

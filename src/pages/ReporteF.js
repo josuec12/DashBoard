@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NavSide from '../components/NavSide';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { useBesitz } from '../Context/BesitzContext';
 
 const ReporteF = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -9,6 +10,16 @@ const ReporteF = () => {
   const toggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const {Besitz} = useBesitz();
+
+  if(!Besitz){
+    console.log('No esta autenticado')
+    return null;
+  }
+
+  const besitzFi = Besitz.Besitz.financiero;
+
   return (
     <div>
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />
@@ -23,7 +34,7 @@ const ReporteF = () => {
               <iframe 
               title="DASHBOARDWOK" 
               className="dashp" 
-              src="https://app.powerbi.com/view?r=eyJrIjoiNmVkM2UzMDktNzMxYS00YjM4LWEzMTUtNjI1MzM0YjJjOTFmIiwidCI6IjhhNmUyOWJiLWRmNDYtNGMxOS04NWJkLTZmNTVjYmNhNzEyNCIsImMiOjR9" 
+              src={besitzFi} 
               frameBorder="0" 
               allowFullScreen={true}>
               </iframe>

@@ -18,8 +18,8 @@
 }
 
 .wrapper {
-    background: linear-gradient(to top, #1629281a ,
-    rgba(46, 94, 109, 0.096)), url(imagenes/fondo.svg);
+    background: linear-gradient(to top, rgba(22, 41, 40, 0.103) ,
+    rgba(46, 94, 109, 0.096)), url(imagenes/leo.jpg);
     background-size: cover;
     padding: 0 20px 0 20px; 
     min-height: 100vh;
@@ -41,8 +41,13 @@
  }
 
 .login1{
-    width: 45%;
+<<<<<<< HEAD
+    width: 49%;
+    height: 410px;
+=======
+    width: 350px;
     height: 400px;
+>>>>>>> parent of 4e133e9 (Acutalizaciones)
     border-radius: 10px;
     background: #fff;
     padding: 0px;
@@ -66,6 +71,12 @@
     }
     
 
+ .mainn {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+
  /* Estilo para ocultar las flechas de incremento y decremento en input number */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -74,11 +85,16 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0; /* opcional, para ajustar el espaciado si es necesario */
 }
 
- .img-login {
+ .img2 {
     width: 140px;
     margin-top: 1%;
     margin-left: 5%;
+       
  }
+     
+.row1 {
+    width: 400px;
+}
 
 .input-field {
     display: flex;
@@ -87,70 +103,61 @@ input[type="number"]::-webkit-outer-spin-button {
     padding: 0 10px 0 10px;
 }
 
-.btn-regis{
+.regis{
     display: flex;
     justify-content: center;
     margin-top: 30px;
 }
 
-.btn-login{
+.login{
     display: flex;
     justify-content: center;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-.buttonL {
-  padding: 6px;
-  border-radius: 5px;
-  border: 0;
-  color: #020013;
-  background-color: #dddcdc;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  width: 145px;
-  font-weight: 700;
-  text-decoration: none;
-  text-align: center;
-  transition: all .5s ease;
- }
- 
- .buttonL:hover {
-  letter-spacing: 3px;
-  background-color: hsl(246deg 100% 3%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: rgb(2 24 220) 0px 7px 29px 0px;
- }
- 
- .buttonL:active {
-  letter-spacing: 3px;
-  background-color: hsl(246deg 100% 3%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: rgb(2 0 19) 0px 0px 0px 0px;
-  transform: translateY(10px);
-  transition: 100ms;
- }
-
- .checkbox-wrapper input[type="checkbox"] {
-  display: none;
+.btn-login {
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    width: 145px;
+    padding: 6px;
+    color: rgb(0, 12, 26);
+    background: #dddcdc;
+    border-radius: 5px;
+    transition: .4s;
+    letter-spacing: 1px;
 }
 
-.checkbox-wrapper .terms-label {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+.btn-login:hover {
+    background: rgb(0, 12, 26);
+    color: #fff;
 }
 
-.checkbox-wrapper .terms-label .label-text {
-  margin-left: 10px;
+.btn-regis{
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    width: 450px;
+    outline: none;
+    font-weight: 700;
+    font-size: 22px;
+    padding: 6px;
+    color: rgb(0, 12, 26);
+    background: #dddcdc;
+    border-radius: 5px;
+    transition: .4s;
+    letter-spacing: 1px;
 }
 
-.checkbox-wrapper .checkbox-svg {
-  width: 18px;
-  height: 18px;
+.btn-regis:hover{
+    background: rgb(0, 12, 26);
+    color: #fff;
 }
 
+<<<<<<< HEAD
 .checkbox-wrapper .checkbox-box {
   fill: rgba(207, 205, 205, 0.425);
   stroke: #020013;
@@ -171,7 +178,10 @@ input[type="number"]::-webkit-outer-spin-button {
   stroke-dashoffset: 0;
 }
 
+
  //Estilos formulario registro 
+=======
+>>>>>>> parent of 4e133e9 (Acutalizaciones)
 .input {
     height: 45px;
     width: 100%;
@@ -206,36 +216,26 @@ input[type="number"]::-webkit-outer-spin-button {
     border-bottom: 1px solid rgb(0, 12, 26);
 }
 
-.CartBtn {
-  width: 160px;
-  height: 40px;
-  border-radius: 12px;
-  border: none;
-  background-color: rgb(2, 0, 19 );
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  transition-duration: .5s;
-  overflow: hidden;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
-  position: relative;
+.submit {
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    outline: none;
+    font-weight: 700;
+    padding: 6px;
+    color: rgb(0, 12, 26);
+    background: #dddcdc;
+    border-radius: 5px;
+    transition: .4s;
+    letter-spacing: 1px;
 }
 
-.IconContainer {
-  position: absolute;
-  left: -51px;
-  width: 30px;
-  height: 38px;
-  background-color: transparent;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 2;
-  transition-duration: .5s;
+.submit:hover {
+    background: rgb(0, 12, 26);
+    color: #fff;
 }
 
+<<<<<<< HEAD
 .textoo {
   height: 100%;
   width: fit-content;
@@ -320,8 +320,9 @@ input[type="number"]::-webkit-outer-spin-button {
   color: white;
 }
 
-
 //Estilos olvida contraseña e ingresa (password)
+=======
+>>>>>>> parent of 4e133e9 (Acutalizaciones)
 .a {
     text-decoration: none;
     font-weight: 500;
@@ -334,16 +335,30 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #010024;
 }
 
-.aP {
+.a1 {
     text-decoration: none;
     font-weight: 500;
     color: #706e6e;
     transition: .5s;
 }
 
-.aP:hover {
+.a1:hover {
     text-decoration: none;
     color: #010024;
+}
+
+@media only screen and (max-width: 768px) {
+
+    img {
+        width: 35px;
+        top: 20px;
+        left: 47%;
+    }
+
+    .row {
+        max-width: 420px;
+        width: 100%;
+    }
 }
 
 //  --NavSide and Nav--
@@ -367,105 +382,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .containerr{
     position: absolute;
     width: 50%;
-}
-
-.logo {
-  position: relative;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.logo img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.logoA {
-  position: relative;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.logoA img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-}
-
-.welcome{
-  font-weight: 600;
-}
-
-.sombra {
-  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
-}
-
-
-.buttonT {
-  --size: 2.5rem;
-  --clr: #020013;
-  width: var(--size);
-  height: calc(0.7 * var(--size));
-  cursor: pointer;
-  position: relative;
-  display: block;
-}
-
-.buttonT #toggle {
-  display: none;
-  width: 100%;
-  height: 100%;
-}
-
-.buttonT span {
-  display: block;
-  position: absolute;
-  width: 100%;
-  border-radius: 0.5rem;
-  border: 3px solid var(--clr);
-  background-color: var(--clr);
-  transition: 0.15s ease-in-out;
-}
-
-.buttonT span:nth-of-type(1) {
-  top: 0;
-  right: 0;
-  transform-origin: right center;
-}
-
-.buttonT span:nth-of-type(2) {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.buttonT span:nth-of-type(3) {
-  top: 100%;
-  right: 0;
-  transform-origin: right center;
-  transform: translateY(-100%);
-}
-
-.buttonT #toggle:checked ~ span:nth-of-type(1) {
-  transform: translateY(-30%) rotate(40deg);
-  width: 50%;
-  top: 50%;
-}
-
-.buttonT #toggle:checked ~ span:nth-of-type(3) {
-  transform: translateY(-70%) rotate(-40deg);
-  width: 50%;
-  top: 50%;
 }
 
 /* =============== Navigation ================ */
@@ -511,9 +427,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .navigation ul li:nth-child(1) {
     margin-bottom: 30px;
-    background-color: #020013;
+    pointer-events: none;
 }
-
 
 .navigation ul li a {
     position: relative;
@@ -581,47 +496,14 @@ input[type="number"]::-webkit-outer-spin-button {
     pointer-events: none;
 }
 
-.navigation ul li:nth-child(1):hover a::before,
-.navigation ul li:nth-child(1).hovered a::before {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0px;
-    width: 0px;
-    height: 0px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--white);
-    pointer-events: none;
-}
-
-.navigation ul li:nth-child(1):hover a::after,
-.navigation ul li:nth-child(1).hovered a::after {
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: 0px;
-    width: 0px;
-    height: 0px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
-    pointer-events: none;
-}
-
-
 /* ===================== Main ===================== */
-
-
-
 .main {
     position: absolute;
     width: calc(100% - 270px);
     left: 275px;
-    min-height: 100%;
+    min-height: 100vh;
     background: var(--white);
     transition: 0.5s;
-    flex-grow: 1;
 }
 
 .main.active {
@@ -629,10 +511,31 @@ input[type="number"]::-webkit-outer-spin-button {
     left: 100px;
 }
 
+.custom-input-file {
+  display: none;
+}
+
+.custom-file-button {
+  background-color:  #dddcdc;
+  color: #020013;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  transition: .4s;
+  font-weight: 600;
+}
+
+.custom-file-button:hover{
+  background-color: #020013;
+  color: white;
+}
+
 .content{
     position: relative;
     width: 100%;
-    padding: 20px;  
+    padding: 15px;  
     
 }
 
@@ -667,6 +570,56 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 
 
+
+.logo {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .logo img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .logoA {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .logoA img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  .welcome{
+    font-weight: 600;
+  }
+
+.sombra {
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;    
+}
+
 //DASHBOARD
 
 .iframe-container {
@@ -684,13 +637,13 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 100%;
   }
 
-// --CALENDARIO y BOLETÍN--
+// --CALENDARIO--
 
 .cont {
     position: relative;
     width: 100%;
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 2fr 1.5fr;
     margin-top: 10px; 
   }
   
@@ -745,17 +698,16 @@ input[type="number"]::-webkit-outer-spin-button {
 .cyb{
     width: 100%;
     height: 400px;
-    overflow: auto;
     border-radius: 5px;
 }
 
 /* ====================== Responsive Design ========================== */
 @media (max-width: 991px) {
     .navigation {
-      left: -273px;
+      left: -300px;
     }
     .navigation.active {
-      width: 273px;
+      width: 300px;
       left: 0;
     }
     .main {
@@ -763,44 +715,11 @@ input[type="number"]::-webkit-outer-spin-button {
       left: 0;
     }
     .main.active {
-      left: 273px;
+      left: 300px;
     }
     .cardBox {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    .buttonT span:nth-of-type(1) {
-      top: 0;
-      left: 0;
-      transform-origin: left center;
-    }
-    
-    .buttonT span:nth-of-type(2) {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    
-    .buttonT span:nth-of-type(3) {
-      top: 100%;
-      left: 0;
-      transform-origin: left center;
-      transform: translateY(-100%);
-    }
-    
-    .buttonT #toggle:checked ~ span:nth-of-type(3) {
-      transform: translateY(-70%) rotate(40deg);
-      width: 50%;
-      bottom: 50%;
-      left: 0px;
-    }
-    
-    .buttonT #toggle:checked ~ span:nth-of-type(1) {
-      transform: translateY(-30%) rotate(-40deg);
-      width: 50%;
-      bottom: 50%;
-      left: 0px;
-    }
-    
   }
   
   @media (max-width: 768px) {
@@ -812,18 +731,6 @@ input[type="number"]::-webkit-outer-spin-button {
     }
     .status.inProgress {
       white-space: nowrap;
-    }
-
-    .buttonT #toggle:checked ~ span:nth-of-type(1) {
-      transform: translateY(-30%) rotate(40deg);
-      width: 50%;
-      top: 50%;
-    }
-    
-    .buttonT #toggle:checked ~ span:nth-of-type(3) {
-      transform: translateY(-70%) rotate(-40deg);
-      width: 50%;
-      top: 50%;
     }
   }
   
@@ -846,13 +753,16 @@ input[type="number"]::-webkit-outer-spin-button {
       width: 100%;
       left: 0;
     }
-   
-    .main.active {
+    .toggle {
+      z-index: 10001;
+    }
+    .main.active .toggle {
       color: #fff;
       position: fixed;
       right: 0;
       left: initial;
     }
+<<<<<<< HEAD
 
     .buttonT #toggle:checked ~ span:nth-of-type(1) {
       transform: translateY(-30%) rotate(40deg);
@@ -866,3 +776,412 @@ input[type="number"]::-webkit-outer-spin-button {
       top: 50%;
     }
   }
+
+ // TABLAS
+
+.table.table-striped td:nth-child(4) {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table.table-striped td:nth-child(5) {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table.table-striped td:nth-child(6) {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table.table-striped td:nth-child(7) {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.table.table-striped td:nth-child(8) {
+ text-align: center;
+}
+
+
+.pagination {
+	float: right;
+	margin: 0 0 5px;
+}
+.pagination li a {
+	border: none;
+	font-size: 13px;
+	min-width: 30px;
+	min-height: 30px;
+	color: #999;
+	margin: 0 2px;
+	line-height: 30px;
+	border-radius: 2px !important;
+	text-align: center;
+	padding: 0 6px;
+}
+.pagination li a:hover {
+	color: #666;
+}	
+.pagination li.active a, .pagination li.active a.page-link {
+	background: #020013;
+  color: white;
+}
+.pagination li.active a:hover {        
+	background: #020013;
+  color: white;
+}
+.pagination li.disabled i {
+	color: #ccc;
+}
+.pagination li i {
+	font-size: 16px;
+	padding-top: 6px
+}
+.hint-text {
+	float: left;
+	margin-top: 10px;
+	font-size: 13px;
+}  
+
+.psearch{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container-inputS {
+  position: relative;
+}
+
+.inputS {
+  width: 150px;
+  padding: 10px 0px 10px 40px;
+  border-radius: 9999px;
+  border: solid 2px #020013;
+  transition: all .2s ease-in-out;
+  outline: none;
+  opacity: 0.8;
+}
+
+.container-inputS svg {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
+}
+
+.inputS:focus {
+  opacity: 1;
+  width: 250px;
+}
+
+.edit-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #020013;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none !important;
+}
+
+.edit-svgIcon {
+  width: 17px;
+  transition-duration: 0.3s;
+}
+
+.edit-svgIcon path {
+  fill: white;
+}
+
+.edit-button:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+  background-color: rgb(255, 208, 0);
+  align-items: center;
+}
+
+.edit-button:hover .edit-svgIcon {
+  width: 20px;
+  transition-duration: 0.3s;
+  transform: translateY(60%);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+  -ms-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+.edit-button::before {
+  display: none;
+  content: "Editar";
+  color: rgb(236, 236, 236);
+  transition-duration: 0.3s;
+  font-size: 2px;
+}
+
+.edit-button:hover::before {
+  display: block;
+  padding-right: 10px;
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition-duration: 0.3s;
+}
+
+.c-button {
+  color: #000;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 0.9em 1.6em;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+}
+
+.c-button--gooey {
+  color: #020013;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 4px solid #020013;
+  border-radius: 0;
+  position: relative;
+  transition: all 700ms ease;
+}
+
+.c-button--gooey .c-button__blobs {
+  height: 100%;
+  filter: url(#goo);
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: -3px;
+  right: -1px;
+  z-index: -1;
+}
+
+.c-button--gooey .c-button__blobs div {
+  background-color: #020013;
+  width: 34%;
+  height: 100%;
+  border-radius: 100%;
+  position: absolute;
+  transform: scale(1.4) translateY(125%) translateZ(0);
+  transition: all 700ms ease;
+}
+
+.c-button--gooey .c-button__blobs div:nth-child(1) {
+  left: -5%;
+}
+
+.c-button--gooey .c-button__blobs div:nth-child(2) {
+  left: 30%;
+  transition-delay: 60ms;
+}
+
+.c-button--gooey .c-button__blobs div:nth-child(3) {
+  left: 66%;
+  transition-delay: 25ms;
+}
+
+.c-button--gooey:hover {
+  color: #fff;
+}
+
+.c-button--gooey:hover .c-button__blobs div {
+  transform: scale(1.4) translateY(0) translateZ(0);
+}
+
+.svg-gcb{
+  display: block;
+  height: 0;
+  width: 0;
+  padding: 5px;
+}
+
+.inputGroup {
+  margin: 1em 0 1em 0;
+  max-width: 190px;
+  position: relative;
+}
+
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: transparent;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: #020013;
+}
+
+.inputGroup :is(input:focus, input:valid)~label {
+  transform: translateY(-50%) scale(.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: white;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+  border-color: #020013;
+}
+
+.button-delete {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #020013;
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  transition-duration: .3s;
+  overflow: hidden;
+  position: relative;
+  margin-top: 4px;
+}
+
+.svgIcon-D {
+  width: 12px;
+  transition-duration: .3s;
+}
+
+.svgIcon-D path {
+  fill: white;
+}
+
+.button-delete:hover {
+  width: 120px;
+  border-radius: 50px;
+  transition-duration: .3s;
+  background-color: rgb(255, 69, 69);
+  align-items: center;
+}
+
+.button-delete:hover .svgIcon-D {
+  width: 40px;
+  transition-duration: .3s;
+  transform: translateY(60%);
+}
+
+.button-delete::before {
+  position: absolute;
+  top: -20px;
+  content: "Eliminar";
+  color: white;
+  transition-duration: .3s;
+  font-size: 2px;
+}
+
+.button-delete:hover::before {
+  font-size: 13px;
+  opacity: 1;
+  transform: translateY(30px);
+  transition-duration: .3s;
+}
+
+.buttonBol {
+  position: relative;
+  border: none;
+  background-color: white;
+  color: #212121;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.buttonBol span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.buttonBol::before {
+  content: "";
+  position: absolute;
+  background-color: #020013;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  bottom: 0%;
+  transform: translate(-100%, 100%);
+  border-radius: inherit;
+}
+
+.buttonBol svg {
+  fill: #020013;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.buttonBol:hover::before {
+  animation: shakeBack 0.6s forwards;
+}
+
+.buttonBol:hover svg {
+  fill: white;
+  scale: 1.3;
+}
+
+.buttonBol:active {
+  box-shadow: none;
+}
+
+@keyframes shakeBack {
+  0% {
+    transform: translate(-100%, 100%);
+  }
+
+  50% {
+    transform: translate(20%, -20%);
+  }
+
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+=======
+  }
+>>>>>>> parent of 4e133e9 (Acutalizaciones)

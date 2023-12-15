@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useBesitz } from '../Context/BesitzContext';
 
-const NavSide = ({ isOpen}) => {
+<<<<<<< HEAD
+const NavSide = ({ isOpen }) => {
+=======
+const NavSide = ({ isOpen, toggleSidebar }) => {
+>>>>>>> parent of 4e133e9 (Acutalizaciones)
   const [activeLink, setActiveLink] = useState(null);
+  const { logoutBesitz } = useBesitz(); // Usar desestructuración correctamente
+  const navigate = useNavigate();
 
   const handleLinkMouseOver = (index) => {
     setActiveLink(index);
   };
+
+  const handleLogout = () => {
+    // Llama a la función correspondiente para cerrar sesión
+    // Aquí se asume que hay una función de cierre de sesión en el contexto
+    logoutBesitz();
+    // Redirige a la página de inicio de sesión
+    navigate('/Login');
+  };
+
 
   const links = [
     {
@@ -28,6 +44,7 @@ const NavSide = ({ isOpen}) => {
       to: '/',
       icon: <ion-icon name="log-out-outline"></ion-icon>,
       title: 'Cerrar sesion',
+      onClick: handleLogout,
     },
   ];
 
@@ -36,7 +53,7 @@ const NavSide = ({ isOpen}) => {
       <div>
         <ul>
           <li>
-            <NavLink to="/Home">
+            <NavLink to="/HomeA">
               <span className="icon">
                 <ion-ico>
                   <img className="img" src={require('../imagenes/blancol.png')} alt="" />

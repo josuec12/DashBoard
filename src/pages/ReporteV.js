@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import NavSide from '../components/NavSide'
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import { useBesitz } from '../Context/BesitzContext';
 
 const ReporteV = () => {
 
@@ -10,6 +11,11 @@ const ReporteV = () => {
   const toggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const {Besitz} = useBesitz();
+
+  const besitzVe = Besitz.Besitz.ventas;
+  console.log(besitzVe);
 
   return (
     <div>
@@ -27,7 +33,7 @@ const ReporteV = () => {
               <iframe
                 title="DASHBOARDWOK"
                 className="dashp"
-                src="https://app.powerbi.com/view?r=eyJrIjoiNmVkM2UzMDktNzMxYS00YjM4LWEzMTUtNjI1MzM0YjJjOTFmIiwidCI6IjhhNmUyOWJiLWRmNDYtNGMxOS04NWJkLTZmNTVjYmNhNzEyNCIsImMiOjR9"
+                src={besitzVe}
                 frameBorder="0"
                 allowFullScreen={true}
               ></iframe>

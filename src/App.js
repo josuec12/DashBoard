@@ -1,16 +1,14 @@
 import './App.scss';
-import Ruta from './routes/Ruta';
 import React from 'react';
-import RutaA from './routes/RutaA';
+import Ruta from './routes/Ruta'
 
 
-function App() {
+const App = () => {
   return (
     <div>
-      {/* <Ruta/> */}
-      <RutaA/>
+      <Ruta/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
