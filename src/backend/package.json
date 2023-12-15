@@ -2,7 +2,6 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-<<<<<<< HEAD
   "main": "index.js",
   "dependencies": {
     "@mapbox/node-pre-gyp": "^1.0.11",
@@ -119,23 +118,14 @@
     "whatwg-url": "^11.0.0",
     "yallist": "^4.0.0"
   },
-=======
-  "main": "Server.js",
->>>>>>> parent of 4e133e9 (Acutalizaciones)
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-<<<<<<< HEAD
   "author": "",
   "license": "ISC",
   "devDependencies": {
-=======
   "author": "Besitz",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
->>>>>>> parent of 4e133e9 (Acutalizaciones)
-    "nodemon": "^3.0.1"
-  }
+  "license": "ISC"
+}
 }

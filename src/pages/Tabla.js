@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import EditModal from '../components/EditModal';
-import NavA from '../components/NavA';
+import EditModal from '../components/EditModal'
 import NavSideA from '../components/NavSideA';
-import React, { useState } from 'react'
-import NavSideA from '../components/NavSideA'
-import Nav from '../components/Nav';
-import User from '../components/User';
-import Edit from '../components/Edit';
-import AddU from '../components/AddU';
+import NavA from '../components/NavA';
+
 
 const MySwal = withReactContent(Swal);
 
@@ -225,19 +220,6 @@ const Tabla = () => {
           </div>
         </div>
       </div>
-    <div>
-      <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
-        <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
-      <Nav isOpen={isSidebarOpen} toggleSidebar={toggle}/>
-    <div className="content" >
-        <div className="dash">
-            <User/>
-            <AddU/>
-            <Edit/>
-            </div>
-            </div>
-    </div>
-    </div>
     </div>
   );
 };

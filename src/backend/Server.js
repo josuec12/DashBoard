@@ -8,7 +8,6 @@ const BesitzRouters = require('./routes/Besitz');
 const AuthRouters = require('./routes/Auth')
 const port = 5000;
 
-<<<<<<< HEAD
 const corsOptions = {
     origin: 'http://localhost:3000', 
     optionsSuccessStatus: 200, // Algunos navegadores antiguos (IE11) interpretan mal las respuestas con un código 204
@@ -54,15 +53,7 @@ Database();
 app.listen(port, () => {
     console.log('La app está en línea en el puerto', port);
 });
-=======
 
-const archivoDB = require('./Connection')
-app.get('/',(req,res)=>{
-    res.end('Bienvenido al servidor backend')
-})
 
-//Confi el server
-app.listen(5000, function(){
-    console.log('El servidor esta corriendo correctamente')
-})
->>>>>>> parent of 4e133e9 (Acutalizaciones)
+
+

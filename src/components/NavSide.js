@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useBesitz } from '../Context/BesitzContext';
 
-<<<<<<< HEAD
-const NavSide = ({ isOpen }) => {
-=======
-const NavSide = ({ isOpen, toggleSidebar }) => {
->>>>>>> parent of 4e133e9 (Acutalizaciones)
+const NavSide = ({ isOpen}) => {
   const [activeLink, setActiveLink] = useState(null);
   const { logoutBesitz } = useBesitz(); // Usar desestructuración correctamente
   const navigate = useNavigate();

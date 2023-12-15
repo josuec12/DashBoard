@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink,  useNavigate } from 'react-router-dom';
 import { useAdmin } from '../Context/AdminContext.js';
 
-const NavSideA = ({ isOpen, toggleSidebar }) => {
+const NavSideA = ({ isOpen }) => {
   const [activeLink, setActiveLink] = useState(null);
   const { logoutAdmin } = useAdmin();
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ const NavSideA = ({ isOpen, toggleSidebar }) => {
     setActiveLink(index);
   };
 
-<<<<<<< HEAD
   const handleLogout = () => {
     // Llama a la función correspondiente para cerrar sesión
     // Aquí se asume que hay una función de cierre de sesión en ambos contextos
@@ -19,9 +18,6 @@ const NavSideA = ({ isOpen, toggleSidebar }) => {
     // Redirige a la página de inicio de sesión
     navigate('/Login');
   };
-
-=======
->>>>>>> parent of 4e133e9 (Acutalizaciones)
   const links = [
     {
       to: '/HomeA',

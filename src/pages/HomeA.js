@@ -39,32 +39,19 @@ const HomeA = () => {
 
         <div className="cont">
           <div className="boletin">
-<<<<<<< HEAD
             <div className="cardHeader">  
               <h2>Solicitudes</h2>
-=======
-            <div className="cardHeader">
-              <h2>Boletín</h2>
->>>>>>> parent of 4e133e9 (Acutalizaciones)
-            </div>
             <iframe title="Boletin" src="" className="cyb"></iframe>
-
-          </div>
-
-          <div className="calendario">
+          </div>    
+        </div>
+        <div className="calendario">
             <div className="cardHeader">
               <h2>Calendario</h2>
             </div>
-<<<<<<< HEAD
             <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb"></iframe>
-=======
-            <iframe title="calendario" src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23005eff&ctz=America%2FBogota&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&src=YzIyZmY2YzU4MzEzMzk1NmE0MjBiY2JlNDk0Mjg4ZGNjNGE0YjIxZjk4MjhmNmE1NTM2M2E4YzIwYjkxMzFlMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%233F51B5" className="cyb" scrolling="no"></iframe>
->>>>>>> parent of 4e133e9 (Acutalizaciones)
           </div>
-
-        </div>
-
       </div>
+    </div>
     </div>
 
   )

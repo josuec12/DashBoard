@@ -7,19 +7,19 @@
 //     --LOGIN AND REGISTER--
 .tittle {
     font-weight: 600;
-    color: #010024;
+    color: #020013;
 }
 
 .tittle1 {
     font-weight: 600;
-    color: #010024;
+    color: #020013;
     text-align: center;
     margin-top: 5px;
 }
 
 .wrapper {
     background: linear-gradient(to top, rgba(22, 41, 40, 0.103) ,
-    rgba(46, 94, 109, 0.096)), url(imagenes/leo.jpg);
+    rgba(46, 94, 109, 0.096)), url(imagenes/3.svg);
     background-size: cover;
     padding: 0 20px 0 20px; 
     min-height: 100vh;
@@ -41,13 +41,8 @@
  }
 
 .login1{
-<<<<<<< HEAD
     width: 49%;
     height: 410px;
-=======
-    width: 350px;
-    height: 400px;
->>>>>>> parent of 4e133e9 (Acutalizaciones)
     border-radius: 10px;
     background: #fff;
     padding: 0px;
@@ -57,6 +52,45 @@
     display: grid;
     align-items: center;
  }
+
+ .img-login{
+  max-width: 11% ;
+  margin-left: 6%;
+  margin-top: 1%;
+ }
+
+ .buttonL {
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 0;
+  font-weight: 700;
+  background-color: rgb(235, 230, 230);
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+  text-decoration: none;
+  color: #020013;
+}
+
+.buttonL:hover {
+  letter-spacing: 3px;
+  background-color: hsl(247, 100%, 7%);
+  color: white;
+  box-shadow: hsl(247, 100%, 7%) 0px 7px 29px 0px;
+}
+
+.buttonL:active {
+  letter-spacing: 3px;
+  background-color: hsl(247, 100%, 7%);
+  color: white;
+  box-shadow: hsl(247, 100%, 7%) 0px 0px 0px 0px;
+  transform: translateY(10px);
+  transition: 100ms;
+}
+
 
 /* ----------------------------------------------
   ANIMACIONES
@@ -117,35 +151,20 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .btn-login {
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    outline: none;
-    font-weight: 700;
-    width: 145px;
-    padding: 6px;
-    color: rgb(0, 12, 26);
-    background: #dddcdc;
-    border-radius: 5px;
-    transition: .4s;
-    letter-spacing: 1px;
-}
-
-.btn-login:hover {
-    background: rgb(0, 12, 26);
-    color: #fff;
+  display: flex;
+   justify-content: center;
 }
 
 .btn-regis{
     text-decoration: none;
     text-align: center;
     border: none;
-    width: 450px;
+    width: 200px;
     outline: none;
     font-weight: 700;
     font-size: 22px;
     padding: 6px;
-    color: rgb(0, 12, 26);
+    color: #020013;
     background: #dddcdc;
     border-radius: 5px;
     transition: .4s;
@@ -157,7 +176,25 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #fff;
 }
 
-<<<<<<< HEAD
+.checkbox-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-wrapper .terms-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-wrapper .terms-label .label-text {
+  margin-left: 10px;
+}
+
+.checkbox-wrapper .checkbox-svg {
+  width: 20px;
+  height: 20px;
+}
+
 .checkbox-wrapper .checkbox-box {
   fill: rgba(207, 205, 205, 0.425);
   stroke: #020013;
@@ -179,9 +216,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 
+
  //Estilos formulario registro 
-=======
->>>>>>> parent of 4e133e9 (Acutalizaciones)
 .input {
     height: 45px;
     width: 100%;
@@ -235,7 +271,6 @@ input[type="number"]::-webkit-outer-spin-button {
     color: #fff;
 }
 
-<<<<<<< HEAD
 .textoo {
   height: 100%;
   width: fit-content;
@@ -321,13 +356,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 //Estilos olvida contraseña e ingresa (password)
-=======
->>>>>>> parent of 4e133e9 (Acutalizaciones)
 .a {
     text-decoration: none;
     font-weight: 500;
     color: #706e6e;
     transition: .5s;
+    margin-bottom: 5px;
 }
 
 .a:hover {
@@ -762,7 +796,7 @@ input[type="number"]::-webkit-outer-spin-button {
       right: 0;
       left: initial;
     }
-<<<<<<< HEAD
+
 
     .buttonT #toggle:checked ~ span:nth-of-type(1) {
       transform: translateY(-30%) rotate(40deg);
@@ -1182,6 +1216,3 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: translate(0%, 0%);
   }
 }
-=======
-  }
->>>>>>> parent of 4e133e9 (Acutalizaciones)
