@@ -8,7 +8,7 @@ const NavA = ({ toggleSidebar }) => {
         console.log('no esta autenticado');
         return null;
     }
- 
+
     const adminName = Admin.Admin.nom || 'Admin';
 
     return (

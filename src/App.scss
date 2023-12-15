@@ -266,10 +266,11 @@ input[type="number"]::-webkit-outer-spin-button {
   transition-duration: .5s;
   font-size: 20px;
   font-weight: 700;
+  margin-top: 13px;
 }
 
 .CartBtn {
-  width: 140px;
+  width: 160px;
   height: 40px;
   border-radius: 12px;
   border: none;
@@ -439,7 +440,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .buttonT {
   --size: 3rem;
-  --clr: #000;
+  --clr: #020013;
   width: var(--size);
   height: calc(0.7 * var(--size));
   cursor: pointer;
