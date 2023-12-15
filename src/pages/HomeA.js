@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import NavSideA from '../components/NavSideA'
 import NavA from '../components/NavA';
 import Carrusel from '../components/Carrusel';
+import CarruselV from '../components/CarruselV';
 
 const HomeA = () => {
 
@@ -31,18 +32,15 @@ const HomeA = () => {
             <div className="cardHeader">
               <h2>Noticias</h2>
             </div>
-          </div>
-          
-          <Carrusel /> 
-          
+          </div>   
+          <Carrusel/>   
         </div>
-
         <div className="cont">
           <div className="boletin">
             <div className="cardHeader">  
               <h2>Solicitudes</h2>
-            <iframe title="Boletin" src="" className="cyb"></iframe>
-          </div>    
+          </div>  
+          {/* <CarruselV/>   */}
         </div>
         <div className="calendario">
             <div className="cardHeader">

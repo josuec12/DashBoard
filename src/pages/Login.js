@@ -88,8 +88,7 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <body className="wrapper">
+      <div className="wrapper">
       <div>
         <Link to="https://besitz.co/">
           <img className="img-login scale-up-center" alt="Logo" src={require('../imagenes/blanco.png')} />
@@ -221,8 +220,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      </body>
-    </div>
+      </div>
 
   );
 };
