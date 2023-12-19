@@ -20,15 +20,15 @@
 
 .wrapper {
     background: linear-gradient(to top, rgba(22, 41, 40, 0.103) ,
-    rgba(46, 94, 109, 0.096)), url(imagenes/fondo.svg);
+    rgba(46, 94, 109, 0.096)), url(imagenes/fondo1.svg);
     background-size: cover;
     padding: 0 20px 0 20px; 
     min-height: 100vh;
 }
 
 .side-image {
-    background: linear-gradient(to top, rgba(22, 41, 40, 0.4) 40%,
-            rgba(46, 94, 109, 0)), url(imagenes/xx.gif);
+    background: linear-gradient(to top, rgba(0, 59, 56, 0.253) 40%,
+            rgba(46, 94, 109, 0.377)), url(imagenes/xx.gif);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -42,8 +42,8 @@
  }
 
 .login1{
-    width: 49%;
-    height: 415px;
+    width: 47%;
+    height: 400px;
     border-radius: 10px;
     background: #fff;
     padding: 0px;
@@ -542,7 +542,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .navigation ul li:nth-child(1) {
     margin-bottom: 30px;
-    pointer-events: none;
+    background-color: #020013;
 }
 
 .navigation ul li a {
@@ -583,6 +583,34 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* --------- curve outside ---------- */
+.navigation ul li:nth-child(1):hover a::before,
+.navigation ul li.hovered a::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0px;
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    border-radius: 0%;
+    box-shadow: 35px 35px 0 10px var(--white);
+    pointer-events: none;
+}
+
+.navigation ul li:nth-child(1):hover a::after,
+.navigation ul li.hovered a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0px;
+    width: 0px;
+    height: 0px;
+    background-color: transparent;
+    border-radius: 0%;
+    box-shadow: 35px -35px 0 10px var(--white);
+    pointer-events: none;
+}
+
 .navigation ul li:hover a::before,
 .navigation ul li.hovered a::before {
     content: "";

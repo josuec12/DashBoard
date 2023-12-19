@@ -17,10 +17,11 @@ const storage = multer.diskStorage({
   const File = multer({ storage: storage })
   
   router.post(`/${path}`, File.single('boletin'), controller.insertData);
+  router.use('/File', express.static('File'));
 
   const model = require('../Models/Besitzss'); 
 
-  router.use('/File', express.static('File'));
+  
 
   router.get(`/checkNit/:nit`, async (req, res) => {
       try {
