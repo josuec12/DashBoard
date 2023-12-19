@@ -14,12 +14,13 @@
     font-weight: 600;
     color: #020013;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 30px;
+    margin-bottom: 15px;
 }
 
 .wrapper {
     background: linear-gradient(to top, rgba(22, 41, 40, 0.103) ,
-    rgba(46, 94, 109, 0.096)), url(imagenes/3.svg);
+    rgba(46, 94, 109, 0.096)), url(imagenes/fondo.svg);
     background-size: cover;
     padding: 0 20px 0 20px; 
     min-height: 100vh;
@@ -42,7 +43,7 @@
 
 .login1{
     width: 49%;
-    height: 410px;
+    height: 415px;
     border-radius: 10px;
     background: #fff;
     padding: 0px;
@@ -60,7 +61,7 @@
  }
 
  .buttonL {
-  padding: 15px 20px;
+  padding: 10px 15px;
   border-radius: 10px;
   cursor: pointer;
   border: 0;
@@ -77,17 +78,17 @@
 
 .buttonL:hover {
   letter-spacing: 3px;
-  background-color: hsl(247, 100%, 7%);
+  background-color: hsl(248, 100%, 6%);
   color: white;
-  box-shadow: hsl(247, 100%, 7%) 0px 7px 29px 0px;
+  box-shadow: hsl(241, 100%, 17%) 0px 7px 29px 0px;
 }
 
 .buttonL:active {
   letter-spacing: 3px;
-  background-color: hsl(247, 100%, 7%);
+  background-color: hsl(248, 100%, 6%);
   color: white;
-  box-shadow: hsl(247, 100%, 7%) 0px 0px 0px 0px;
-  transform: translateY(10px);
+  box-shadow: hsl(241, 100%, 17%) 0px 0px 0px 0px;
+  transform: translateY(5px);
   transition: 100ms;
 }
 
@@ -143,12 +144,12 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-top: 30px;
 }
 
-.login{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
+// .login{
+//     display: flex;
+//     justify-content: center;
+//     margin-top: 20px;
+//     margin-bottom: 10px;
+// }
 
 .btn-login {
   display: flex;
@@ -231,24 +232,24 @@ input[type="number"]::-webkit-outer-spin-button {
     border-bottom: 1px solid rgb(0, 12, 26);
 }
 
-.submit {
-    text-decoration: none;
-    text-align: center;
-    border: none;
-    outline: none;
-    font-weight: 700;
-    padding: 6px;
-    color: rgb(0, 12, 26);
-    background: #dddcdc;
-    border-radius: 5px;
-    transition: .4s;
-    letter-spacing: 1px;
-}
+// .submit {
+//     text-decoration: none;
+//     text-align: center;
+//     border: none;
+//     outline: none;
+//     font-weight: 700;
+//     padding: 6px;
+//     color: rgb(0, 12, 26);
+//     background: #dddcdc;
+//     border-radius: 5px;
+//     transition: .4s;
+//     letter-spacing: 1px;
+// }
 
-.submit:hover {
-    background: rgb(0, 12, 26);
-    color: #fff;
-}
+// .submit:hover {
+//     background: rgb(0, 12, 26);
+//     color: #fff;
+// }
 
 .btn-regis{
   display: flex;
@@ -399,6 +400,10 @@ input[type="number"]::-webkit-outer-spin-button {
 .a1:hover {
     text-decoration: none;
     color: #010024;
+}
+.Ocontra{
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 768px) {
@@ -1369,4 +1374,85 @@ input[type="number"]::-webkit-outer-spin-button {
   100% {
     transform: translate(0%, 0%);
   }
+}
+.inputForm {
+  border: 2px solid #e5e9e5;
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: 0.2s ease-in-out;
+  margin-bottom: 10px;
+}
+
+.inputForm:focus-within {
+  border: 2px solid #020013;
+}
+
+.inputF {
+  margin-left: 5px;
+  border-radius: 10px;
+  border: none;
+  width: 85%;
+  height: 100%;
+}
+
+.inputF:focus {
+  outline: none;
+}
+
+.eyeI{
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+// button que alterna cliente y admin
+.swipeS {
+  position: relative;
+  background-color: rgb(235, 230, 230);
+  width: 220px;
+  height: 50px;
+  color: #020013;
+  border-radius: 60px;
+  border-color: rgb(235, 230, 230);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  letter-spacing: 2px;
+  border-top: 2px solid rgba(0, 0, 0, 0.35);
+  border-left: 2px solid rgba(0, 0, 0, 0.35);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.35);
+  border-right: 2px solid rgba(0, 0, 0, 0.35);
+  padding-left: 40px;
+  cursor: pointer;
+  transition: 0.35s ease;
+}
+
+.swipeS:hover {
+  padding-left: 0;
+  padding-right: 40px;
+  color: white;
+  background-color: #020013;
+}
+
+.containerS {
+  position: absolute;
+  left: 5px;
+  width: 40px;
+  height: 40px;
+  background: #020013;
+  border-radius: 50%;
+  transition: 0.35s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(235, 230, 230);
+}
+
+.swipeS:hover .containerS {
+  left: calc(100% - 55px);
+  color: #020013;
+  background-color: rgb(235, 230, 230);
 }

@@ -52,7 +52,7 @@ const NavSide = ({ isOpen}) => {
             <NavLink to="/HomeA">
               <span className="icon">
                 <ion-ico>
-                  <img className="img" src={require('../imagenes/blancol.png')} alt="" />
+                  <img className="img" src={require('../imagenes/LogoSL.png')} alt="" />
                 </ion-ico>
               </span>
               <h3 className="tittle2">Besitz</h3>
