@@ -15,9 +15,11 @@ const storage = multer.diskStorage({
   })
   
   const File = multer({ storage: storage })
-  
-  router.post(`/${path}`, File.single('boletin'), controller.insertData);
+
+  router.post(`/${path}`, File.fields([{ name: 'boletin' }, { name: 'logo' }]), controller.insertData);
+
   router.use('/File', express.static('File'));
+
 
   const model = require('../Models/Besitzss'); 
 

@@ -47,7 +47,7 @@ const Home = () => {
             <div className="cardHeader">
               <h2>Calendario</h2>
             </div>
-            <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb" scrolling="no"></iframe>
+            <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb"></iframe>
           </div>
         </div>
         <Footer />

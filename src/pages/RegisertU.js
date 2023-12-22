@@ -12,17 +12,14 @@ const [email, setEmail] = useState('');
 const [boletin, setBoletin] = useState(null);
 const [ventas, setVentas] = useState('');
 const [financiero, setFinanciero] = useState('');
+const [logo, setLogo] = useState(null);
 
 const checkExistingNit = async (nit) => {
   try {
     const response = await fetch(`http://localhost:5000/checkNit/${nit}`);
     const result = await response.json();
 
-    console.log('Response:', response);
-    console.log('Result:', result);
-
     if (response.ok) {
-      console.log('Nit exists:', result.exists);
       return result.exists;
     } else {
       console.error('Error en la respuesta del servidor:', result.error || 'Error desconocido');
@@ -59,6 +56,16 @@ const checkExistingNit = async (nit) => {
       return;
     }
 
+    if (!logo) {
+      // Mostrar mensaje de error
+      Swal.fire({
+        icon: 'error',
+        title: 'Archivo requerido',
+        text: 'Por favor, selecciona un archivo.',
+      });
+      return;
+    }
+
     const passwordStrength = zxcvbn(pass);
 
     if (passwordStrength.score < 3) {
@@ -74,6 +81,7 @@ const checkExistingNit = async (nit) => {
     try {
     
       const formData = new FormData();
+      formData.append('logo', logo);
       formData.append('boletin', boletin); 
       formData.append('nombre', nombre);
       formData.append('apellido', apellido);
@@ -82,6 +90,7 @@ const checkExistingNit = async (nit) => {
       formData.append('email', email);
       formData.append('ventas', ventas);
       formData.append('financiero', financiero);
+      
     
       // Realizar una solicitud al backend para insertar los datos
       const response = await fetch('http://localhost:5000/Besitz', {
@@ -109,6 +118,8 @@ const checkExistingNit = async (nit) => {
         setVentas('');
         setFinanciero('');
         setSelectedFile(null);
+        setLogo(null);
+        setSelectedImg(null);
 
     } else {
         Swal.fire({
@@ -133,6 +144,7 @@ const checkExistingNit = async (nit) => {
 
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -142,6 +154,17 @@ const checkExistingNit = async (nit) => {
     } else {
       setBoletin(null);
       setSelectedFile(null);
+    }
+  };
+
+  const handleImgChange = (event) => {
+    const img = event.target.files[0];
+    if (img) {
+      setLogo(img);
+      setSelectedImg(img.name);
+    } else {
+      setLogo(null);
+      setSelectedImg(null);
     }
   };
 
@@ -177,15 +200,21 @@ const checkExistingNit = async (nit) => {
                     </div>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="col">
+                <div className='row'>
+                <div className="col">
                     <div className="input-field">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" className="input" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" placeholder="name@example.com" />
+                      <label htmlFor="logo" className="custom-file-button">
+                      {/* <svg className="svg-icon1" width="24" viewBox="0 0 24 24" height="24" fill="none"><g strokeWidth="2" strokeLinecap="round" stroke="#056dfa" fillRule="evenodd" clipRule="evenodd"><path d="m3 7h17c.5523 0 1 .44772 1 1v11c0 .5523-.4477 1-1 1h-16c-.55228 0-1-.4477-1-1z"></path><path d="m3 4.5c0-.27614.22386-.5.5-.5h6.29289c.13261 0 .25981.05268.35351.14645l2.8536 2.85355h-10z"></path></g></svg> */}
+                      Subir Logo
+                      </label>
+                      <div className="aa">
+                        {selectedImg ? 'Archivo seleccionado: ' + selectedImg : 'Ningún archivo seleccionado'}
+                      </div>
+                      <input type="file" id="logo" name="logo" accept="image/*" className="custom-input-file" onChange={handleImgChange} />
                     </div>
                   </div>
-                  <div className="col">
-                    <div className="input-field">
+                  <div className='col'>
+                  <div className="input-field">
                       <label htmlFor="boletin" className="custom-file-button">
                       <svg className="svg-icon1" width="24" viewBox="0 0 24 24" height="24" fill="none"><g strokeWidth="2" strokeLinecap="round" stroke="#056dfa" fillRule="evenodd" clipRule="evenodd"><path d="m3 7h17c.5523 0 1 .44772 1 1v11c0 .5523-.4477 1-1 1h-16c-.55228 0-1-.4477-1-1z"></path><path d="m3 4.5c0-.27614.22386-.5.5-.5h6.29289c.13261 0 .25981.05268.35351.14645l2.8536 2.85355h-10z"></path></g></svg>
                       Subir Boletín
@@ -196,7 +225,6 @@ const checkExistingNit = async (nit) => {
                       <input type="file" id="boletin" name="boletin" accept=".pdf, .doc, .docx" className="custom-input-file" onChange={handleFileChange} />
                     </div>
                   </div>
-
                 </div>
                 <div className="row">
                   <div className="col">
@@ -210,6 +238,14 @@ const checkExistingNit = async (nit) => {
                     <div className="input-field">
                       <label htmlFor="financiero">Link Financiero</label>
                       <input type="url" className="input" id="financiero" required value={financiero} onChange={(e) => setFinanciero(e.target.value)} placeholder="https://www.example.com/"></input>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <div className="input-field">
+                      <label htmlFor="email">Email</label>
+                      <input type="email" className="input" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" placeholder="name@example.com" />
                     </div>
                   </div>
                 </div>

@@ -11,6 +11,7 @@ const Nav = ({ toggleSidebar }) => {
   }
 
   const BesitzName = Besitz.Besitz.nombre || 'Cliente';
+  const Besitzlogo = Besitz.Besitz.logo;
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sombra">
       <div className="container-fluid">
@@ -26,7 +27,7 @@ const Nav = ({ toggleSidebar }) => {
           <h2 className="welcome">Welcome {BesitzName}</h2>
         </div>
         <div className="logo">
-          <img src={require('../imagenes/descarga.png')} alt="" />
+          <img src={Besitzlogo} alt="" />
         </div>
       </div>
     </nav>

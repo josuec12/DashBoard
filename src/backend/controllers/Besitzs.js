@@ -21,9 +21,7 @@ exports.getData = async (req, res) => {
 
 exports.insertData = async (req, res) => {
     try {
-
         const { nombre, apellido, nit, pass, email, ventas, financiero } = req.body;
-
         const data = req.body;
 
         // Verificar si ya existe un documento con el mismo nit
@@ -35,6 +33,11 @@ exports.insertData = async (req, res) => {
             return;
         }
 
+        // Accede a las rutas de los archivos desde req.files
+        const { boletin, logo } = req.files;
+        const boletinPath = boletin[0].path;
+        const logoPath = logo[0].path;
+
         // Crear una nueva instancia del modelo con los datos del cuerpo de la solicitud
         const newDoc = new model({
             nombre,
@@ -44,7 +47,8 @@ exports.insertData = async (req, res) => {
             email,
             ventas,
             financiero,
-            boletin: req.file.path // Guardar la ruta del archivo en la base de datos
+            boletin: boletinPath, // Utiliza la ruta del archivo
+            logo: logoPath // Utiliza la ruta del archivo
         });
 
         // Encriptar la contraseña antes de guardarla en la base de datos
@@ -65,6 +69,7 @@ exports.insertData = async (req, res) => {
         res.status(500).send({ error: 'Error al insertar datos' });
     }
 };
+
 
 exports.updateSingle = async (req, res) => {
     try {
