@@ -55,19 +55,57 @@ const Tabla = () => {
 
   const handleGuardarEdicion = async (editedData) => {
     try {
-      const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData);
-      const updatedRegistro = response.data.data;
-      console.log('Registro Editado:', updatedRegistro);
+      // Crea un nuevo objeto FormData para enviar los datos
+    const formData = new FormData();
+    
+    // Agrega campos al FormData, incluido el boletín como archivo
+    formData.append('nombre', editedData.nombre);
+    formData.append('apellido', editedData.apellido);
+    formData.append('nit', editedData.nit);
+    formData.append('pass', editedData.pass);
+    formData.append('email', editedData.email);
+    formData.append('ventas', editedData.ventas);
+    formData.append('financiero', editedData.financiero);
+     // Si hay un archivo seleccionado para el boletín, agrégalo al FormData;
+     if (editedData.boletin) {
+      formData.append('boletin', editedData.boletin);
+     }
 
-      const updatedRegistros = registros.map((r) => (r._id === updatedRegistro._id ? updatedRegistro : r));
-      setRegistros(updatedRegistros);
-
-      MySwal.close();
-      MySwal.fire('¡Éxito!', 'Registro editado correctamente', 'success');
-    } catch (error) {
-      console.error('Error al editar el registro', error);
+    // Si hay un archivo seleccionado para el logo, agrégalo al FormData; 
+    if (editedData.logo) {
+      formData.append('logo', editedData.logo);
     }
-  };
+
+  
+      // Imprime el FormData en la consola para verificar los datos antes de enviar la solicitud
+    console.log('FormData:', formData);
+
+    // Realiza la solicitud PUT al servidor
+    const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // Si la solicitud es exitosa, actualiza el estado y muestra un mensaje de éxito
+    const updatedRegistro = response.data.data;
+    console.log('Registro Editado:', updatedRegistro);
+
+    const updatedRegistros = registros.map((r) => (r._id === updatedRegistro._id ? updatedRegistro : r));
+    setRegistros(updatedRegistros);
+
+    MySwal.close();
+    MySwal.fire('¡Éxito!', 'Registro editado correctamente', 'success');
+  } catch (error) {
+    // Si hay un error, imprímelo en la consola
+    console.error('Error al editar el registro', error);
+
+    // Muestra un mensaje de error en caso de un problema
+    MySwal.fire('Error', 'Hubo un problema al editar el registro', 'error');
+  }
+};
+  
+  
 
   const handleEliminar = async (id) => {
     const confirmacion = await MySwal.fire({

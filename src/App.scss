@@ -42,8 +42,8 @@
  }
 
 .login1{
-    width: 47%;
-    height: 400px;
+    width: 48%;
+    height: 410px;
     border-radius: 10px;
     background: #fff;
     padding: 0px;
@@ -90,6 +90,10 @@
   box-shadow: hsl(241, 100%, 17%) 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 100ms;
+}
+
+.aa{
+  margin-bottom: 20px;
 }
 
 
@@ -1400,7 +1404,7 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
   padding-left: 10px;
   transition: 0.2s ease-in-out;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .inputForm:focus-within {

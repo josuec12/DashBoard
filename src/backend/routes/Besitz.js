@@ -58,8 +58,9 @@ router.post(
 
 router.put(
     `/${path}/:id`,
+    File.fields([{ name: 'boletin' }, { name: 'logo' }]),
     controller.updateSingle
-)
+);
 
 router.delete(
     `/${path}/:id`,

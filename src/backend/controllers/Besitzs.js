@@ -1,6 +1,8 @@
 const mongoose  = require('mongoose');
 const model = require('../Models/Besitzss');
 const bcrypt = require('bcrypt')
+const fs = require('fs').promises;
+
 
 const successResponse = { success: true, message: 'Operación exitosa' };
 
@@ -76,17 +78,45 @@ exports.updateSingle = async (req, res) => {
         const { id } = req.params;
         const body = req.body;
 
-        // Encontrar el documento por ID y actualizarlo, estableciendo 'new' en true para obtener el documento actualizado
-        let updatedDoc = await model.findByIdAndUpdate(
-            parseId(id),
-            { $set: body },
-            { new: true }
-        );
+        // Encontrar el documento por ID
+        let existingDoc = await model.findById(parseId(id));
 
         // Verificar si se encontró el documento antes de intentar actualizar
-        if (!updatedDoc) {
+        if (!existingDoc) {
             return res.status(404).json({ error: 'Documento no encontrado' });
         }
+
+        // Accede a las rutas de los archivos desde req.files
+        const { boletin, logo } = req.files;
+        // const boletinPath = boletin[0].path;
+        // const logoPath = logo[0].path;
+
+        // Si hay un nuevo boletín, actualiza la ruta del boletín en el documento existente
+        if (boletin) {
+            // Eliminar el archivo anterior si existe
+            await fs.unlink(existingDoc.boletin);
+            // Obtener la nueva ruta del boletín
+            const boletinPath = boletin[0].path;
+            // Actualizar la ruta del boletín en el documento existente
+            existingDoc.boletin = boletinPath;
+        }
+
+        // Si hay un nuevo logo, actualiza la ruta del logo en el documento existente
+        if (logo) {
+            // Eliminar el archivo anterior si existe
+            await fs.unlink(existingDoc.logo);
+            // Obtener la nueva ruta del logo
+            const logoPath = logo[0].path;
+            // Actualizar la ruta del logo en el documento existente
+            existingDoc.logo = logoPath;
+        }
+
+        // Actualizar otros campos del documento
+        existingDoc.nombre = body.nombre || existingDoc.nombre;
+        existingDoc.apellido = body.apellido || existingDoc.apellido;
+        existingDoc.email = body.email || existingDoc.email;
+        existingDoc.ventas = body.ventas || existingDoc.ventas;
+        existingDoc.financiero = body.financiero || existingDoc.financiero;
 
         // Verificar si el campo 'pass' está presente en el cuerpo de la solicitud antes de intentar cifrarlo
         if (body.pass) {
@@ -94,12 +124,12 @@ exports.updateSingle = async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(body.pass, salt);
 
-            // Actualizar el campo 'pass' en el documento actualizado con la contraseña cifrada
-            updatedDoc.pass = hashedPassword;
-            
-            // Guardar el documento actualizado con la contraseña cifrada
-            await updatedDoc.save();
+            // Actualizar el campo 'pass' en el documento existente con la contraseña cifrada
+            existingDoc.pass = hashedPassword;
         }
+
+        // Guardar el documento actualizado en la base de datos
+        const updatedDoc = await existingDoc.save();
 
         res.json({ data: updatedDoc });
 
