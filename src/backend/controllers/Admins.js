@@ -74,30 +74,30 @@ exports.updateSingle = async (req, res) => {
         const { id } = req.params;
         const body = req.body;
 
-        // Encontrar el documento por ID y actualizarlo, estableciendo 'new' en true para obtener el documento actualizado
-        let updatedDoc = await model.findByIdAndUpdate(
-            parseId(id),
-            { $set: body },
-            { new: true }
-        );
+        // Encuentra el documento por ID
+        let updatedDoc = await model.findById(parseId(id));
 
         // Verificar si se encontró el documento antes de intentar actualizar
         if (!updatedDoc) {
             return res.status(404).json({ error: 'Documento no encontrado' });
         }
 
-        // Verificar si el campo 'passw' está presente en el cuerpo de la solicitud antes de intentar cifrarlo
-        if (body.passw) {
-            // Encriptar la contraseña antes de guardarla en la base de datos
+         // Verificar y cifrar la contraseña si se proporciona en la solicitud
+         if (body.passw && body.passw !== updatedDoc.passw) {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(body.passw, salt);
-
-            // Actualizar el campo 'passw' en el documento actualizado con la contraseña cifrada
             updatedDoc.passw = hashedPassword;
-            
-            // Guardar el documento actualizado con la contraseña cifrada
-            await updatedDoc.save();
         }
+
+           // Actualizar otros campos
+           ['nom', 'ape', 'nitt', 'emaila'].forEach(field => {
+            if (body[field]) {
+                updatedDoc[field] = body[field];
+            }
+        });
+
+        // Guardar el documento actualizado en la base de datos
+        await updatedDoc.save();
 
         res.json({ data: updatedDoc });
 

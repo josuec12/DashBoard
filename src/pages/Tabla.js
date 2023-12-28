@@ -55,33 +55,9 @@ const Tabla = () => {
 
   const handleGuardarEdicion = async (editedData) => {
     try {
-      // Crea un nuevo objeto FormData para enviar los datos
-    const formData = new FormData();
-    
-    // Agrega campos al FormData, incluido el boletín como archivo
-    formData.append('nombre', editedData.nombre);
-    formData.append('apellido', editedData.apellido);
-    formData.append('nit', editedData.nit);
-    formData.append('pass', editedData.pass);
-    formData.append('email', editedData.email);
-    formData.append('ventas', editedData.ventas);
-    formData.append('financiero', editedData.financiero);
-     // Si hay un archivo seleccionado para el boletín, agrégalo al FormData;
-     if (editedData.boletin) {
-      formData.append('boletin', editedData.boletin);
-     }
-
-    // Si hay un archivo seleccionado para el logo, agrégalo al FormData; 
-    if (editedData.logo) {
-      formData.append('logo', editedData.logo);
-    }
-
-  
-      // Imprime el FormData en la consola para verificar los datos antes de enviar la solicitud
-    console.log('FormData:', formData);
 
     // Realiza la solicitud PUT al servidor
-    const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, formData, {
+    const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

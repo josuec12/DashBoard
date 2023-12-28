@@ -77,59 +77,43 @@ exports.updateSingle = async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
+        const { boletin, logo } = req.files;
 
-        // Encontrar el documento por ID
-        let existingDoc = await model.findById(parseId(id));
+        // Encuentra el documento por ID
+        let updatedDoc = await model.findById(parseId(id));
 
         // Verificar si se encontró el documento antes de intentar actualizar
-        if (!existingDoc) {
+        if (!updatedDoc) {
             return res.status(404).json({ error: 'Documento no encontrado' });
         }
 
-        // Accede a las rutas de los archivos desde req.files
-        const { boletin, logo } = req.files;
-        // const boletinPath = boletin[0].path;
-        // const logoPath = logo[0].path;
-
-        // Si hay un nuevo boletín, actualiza la ruta del boletín en el documento existente
-        if (boletin) {
-            // Eliminar el archivo anterior si existe
-            await fs.unlink(existingDoc.boletin);
-            // Obtener la nueva ruta del boletín
-            const boletinPath = boletin[0].path;
-            // Actualizar la ruta del boletín en el documento existente
-            existingDoc.boletin = boletinPath;
-        }
-
-        // Si hay un nuevo logo, actualiza la ruta del logo en el documento existente
-        if (logo) {
-            // Eliminar el archivo anterior si existe
-            await fs.unlink(existingDoc.logo);
-            // Obtener la nueva ruta del logo
-            const logoPath = logo[0].path;
-            // Actualizar la ruta del logo en el documento existente
-            existingDoc.logo = logoPath;
-        }
-
-        // Actualizar otros campos del documento
-        existingDoc.nombre = body.nombre || existingDoc.nombre;
-        existingDoc.apellido = body.apellido || existingDoc.apellido;
-        existingDoc.email = body.email || existingDoc.email;
-        existingDoc.ventas = body.ventas || existingDoc.ventas;
-        existingDoc.financiero = body.financiero || existingDoc.financiero;
-
-        // Verificar si el campo 'pass' está presente en el cuerpo de la solicitud antes de intentar cifrarlo
-        if (body.pass) {
-            // Encriptar la contraseña antes de guardarla en la base de datos
+        // Verificar y cifrar la contraseña si se proporciona en la solicitud
+        if (body.pass && body.pass !== updatedDoc.pass) {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(body.pass, salt);
-
-            // Actualizar el campo 'pass' en el documento existente con la contraseña cifrada
-            existingDoc.pass = hashedPassword;
+            updatedDoc.pass = hashedPassword;
         }
 
+        // Actualizar otros campos
+        ['nombre', 'apellido', 'nit', 'email', 'ventas', 'financiero'].forEach(field => {
+            if (body[field]) {
+                updatedDoc[field] = body[field];
+            }
+        });
+
+        // Actualizar rutas de archivos
+        const updateFilePath = async (file, property) => {
+            if (file) {
+                await fs.unlink(updatedDoc[property]);
+                updatedDoc[property] = file[0].path;
+            }
+        };
+
+        await updateFilePath(boletin, 'boletin');
+        await updateFilePath(logo, 'logo');
+
         // Guardar el documento actualizado en la base de datos
-        const updatedDoc = await existingDoc.save();
+        await updatedDoc.save();
 
         res.json({ data: updatedDoc });
 
@@ -138,6 +122,7 @@ exports.updateSingle = async (req, res) => {
         res.status(500).send({ error: 'Error al actualizar datos' });
     }
 };
+
 
 exports.deleteSingle = async (req, res) => {
     try {

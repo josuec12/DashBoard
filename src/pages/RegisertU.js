@@ -106,8 +106,8 @@ const RegisterU = () => {
       if (response.ok) {
 
         Swal.fire({
-          title: "Good job!",
-          text: "Formulario enviado con éxito",
+          title: "¡Éxito!",
+          text: "Formulario enviado correctamente",
           icon: "success"
         });
 

@@ -23,7 +23,7 @@ const BesitzScheme = new moongose.Schema({
         type: String,
         minlength: 6,
         maxlength: 128,
-        match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\^&\*]).+/
+        match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+/
     },
 
     email: {
