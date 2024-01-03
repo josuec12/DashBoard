@@ -2,7 +2,7 @@ const mongoose  = require('mongoose');
 const model = require('../Models/Besitzss');
 const bcrypt = require('bcrypt')
 const fs = require('fs').promises;
-
+const path = require('path');
 
 const successResponse = { success: true, message: 'Operación exitosa' };
 
@@ -127,18 +127,32 @@ exports.updateSingle = async (req, res) => {
     }
 };
 
-
 exports.deleteSingle = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Encontrar el documento por ID y eliminarlo
-        let deletedDoc = await model.findByIdAndDelete(parseId(id));
+        // Encontrar el documento por ID para obtener información del usuario
+        const userToDelete = await model.findById(parseId(id));
 
         // Verificar si se encontró el documento antes de intentar eliminarlo
-        if (!deletedDoc) {
+        if (!userToDelete) {
             return res.status(404).json({ error: 'Documento no encontrado' });
         }
+
+        // Obtener la información del usuario, incluyendo los archivos
+        const { boletin, logo } = userToDelete;
+
+        // Definir la ruta de la carpeta donde se almacenan los archivos
+        const filesFolder = '';
+
+        // Eliminar el archivo boletin
+        await deleteFile(filesFolder, boletin);
+
+        // Eliminar el archivo logo
+        await deleteFile(filesFolder, logo);
+
+        // Ahora que los archivos están eliminados, podemos borrar el usuario
+        const deletedDoc = await model.findByIdAndDelete(parseId(id));
 
         res.json({ data: deletedDoc });
 
@@ -147,3 +161,16 @@ exports.deleteSingle = async (req, res) => {
         res.status(500).send({ error: 'Error al eliminar datos' });
     }
 };
+
+// Función para eliminar un archivo específico
+async function deleteFile(filesFolder, fileName) {
+    if (fileName) {
+        const filePath = path.join(__dirname, '..', filesFolder, fileName);
+        console.log('Ruta del archivo a eliminar:', filePath);
+        try {
+            await fs.unlink(filePath);
+        } catch (error) {
+            console.error(`Error al eliminar el archivo ${fileName}: ${error.message}`);
+        }
+    }
+}
