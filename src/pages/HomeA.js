@@ -23,7 +23,7 @@ const HomeA = () => {
   };
 
   return (
-    <div>
+    <>
       <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <NavA isOpen={isSidebarOpen} toggleSidebar={toggle} />
@@ -50,7 +50,7 @@ const HomeA = () => {
           </div>
       </div>
     </div>
-    </div>
+    </>
 
   )
 }

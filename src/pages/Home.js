@@ -22,9 +22,9 @@ const Home = () => {
   const besitzBol = Besitz.Besitz.boletin;
 
   return (
-    <div>
+    <>
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />
-      <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
+      <div className={`main ${isSidebarOpen && 'active'}`}>
         <Nav isOpen={isSidebarOpen} toggleSidebar={toggle} />
         <div className="cardBox">
           <div className="card1">
@@ -41,18 +41,18 @@ const Home = () => {
             <div className="cardHeader">
               <h2>Boletín</h2>
             </div>
-            <iframe title="Boletin" src={`http://localhost:5000/${besitzBol}`}className="cyb"></iframe>
-          </div>
+              <iframe title="Boletin" src={`http://localhost:5000/${besitzBol}`} className="cyb"></iframe>
+                     </div>
           <div className="calendario">
             <div className="cardHeader">
               <h2>Calendario</h2>
             </div>
-            <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb"></iframe>
+            <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb" scrolling=''></iframe>
           </div>
         </div>
         <Footer />
       </div>
-    </div>
+    </>
   );
 };
 

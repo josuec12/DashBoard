@@ -89,7 +89,7 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper kenburns-top">
       <div>
         <Link to="https://besitz.co/">
           <img className="img-login scale-up-center" alt="Logo" src={require('../imagenes/Lblanco.png')} />
@@ -109,6 +109,7 @@ const Login = () => {
                     placeholder="654615231"
                     value={nit}
                     onChange={(e) => setNit(e.target.value)}
+                    autoComplete='on'
                   />
                 </div>
                 <div className="inputForm">

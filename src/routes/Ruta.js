@@ -13,6 +13,7 @@ import Password from '../pages/Password.js';
 import Error404 from '../pages/Error404.js';
 import Error500 from '../pages/Error500.js';
 import TablaA from '../pages/TablaA.js';
+import Loading from '../components/Loading.js';
 
 const Ruta = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -40,6 +41,7 @@ const Ruta = () => {
           <Route path="/Error404" element={<Error404 />} />
           <Route path="/Error500" element={<Error500 />} />
           <Route path="/Password" element={<Password />} />
+          <Route path='/Loading' element={<Loading/>} />
 
           {/* Rutas protegidas para clientes */}
           <Route

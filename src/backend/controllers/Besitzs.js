@@ -23,29 +23,36 @@ exports.getData = async (req, res) => {
 
 exports.insertData = async (req, res) => {
     try {
-        const { nombre, apellido, nit, pass, email, ventas, financiero } = req.body;
+        const { nombre, apellido, nit, email, ventas, financiero } = req.body;
         const data = req.body;
 
         // Verificar si ya existe un documento con el mismo nit
         const existingDoc = await model.findOne({ nit: data.nit });
 
+        console.log("Existing Doc:", existingDoc);
+
         if (existingDoc) {
-            // El documento ya existe, decide qué hacer en este caso
-            res.status(409).send({ error: 'El nit ya existe.' });
-            return;
+            console.log("Documento existente. No se procesarán archivos.");
+            return res.status(409).send({ error: 'El nit ya existe.' });
         }
+        
+        console.log("Continuando con el procesamiento de archivos.");
 
         // Accede a las rutas de los archivos desde req.files
         const { boletin, logo } = req.files;
         const boletinPath = boletin[0].path;
         const logoPath = logo[0].path;
 
+        // Encriptar la contraseña antes de guardarla en la base de datos
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(data.pass, salt);
+
         // Crear una nueva instancia del modelo con los datos del cuerpo de la solicitud
         const newDoc = new model({
             nombre,
             apellido,
             nit,
-            pass,
+            pass: hashedPassword,
             email,
             ventas,
             financiero,
@@ -53,18 +60,15 @@ exports.insertData = async (req, res) => {
             logo: logoPath // Utiliza la ruta del archivo
         });
 
-        // Encriptar la contraseña antes de guardarla en la base de datos
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(data.pass, salt);
-
         // Sobreescribir la contraseña en el nuevo documento con la versión encriptada
-        newDoc.pass = hashedPassword;
+        // newDoc.pass = hashedPassword;
 
         // Guardar el nuevo documento en la base de datos
         const savedDoc = await newDoc.save();
 
         // Responder con el documento guardado
         res.json({ data: savedDoc, successResponse });
+    
 
     } catch (err) {
         console.error(err);

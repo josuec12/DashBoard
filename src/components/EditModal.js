@@ -66,7 +66,7 @@ const EditModal = ({ registro, onSave }) => {
         <div className='col'>
           <div className='inputGroup'>
             <input type="text" name="pass" value={editedData.pass} onChange={handleInputChange} />
-            <label>Contraseña:</label>
+            <label>Pass:</label>
           </div>
         </div>
         <div className='col'>
@@ -75,31 +75,31 @@ const EditModal = ({ registro, onSave }) => {
             <label>Email:</label>
           </div>
         </div>
-      </div>
-      <div className='row'>
         <div className='col'>
           <div className='inputGroup'>
             <input type="text" name="ventas" value={editedData.ventas} onChange={handleInputChange} />
             <label>Ventas:</label>
           </div>
         </div>
+      </div>
+      <div className='row'>
+        
         <div className='col'>
           <div className='inputGroup'>
             <input type="text" name="financiero" value={editedData.financiero} onChange={handleInputChange} />
             <label>Financiero:</label>
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
-      <div className='row'>
+      {/* <div className='row'> */}
         <div className='col'>
           <div className="input-field ">
             <label htmlFor="boletin" className="custom-file-button">
               <svg className="svg-icon1" width="24" viewBox="0 0 24 24" height="24" fill="none"><g strokeWidth="2" strokeLinecap="round" stroke="#056dfa" fillRule="evenodd" clipRule="evenodd"><path d="m3 7h17c.5523 0 1 .44772 1 1v11c0 .5523-.4477 1-1 1h-16c-.55228 0-1-.4477-1-1z"></path><path d="m3 4.5c0-.27614.22386-.5.5-.5h6.29289c.13261 0 .25981.05268.35351.14645l2.8536 2.85355h-10z"></path></g></svg>
-              Boletín
             </label>
             <div className="aa">
-              {selectedBoletin ? 'Archivo seleccionado: ' + selectedBoletin.name : 'Ningún archivo seleccionado'}
+              {selectedBoletin ? 'Boletin seleccionado: ' + selectedBoletin.name : 'Ningún boletin seleccionado'}
             </div>
             <input type="file" id="boletin" name="boletin" accept=".pdf, .doc, .docx" className="custom-input-file" onChange={(event) => handleFileChange(event, 'boletin')} />
           </div>
@@ -107,16 +107,10 @@ const EditModal = ({ registro, onSave }) => {
         <div className='col'>
           <div className="input-field">
             <label htmlFor="logo" className="custom-file-button">
-              <svg strokeLinejoin="round" strokeLinecap="round" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-                <path fill="none" d="M0 0h24v24H0z" stroke="none"></path>
-                <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1"></path>
-                <path d="M9 15l3 -3l3 3"></path>
-                <path d="M12 12l0 9"></path>
-              </svg>
-              Logo
+            <svg className='svg-icon1' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#056dfa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M20.4 14.5L16 10 4 20"/></svg>
             </label>
             <div className="aa">
-              {selectedLogo ? 'Archivo seleccionado: ' + selectedLogo.name : 'Ningún archivo seleccionado'}
+              {selectedLogo ? 'Logo seleccionado: ' + selectedLogo.name : 'Ningún logo seleccionado'}
             </div>
             <input type="file" id="logo" name="logo" accept=".png, .jpg, .jpeg" className="custom-input-file" onChange={(event) => handleFileChange(event, 'logo')} />
           </div>

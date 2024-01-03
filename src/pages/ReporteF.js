@@ -21,7 +21,7 @@ const ReporteF = () => {
   const besitzFi = Besitz.Besitz.financiero;
 
   return (
-    <div>
+    <>
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <Nav isOpen={isSidebarOpen} toggleSidebar={toggle} />
@@ -43,7 +43,7 @@ const ReporteF = () => {
         </div>
         <Footer />
       </div>
-    </div>
+    </>
   )
 }
 

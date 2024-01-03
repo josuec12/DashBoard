@@ -6,13 +6,11 @@ const controller = require ('../controllers/Besitzs')
 const path = 'Besitz'
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, 'File') // La carpeta donde se almacenarán los archivos
-    },
-    filename: function (req, file, cb) {
-      cb(null, `${Date.now()}-${file.originalname}`)
+    destination: 'File',
+    filename: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
     }
-  })
+  });
   
   const File = multer({ storage: storage })
 

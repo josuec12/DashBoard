@@ -194,7 +194,7 @@ const Tabla = () => {
                                 </span>
                               </button>
                             </a>
-                          </td>
+                          </td> 
                           <td>
                             <button className="edit-button" onClick={() => handleEditar(registro._id)}>
                               <svg className="edit-svgIcon" viewBox="0 0 512 512">

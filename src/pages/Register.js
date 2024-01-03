@@ -15,18 +15,18 @@ const Register = ({ isOpen, toggleSidebar }) => {
 
 
   return (
-    <div>
+    <>
       <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
 
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <NavA isOpen={isSidebarOpen} toggleSidebar={toggle} />
 
-        <div className="content" >
+        <div className="content">
           <div className="dash">
-            <div className="accordion" id="accordionExample">
+            <div className="accordion shadow" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header">
-                  <button className="accordion-button bg-light text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <button className="accordion-button bg-ligth" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <div className="cardHeader">
                       <h2>Registro Cliente</h2>
                     </div>
@@ -40,7 +40,7 @@ const Register = ({ isOpen, toggleSidebar }) => {
               </div>
               <div className="accordion-item">
                 <h2 className="accordion-header">
-                  <button className="accordion-button bg-light text-black collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <button className="accordion-button bg-ligth collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <div className="cardHeader">
                       <h2>Registro Administrador</h2>
                     </div>
@@ -56,7 +56,7 @@ const Register = ({ isOpen, toggleSidebar }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

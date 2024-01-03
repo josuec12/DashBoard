@@ -18,7 +18,7 @@ const ReporteV = () => {
   console.log(besitzVe);
 
   return (
-    <div>
+    <>
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />
 
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
@@ -43,7 +43,7 @@ const ReporteV = () => {
         </div>
         <Footer/>
       </div>
-    </div>
+    </>
   )
 }
 

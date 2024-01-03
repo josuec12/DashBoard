@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Password = () => {
     return (
-        <div>
+        <>
             <div className="wrapper">
                 <img className="img-login scale-up-center" alt="logo" src={require('../imagenes/Lblanco.png')} />
                 <div className="container">
@@ -32,7 +32,7 @@ const Password = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
