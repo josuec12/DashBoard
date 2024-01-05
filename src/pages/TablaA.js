@@ -55,6 +55,16 @@ const TablaA = () => {
 
   const handleGuardarEdicion = async (editedData) => {
     try {
+
+      // Verificar si el nuevo NIT ya existe en otro registro
+    const nitExists = registros.some((r) => r._id === editedData._id && r.nitt !== editedData.nitt);
+
+    if (nitExists) {
+      console.log('dentro',nitExists);
+      MySwal.fire('Error', 'El NIT ingresado ya existe en otro registro', 'error');
+      return; // No proceder con la edición si el NIT ya existe
+    }
+
       const response = await axios.put(`http://localhost:5000/Admin/${editedData._id}`, editedData);
       const updatedRegistro = response.data.data;
       console.log('Registro Editado:', updatedRegistro);

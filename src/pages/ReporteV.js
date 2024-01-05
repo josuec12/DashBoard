@@ -15,7 +15,6 @@ const ReporteV = () => {
   const {Besitz} = useBesitz();
 
   const besitzVe = Besitz.Besitz.ventas;
-  console.log(besitzVe);
 
   return (
     <>

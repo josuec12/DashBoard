@@ -3,14 +3,17 @@ import React, { createContext, useContext, useState } from 'react';
 const BesitzContext = createContext();
 
 export const BesitzProvider = ({ children }) => {
-  const [Besitz, setBesitz] = useState(null);
+  const storedBesitz = localStorage.getItem('Besitz');
+  const [Besitz, setBesitz] = useState(storedBesitz ? JSON.parse(storedBesitz) : null);
 
   const loginBesitz = (BesitzData) => {
     setBesitz(BesitzData);
+    localStorage.setItem('Besitz', JSON.stringify(BesitzData));
   };
 
   const logoutBesitz = () => {
     setBesitz(null);
+    localStorage.removeItem('Besitz');
   };
 
   return (

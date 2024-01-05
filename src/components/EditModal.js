@@ -90,9 +90,6 @@ const EditModal = ({ registro, onSave }) => {
             <label>Financiero:</label>
           </div>
         </div>
-      {/* </div> */}
-
-      {/* <div className='row'> */}
         <div className='col'>
           <div className="input-field ">
             <label htmlFor="boletin" className="custom-file-button">

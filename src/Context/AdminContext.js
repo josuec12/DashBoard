@@ -3,15 +3,17 @@ import React, { createContext, useContext, useState } from 'react';
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const [Admin, setAdmin] = useState(null);
+  const storedAdmin = localStorage.getItem('Admin');
+  const [Admin, setAdmin] = useState(storedAdmin ? JSON.parse(storedAdmin) : null);
 
   const loginAdmin = (AdminData) => {
     setAdmin(AdminData);
-    console.log(AdminData);
+    localStorage.setItem('Admin', JSON.stringify(AdminData));
   };
 
   const logoutAdmin = () => {
     setAdmin(null);
+    localStorage.removeItem('Admin');
   };
 
   return (

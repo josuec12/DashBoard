@@ -4,7 +4,7 @@ import { useBesitz } from '../Context/BesitzContext';
 
 const NavSide = ({ isOpen}) => {
   const [activeLink, setActiveLink] = useState(null);
-  const { logoutBesitz } = useBesitz(); // Usar desestructuración correctamente
+  const { logoutBesitz } = useBesitz(); 
   const navigate = useNavigate();
 
   const handleLinkMouseOver = (index) => {
@@ -15,8 +15,9 @@ const NavSide = ({ isOpen}) => {
     // Llama a la función correspondiente para cerrar sesión
     // Aquí se asume que hay una función de cierre de sesión en el contexto
     logoutBesitz();
+    console.log('Saliendon...');
     // Redirige a la página de inicio de sesión
-    navigate('/Login');
+    navigate('/');
   };
 
 
@@ -37,10 +38,9 @@ const NavSide = ({ isOpen}) => {
       title: 'Reporte Financiero',
     },
     {
-      to: '/',
       icon: <ion-icon name="log-out-outline"></ion-icon>,
       title: 'Cerrar sesion',
-      onClick: handleLogout,
+      onClick: {handleLogout},
     },
   ];
 
@@ -61,10 +61,17 @@ const NavSide = ({ isOpen}) => {
 
           {links.map((link, index) => (
             <li key={index} onMouseOver={() => handleLinkMouseOver(index)} className={activeLink === index ? 'hovered' : ''}>
-              <NavLink to={link.to}>
-                <span className="icon">{link.icon}</span>
-                <span className="title">{link.title}</span>
-              </NavLink>
+              {link.onClick ? (
+                <NavLink onClick={handleLogout}>
+                  <span className="icon">{link.icon}</span>
+                  <span className="title">{link.title}</span>
+                </NavLink>
+              ) : (
+                <NavLink to={link.to}>
+                  <span className="icon">{link.icon}</span>
+                  <span className="title">{link.title}</span>
+                </NavLink>
+              )}
             </li>
           ))}
         </ul>

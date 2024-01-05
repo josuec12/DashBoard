@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink,  useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAdmin } from '../Context/AdminContext.js';
 
 const NavSideA = ({ isOpen }) => {
@@ -7,17 +7,19 @@ const NavSideA = ({ isOpen }) => {
   const { logoutAdmin } = useAdmin();
   const navigate = useNavigate();
 
-  const handleLinkMouseOver  = (index) => {
+  const handleLinkMouseOver = (index) => {
     setActiveLink(index);
   };
 
+  console.log('Before handleLogout');
+
   const handleLogout = () => {
-    // Llama a la función correspondiente para cerrar sesión
-    // Aquí se asume que hay una función de cierre de sesión en ambos contextos
+    console.log('Logging out...');
     logoutAdmin();
     // Redirige a la página de inicio de sesión
-    navigate('/Login');
+    navigate('/');
   };
+
   const links = [
     {
       to: '/HomeA',
@@ -40,10 +42,9 @@ const NavSideA = ({ isOpen }) => {
       title: 'Registrar',
     },
     {
-      to: '/',
       icon: <ion-icon name="log-out-outline"></ion-icon>,
       title: 'Cerrar sesion',
-      onClick: handleLogout,
+      onClick: { handleLogout },
     },
   ];
 
@@ -64,10 +65,17 @@ const NavSideA = ({ isOpen }) => {
 
           {links.map((link, index) => (
             <li key={index} onMouseOver={() => handleLinkMouseOver(index)} className={activeLink === index ? 'hovered' : ''}>
-              <NavLink to={link.to}>
-                <span className="icon">{link.icon}</span>
-                <span className="title">{link.title}</span>
-              </NavLink>
+              {link.onClick ? (
+                <NavLink onClick={handleLogout}>
+                  <span className="icon">{link.icon}</span>
+                  <span className="title">{link.title}</span>
+                </NavLink>
+              ) : (
+                <NavLink to={link.to}>
+                  <span className="icon">{link.icon}</span>
+                  <span className="title">{link.title}</span>
+                </NavLink>
+              )}
             </li>
           ))}
         </ul>
@@ -75,5 +83,5 @@ const NavSideA = ({ isOpen }) => {
     </div>
   );
 };
-  
+
 export default NavSideA;

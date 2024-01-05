@@ -36,7 +36,7 @@ const Ruta = () => {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Navigate to="/Login" />} />
+          <Route path="/" element={<Login />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Error404" element={<Error404 />} />
           <Route path="/Error500" element={<Error500 />} />
