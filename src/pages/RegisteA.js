@@ -5,15 +5,15 @@ import zxcvbn from 'zxcvbn'
 const RegisteA = () => {
   const [nom, setNom] = useState('');
   const [ape, setApe] = useState('');
-  const [nitt, setNitt] = useState('');
+  const [cedula, setCedula] = useState('');
   const [passw, setPassw] = useState('');
   const [emaila, setEmaila] = useState('');
 
   const [showPasswordIconA, setShowPasswordIconA] = useState(false);
 
-  const checkExistingNitt = async (nitt) => {
+  const checkExistingCedula = async (cedula) => {
     try {
-      const response = await fetch(`http://localhost:5000/checkNitt/${nitt}`);
+      const response = await fetch(`http://localhost:5000/checkCedula/${cedula}`);
       console.log('Status:', response.status);
 
       if (response.ok) {
@@ -39,9 +39,9 @@ const RegisteA = () => {
     e.preventDefault();
 
           // Verificar si ya existe un documento con el mismo NIT
-          const existingNitt = await checkExistingNitt(nitt);
+          const existingCedula = await checkExistingCedula(cedula);
   
-          if (existingNitt) {
+          if (existingCedula) {
             // El NIT ya existe, muestra una alerta
             Swal.fire({
               icon: 'error',
@@ -72,7 +72,7 @@ const RegisteA = () => {
         body: JSON.stringify({
           nom,
           ape,
-          nitt,
+          cedula,
           passw,
           emaila,
         }),
@@ -90,7 +90,7 @@ const RegisteA = () => {
         // Limpiar los campos después del envío exitoso
         setNom('');
         setApe('');
-        setNitt('');
+        setCedula('');
         setPassw('');
         setEmaila('');
       } else {
@@ -166,7 +166,7 @@ const RegisteA = () => {
             <div className="col">
               <div className="inputForm">
                 <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
-                <input type="number" className="inputF" id="nitt" required value={nitt} onChange={(e) => setNitt(e.target.value)} autoComplete="off" placeholder="965647482" />
+                <input type="number" className="inputF" id="cedula" required value={cedula} onChange={(e) => setCedula(e.target.value)} autoComplete="off" placeholder="9656474823" />
               </div>
             </div>
             <div className="col">

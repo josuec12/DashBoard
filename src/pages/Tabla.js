@@ -53,16 +53,43 @@ const Tabla = () => {
     });
   };
 
+  const checkExistingNitID = async (nit, _id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/checkNitID/${nit}/${_id}`);
+      console.log('Status:', response.status);
+
+      if (response.ok) {
+        // NIT no existe
+        console.log('entro');
+        return false;
+      } else if (response.status === 409) {
+        // NIT ya existe
+        console.log('entro 409');
+        return true;
+      } else {
+        // Otro error
+        throw new Error('Error en la verificación del NIT');
+      }
+    } catch (error) {
+      console.error('Error en la verificación del NIT:', error);
+      throw error;
+    }
+  };
   const handleGuardarEdicion = async (editedData) => {
     try {
-    // Verificar si el nuevo NIT ya existe en otro registro
-    const nitExists = registros.some((r) => r._id === editedData._id && r.nit !== editedData.nit);
-
-    if (nitExists) {
-      console.log('dentro',nitExists);
-      MySwal.fire('Error', 'El NIT ingresado ya existe en otro registro', 'error');
-      return; // No proceder con la edición si el NIT ya existe
-    }
+      
+       // Verificar si ya existe un documento con el mismo NIT
+       const existingNit = await checkExistingNitID(editedData.nit, editedData._id);
+  
+       if (existingNit) {
+         // El NIT ya existe, muestra una alerta
+         Swal.fire({
+           icon: 'error',
+           title: 'Error',
+           text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
+         });
+         return;
+       }
 
     // Realiza la solicitud PUT al servidor
     const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData, {

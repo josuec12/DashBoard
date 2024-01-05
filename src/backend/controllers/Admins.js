@@ -21,12 +21,12 @@ exports.getData = async (req, res) => {
 
 exports.insertData = async (req, res) => {
     try {
-        const { nom, ape, nitt, passw, emaila } = req.body;
+        const { nom, ape, cedula, passw, emaila } = req.body;
 
         const data = req.body;
 
         // Verificar si ya existe un documento con el mismo nit
-        const existingDoc = await model.findOne({ nitt: data.nitt });
+        const existingDoc = await model.findOne({ cedula: data.cedula });
 
         if (existingDoc) {
             // El documento ya existe, decide qué hacer en este caso
@@ -37,7 +37,7 @@ exports.insertData = async (req, res) => {
         const newDoc = new model({
             nom,
             ape,
-            nitt,
+            cedula,
             passw,
             emaila
           });
@@ -90,7 +90,7 @@ exports.updateSingle = async (req, res) => {
         }
 
            // Actualizar otros campos
-           ['nom', 'ape', 'nitt', 'emaila'].forEach(field => {
+           ['nom', 'ape', 'cedula', 'emaila'].forEach(field => {
             if (body[field]) {
                 updatedDoc[field] = body[field];
             }

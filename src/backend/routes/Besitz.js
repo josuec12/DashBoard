@@ -43,6 +43,33 @@ const storage = multer.diskStorage({
       }
   });
 
+  router.get(`/checkNitID/:nit/:id`, async (req, res) => {
+    try {
+        const nitToCheck = req.params.nit;
+        const idToCheck = req.params.id;
+
+        // Verifica si ya existe un documento con el mismo NIT
+        const existingDoc = await model.findOne({ nit: nitToCheck });
+
+        if (existingDoc) {
+            // Si el documento ya existe
+            if (existingDoc.id.toString() === idToCheck.toString()) {
+                res.status(200).send({ success: 'El nit está disponible y el ID coincide.' });
+            } else {
+                // Si el documento ya existe pero el ID es diferente
+                res.status(409).send({ error: 'El nit ya existe, pero el ID es diferente.' });
+            }
+        } else {
+            // El nit no existe
+            res.status(200).send({ success: 'La cédula está disponible.' });
+        }
+    } catch (error) {
+        console.error('Error al verificar la cédula:', error);
+        res.status(500).send({ error: 'Error interno del servidor.' });
+    }
+});
+
+
   
 router.get(
     `/${path}`,

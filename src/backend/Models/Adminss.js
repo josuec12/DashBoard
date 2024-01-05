@@ -11,10 +11,10 @@ const AdminScheme = new moongose.Schema({
                  type: String
              },
         
-             nitt: {
+             cedula: {
                  required: true,
                  type: Number,
-                 min: 9,
+                 min: 10,
                  unique: true
              },
         
@@ -23,7 +23,7 @@ const AdminScheme = new moongose.Schema({
                  type: String,
                  minlength: 6,
                  maxlength: 128,
-                 match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\^&\*]).+/               
+                 match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+/             
              },        
              emaila: {
                  required: true,

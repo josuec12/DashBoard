@@ -18,13 +18,15 @@ const EditModalA = ({ registro, onSave }) => {
   return (
     <div>
     <div className='row'>
-    <div className='col'>
+    <div className='col-1'></div>
+
+    <div className='col-5'>
       <div className="inputGroup">
         <input name="nom" type="text" value={editedData.nom} onChange={handleInputChange} />
         <label htmlFor="nom">Nombre</label>
       </div>   
       </div>
-      <div className='col'>
+      <div className='col-5'>
       <div className="inputGroup">     
         <input type="text" name="ape" value={editedData.ape} onChange={handleInputChange} />
         <label>Apellido:</label>
@@ -32,13 +34,14 @@ const EditModalA = ({ registro, onSave }) => {
     </div>
    </div>
     <div className='row'>
-    <div className='col'>
+    <div className='col-1'></div>
+    <div className='col-5'>
       <div className="inputGroup">    
-        <input type="text" name="nitt" value={editedData.nitt} onChange={handleInputChange} />
-        <label>NIT:</label>
+        <input type="text" name="cedula" value={editedData.cedula} onChange={handleInputChange} />
+        <label>Cedula:</label>
       </div>
     </div>
-    <div className='col'>
+    <div className='col-5'>
       <div className="inputGroup">       
         <input type="text" name="passw" value={editedData.passw} onChange={handleInputChange} />
         <label>Contraseña:</label>
@@ -46,10 +49,14 @@ const EditModalA = ({ registro, onSave }) => {
     </div>
     </div>
     <div className='row'>  
+    <div className='col'></div>
+    <div className='col-5'>
       <div className="inputGroup">
         <input type="text" name="emaila" value={editedData.emaila} onChange={handleInputChange} />
         <label>Email:</label>
-      </div>         
+      </div> 
+      </div> 
+      <div className='col'></div>       
     </div> 
     <button className="c-button c-button--gooey" onClick={handleGuardar}> Guardar
         <div className="c-button__blobs">

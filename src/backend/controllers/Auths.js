@@ -8,8 +8,8 @@ const findUser = (nit) => {
     return modelU.findOne({ nit });
 };
 
-const findAdmin = (nitt) => {
-    return modelA.findOne({ nitt });
+const findAdmin = (cedula) => {
+    return modelA.findOne({ cedula });
 };
 
 const comparePasswords = (password, hashedPassword) => {
@@ -85,7 +85,7 @@ exports.loginA = async (req, res) => {
     const body = req.body;
 
     try {
-        const Admin = await findAdmin(body.nitt);
+        const Admin = await findAdmin(body.cedula);
 
         if (!Admin) {
             res.send({ success: false, data: 'Administrador no encontrado' });

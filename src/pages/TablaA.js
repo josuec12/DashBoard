@@ -53,17 +53,44 @@ const TablaA = () => {
     });
   };
 
+  const checkExistingCedulaID = async (cedula, _id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/checkCedulaID/${cedula}/${_id}`);
+      console.log('Status:', response.status);
+
+      if (response.ok) {
+        // NIT no existe
+        console.log('entro');
+        return false;
+      } else if (response.status === 409) {
+        // NIT ya existe
+        console.log('entro 409');
+        return true;
+      } else {
+        // Otro error
+        throw new Error('Error en la verificación del NIT');
+      }
+    } catch (error) {
+      console.error('Error en la verificación del NIT:', error);
+      throw error;
+    }
+  };
+
   const handleGuardarEdicion = async (editedData) => {
     try {
 
-      // Verificar si el nuevo NIT ya existe en otro registro
-    const nitExists = registros.some((r) => r._id === editedData._id && r.nitt !== editedData.nitt);
-
-    if (nitExists) {
-      console.log('dentro',nitExists);
-      MySwal.fire('Error', 'El NIT ingresado ya existe en otro registro', 'error');
-      return; // No proceder con la edición si el NIT ya existe
-    }
+      // Verificar si ya existe un documento con el mismo NIT
+      const existingCedula = await checkExistingCedulaID(editedData.cedula, editedData._id);
+  
+      if (existingCedula) {
+        // El NIT ya existe, muestra una alerta
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
+        });
+        return;
+      }
 
       const response = await axios.put(`http://localhost:5000/Admin/${editedData._id}`, editedData);
       const updatedRegistro = response.data.data;
@@ -121,13 +148,13 @@ const TablaA = () => {
 
   const searchMatches = (registro, term) => {
     const lowerCaseTerm = term.toLowerCase();
-    const nitAsString = registro.nitt.toString(); 
+    const cedulaAsString = registro.cedula.toString(); 
 
     return( 
     registro.nom.toLowerCase().includes(lowerCaseTerm) ||
     registro.ape.toLowerCase().includes(lowerCaseTerm) ||
     registro.emaila.toLowerCase().includes(lowerCaseTerm) ||
-    nitAsString.includes(lowerCaseTerm)
+    cedulaAsString.includes(lowerCaseTerm)
     )
   };
 
@@ -164,7 +191,7 @@ const TablaA = () => {
                     <tr>
                       <th>NOMBRE</th>
                       <th>APELLIDO</th>
-                      <th>NIT</th>
+                      <th>CEDULA</th>
                       <th>CONTRASEÑA</th>
                       <th>EMAIL</th>
                       <th>ACCIONES</th>
@@ -176,7 +203,7 @@ const TablaA = () => {
                         <tr key={registro._id}>
                           <td>{registro.nom}</td>
                           <td>{registro.ape}</td>
-                          <td>{registro.nitt}</td>
+                          <td>{registro.cedula}</td>
                           <td>{registro.passw}</td>
                           <td>{registro.emaila}</td>
                           <td className=''>

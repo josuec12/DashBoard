@@ -8,7 +8,7 @@ const Login = () => {
   const [nit, setNit] = useState('');
   const [pass, setPassword] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
-  const [nitt, setNitt] = useState('');
+  const [cedula, setCedula] = useState('');
   const [passw, setPassw] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [rememberMeA, setRememberMeA] = useState(false);
@@ -22,10 +22,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting form with data:', isAdmin ? { nitt, passw } : { nit, pass });
+    console.log('Submitting form with data:', isAdmin ? { cedula, passw } : { nit, pass });
 
 
-    if ((!isAdmin && (!nit || !pass)) || (isAdmin && (!nitt || !passw))) {
+    if ((!isAdmin && (!nit || !pass)) || (isAdmin && (!cedula || !passw))) {
       Swal.fire({
         icon: 'error',
         title: 'Campos incompletos',
@@ -37,7 +37,7 @@ const Login = () => {
     try {
       const loginUrl = isAdmin ? 'http://localhost:5000/loginA' : 'http://localhost:5000/loginU';
       const loginData = isAdmin
-        ? { nitt: nitt, passw: passw, rememberMeA: rememberMeA }
+        ? { cedula: cedula, passw: passw, rememberMeA: rememberMeA }
         : { nit: nit, pass: pass, rememberMe: rememberMe };
 
       const response = await fetch(loginUrl, {
@@ -170,11 +170,11 @@ const Login = () => {
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" /><circle cx="12" cy="10" r="3" /><circle cx="12" cy="12" r="10" /></svg>
                   <input
                     className="inputF"
-                    id="nitt"
+                    id="cedula"
                     type="number"
                     placeholder="244565185"
-                    value={nitt}
-                    onChange={(e) => setNitt(e.target.value)}
+                    value={cedula}
+                    onChange={(e) => setCedula(e.target.value)}
                   />
                 </div>
                 <div className="inputForm">
