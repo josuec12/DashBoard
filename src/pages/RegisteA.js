@@ -11,9 +11,45 @@ const RegisteA = () => {
 
   const [showPasswordIconA, setShowPasswordIconA] = useState(false);
 
+  const checkExistingNitt = async (nitt) => {
+    try {
+      const response = await fetch(`http://localhost:5000/checkNitt/${nitt}`);
+      console.log('Status:', response.status);
+
+      if (response.ok) {
+        // NIT no existe
+        console.log('entro');
+        return false;
+      } else if (response.status === 409) {
+        // NIT ya existe
+        console.log('entro 409');
+        return true;
+      } else {
+        // Otro error
+        throw new Error('Error en la verificación del NIT');
+      }
+    } catch (error) {
+      console.error('Error en la verificación del NIT:', error);
+      throw error;
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+          // Verificar si ya existe un documento con el mismo NIT
+          const existingNitt = await checkExistingNitt(nitt);
+  
+          if (existingNitt) {
+            // El NIT ya existe, muestra una alerta
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
+            });
+            return;
+          }
 
     const passwordStrength = zxcvbn(passw);
 

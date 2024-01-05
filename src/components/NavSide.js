@@ -15,7 +15,6 @@ const NavSide = ({ isOpen}) => {
     // Llama a la función correspondiente para cerrar sesión
     // Aquí se asume que hay una función de cierre de sesión en el contexto
     logoutBesitz();
-    console.log('Saliendon...');
     // Redirige a la página de inicio de sesión
     navigate('/');
   };

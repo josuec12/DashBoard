@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import NavSideA from '../components/NavSideA';
 import RegisterU from './RegisertU';
 import RegisteA from './RegisteA';
 import NavA from '../components/NavA';
 
-const Register = ({ isOpen, toggleSidebar }) => {
+const Register = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

@@ -127,35 +127,3 @@ exports.deleteSingle = async (req, res) => {
     }
 };
 
-// exports.getAll = async (req, res) => {
-//     try {
-//         // Obtener todos los documentos del modelo
-//         let allDocs = await model.find();
-
-//         res.json({ data: allDocs });
-
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).send({ error: 'Error al obtener datos' });
-//     }
-// };
-
-exports.getSingle = async (req, res) => {
-    try {
-        const { id } = req.params;
-
-        // Encontrar el documento por ID
-        let foundDoc = await model.findById(parseId(id));
-
-        // Verificar si se encontró el documento
-        if (!foundDoc) {
-            return res.status(404).json({ error: 'Documento no encontrado' });
-        }
-
-        res.json({ data: foundDoc });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: 'Error al obtener datos' });
-    }
-};

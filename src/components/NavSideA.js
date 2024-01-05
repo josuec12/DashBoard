@@ -11,8 +11,6 @@ const NavSideA = ({ isOpen }) => {
     setActiveLink(index);
   };
 
-  console.log('Before handleLogout');
-
   const handleLogout = () => {
     console.log('Logging out...');
     logoutAdmin();

@@ -174,13 +174,3 @@ async function deleteFile(filesFolder, fileName) {
         }
     }
 }
-
-exports.getNitList = async (req, res) => {
-    try {
-        const nitList = await model.distinct('nit');
-        res.send({ nitList });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send({ error: 'Error al obtener la lista de NITs' });
-    }
-};

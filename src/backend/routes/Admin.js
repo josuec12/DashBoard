@@ -6,7 +6,7 @@ const Path = 'Admin'
 
 const model = require('../Models/Adminss'); 
 
-router.get(`/checkNit/:nitt`, async (req, res) => {
+router.get(`/checkNitt/:nitt`, async (req, res) => {
     try {
         const nittToCheck = req.params.nitt;
 
