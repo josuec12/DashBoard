@@ -35,6 +35,25 @@ const RegisterU = () => {
     }
   };
 
+  const checkExistingEmail = async (nit) => {
+    try {
+      const response = await fetch(`http://localhost:5000/checkEmail/${email}`);
+      if (response.ok) {
+        // Email no existe
+        return false;
+      } else if (response.status === 409) {
+        // Email ya existe
+        return true;
+      } else {
+        // Otro error
+        throw new Error('Error en la verificación del Email');
+      }
+    } catch (error) {
+      console.error('Error en la verificación del Email:', error);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
  
@@ -50,6 +69,19 @@ const RegisterU = () => {
         });
         return;
       }
+
+            // Verificar si ya existe un documento con el mismo Email
+            const existingEmail = await checkExistingEmail(email);
+  
+            if (existingEmail) {
+              // El Email ya existe, muestra una alerta
+              Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'El Email ya existe. Por favor, ingresa otro Email.',
+              });
+              return;
+            }
 
     if (!boletin) {
       // Mostrar mensaje de error

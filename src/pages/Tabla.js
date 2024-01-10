@@ -75,6 +75,30 @@ const Tabla = () => {
       throw error;
     }
   };
+
+  const checkExistingEmailID = async (email, _id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/checkEmailID/${email}/${_id}`);
+      console.log('Status:', response.status);
+
+      if (response.ok) {
+        // Email no existe
+        console.log('entro');
+        return false;
+      } else if (response.status === 409) {
+        // Email ya existe
+        console.log('entro 409');
+        return true;
+      } else {
+        // Otro error
+        throw new Error('Error en la verificación del Email');
+      }
+    } catch (error) {
+      console.error('Error en la verificación del Email:', error);
+      throw error;
+    }
+  };
+
   const handleGuardarEdicion = async (editedData) => {
     try {
       
@@ -90,6 +114,19 @@ const Tabla = () => {
          });
          return;
        }
+
+         // Verificar si ya existe un documento con el mismo Email
+         const existingEmail = await checkExistingEmailID(editedData.email, editedData._id);
+  
+         if (existingEmail) {
+           // El Email ya existe, muestra una alerta
+           Swal.fire({
+             icon: 'error',
+             title: 'Error',
+             text: 'El Email ya existe. Por favor, ingresa otro Email.',
+           });
+           return;
+         }
 
     // Realiza la solicitud PUT al servidor
     const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData, {

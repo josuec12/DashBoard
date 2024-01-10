@@ -34,6 +34,29 @@ const RegisteA = () => {
     }
   };
 
+  const checkExistingEmaila = async (emaila) => {
+    try {
+      const response = await fetch(`http://localhost:5000/checkEmaila/${emaila}`);
+      console.log('Status:', response.status);
+
+      if (response.ok) {
+        // Email no existe
+        console.log('entro');
+        return false;
+      } else if (response.status === 409) {
+        // Email ya existe
+        console.log('entro 409');
+        return true;
+      } else {
+        // Otro error
+        throw new Error('Error en la verificación del email');
+      }
+    } catch (error) {
+      console.error('Error en la verificación del email:', error);
+      throw error;
+    }
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,6 +70,18 @@ const RegisteA = () => {
               icon: 'error',
               title: 'Error',
               text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
+            });
+            return;
+          }
+
+          const existingEmaila = await checkExistingEmaila(emaila);
+  
+          if (existingEmaila) {
+            // El NIT ya existe, muestra una alerta
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El Email ya existe. Por favor, ingresa otro Email.',
             });
             return;
           }

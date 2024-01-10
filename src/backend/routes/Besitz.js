@@ -43,6 +43,26 @@ const storage = multer.diskStorage({
       }
   });
 
+  router.get(`/checkEmail/:email`, async (req, res) => {
+    try {
+        const emailToCheck = req.params.email;
+
+        // Verifica si ya existe un documento con el mismo email
+        const existingDoc = await model.findOne({ email: emailToCheck });
+
+        if (existingDoc) {
+            // El documento ya existe
+            res.status(409).send({ error: 'El Email ya existe.' });
+        } else {
+            // El Email no existe
+            res.status(200).send({ success: 'El Email está disponible.' });
+        }
+    } catch (error) {
+        console.error('Error al verificar el Email:', error);
+        res.status(500).send({ error: 'Error interno del servidor.' });
+    }
+});
+
   router.get(`/checkNitID/:nit/:id`, async (req, res) => {
     try {
         const nitToCheck = req.params.nit;
@@ -61,15 +81,39 @@ const storage = multer.diskStorage({
             }
         } else {
             // El nit no existe
-            res.status(200).send({ success: 'La cédula está disponible.' });
+            res.status(200).send({ success: 'El nit está disponible.' });
         }
     } catch (error) {
-        console.error('Error al verificar la cédula:', error);
+        console.error('Error al verificar el nit:', error);
         res.status(500).send({ error: 'Error interno del servidor.' });
     }
 });
 
+router.get(`/checkEmailID/:email/:id`, async (req, res) => {
+    try {
+        const emailToCheck = req.params.email;
+        const idToCheck = req.params.id;
 
+        // Verifica si ya existe un documento con el mismo Email
+        const existingDoc = await model.findOne({ email: emailToCheck });
+
+        if (existingDoc) {
+            // Si el documento ya existe
+            if (existingDoc.id.toString() === idToCheck.toString()) {
+                res.status(200).send({ success: 'El Email está disponible y el ID coincide.' });
+            } else {
+                // Si el documento ya existe pero el ID es diferente
+                res.status(409).send({ error: 'El Email ya existe, pero el ID es diferente.' });
+            }
+        } else {
+            // El nit no existe
+            res.status(200).send({ success: 'El Email está disponible.' });
+        }
+    } catch (error) {
+        console.error('Error al verificar el Email:', error);
+        res.status(500).send({ error: 'Error interno del servidor.' });
+    }
+});
   
 router.get(
     `/${path}`,
