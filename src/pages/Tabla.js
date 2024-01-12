@@ -99,6 +99,8 @@ const Tabla = () => {
     }
   };
 
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com"];
+
   const handleGuardarEdicion = async (editedData) => {
     try {
       
@@ -124,6 +126,17 @@ const Tabla = () => {
              icon: 'error',
              title: 'Error',
              text: 'El Email ya existe. Por favor, ingresa otro Email.',
+           });
+           return;
+         }
+
+         const isValidDomain = allowedDomains.some((domain) => editedData.email.endsWith(domain));
+
+         if (!isValidDomain) {
+           Swal.fire({
+             icon: 'error',
+             title: 'Error',
+             text: 'Por favor, ingresa un correo electrónico válido.'
            });
            return;
          }

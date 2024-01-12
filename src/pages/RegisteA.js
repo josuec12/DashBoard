@@ -57,46 +57,79 @@ const RegisteA = () => {
     }
   };
 
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com"];
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-          // Verificar si ya existe un documento con el mismo NIT
-          const existingCedula = await checkExistingCedula(cedula);
-  
-          if (existingCedula) {
-            // El NIT ya existe, muestra una alerta
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
-            });
-            return;
-          }
+    // Verificar si ya existe un documento con el mismo NIT
+    const existingCedula = await checkExistingCedula(cedula);
 
-          const existingEmaila = await checkExistingEmaila(emaila);
-  
-          if (existingEmaila) {
-            // El NIT ya existe, muestra una alerta
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'El Email ya existe. Por favor, ingresa otro Email.',
-            });
-            return;
-          }
-
-    const passwordStrength = zxcvbn(passw);
-
-    if (passwordStrength.score < 3) {
-      // Mostrar mensaje de error si la contraseña no cumple con los requisitos de fortaleza
+    if (existingCedula) {
+      // El NIT ya existe, muestra una alerta
       Swal.fire({
         icon: 'error',
-        title: 'Contraseña débil',
-        text: 'La contraseña debe tener al menos una letra minúscula, una letra mayúscula, un dígito y una longitud de al menos 6 caracteres.',
+        title: 'Error',
+        text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
       });
       return;
     }
+
+    const existingEmaila = await checkExistingEmaila(emaila);
+
+    if (existingEmaila) {
+      // El NIT ya existe, muestra una alerta
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El Email ya existe. Por favor, ingresa otro Email.',
+      });
+      return;
+    }
+
+    const isValidDomain = allowedDomains.some((domain) => emaila.endsWith(domain));
+
+    if (!isValidDomain) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Por favor, ingresa un correo electrónico válido.'
+      });
+      return;
+    }
+
+    const passwordStrength = zxcvbn(passw);
+
+    
+    if (passwordStrength.score < 3) {
+      // Construir la lista de requisitos no cumplidos
+      const requirements = [];
+      
+      if (!/[A-Z]/.test(passw)) {
+          requirements.push('Debe tener al menos una letra mayúscula.');
+      }
+
+      if (!/\d/.test(passw)) {
+          requirements.push('Debe tener al menos un dígito.');
+      }
+
+      if (passw.length < 6) {
+          requirements.push('Debe tener una longitud de al menos 6 caracteres.');
+      }
+
+      // Mostrar mensaje de error con requisitos no cumplidos
+      Swal.fire({
+          icon: 'error',
+          title: 'Contraseña débil',
+          html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
+                <ul style="text-align: left;">
+                    ${requirements.map(req => `<li>${req}</li>`).join('')}
+                </ul>`,
+      });
+      return;
+  }
+
 
     try {
       const response = await fetch('http://localhost:5000/Admin', {
@@ -209,14 +242,14 @@ const RegisteA = () => {
                 <svg height="20" viewBox="-64 0 512 512" width="20" xmlns="http://www.w3.org/2000/svg"><path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path><path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path></svg>
                 <input type={showPasswordIconA ? "text" : "password"} className="inputF" id="passw" required value={passw} onChange={(e) => setPassw(e.target.value)} placeholder="***********"></input>
                 {showPasswordIconA ? (
-                    <svg viewBox="0 0 576 512" height="1em" className='eyeA' onClick={() => setShowPasswordIconA(!showPasswordIconA)} xmlns="http://www.w3.org/2000/svg">
-                      <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"></path>
-                      <rect x="-80" y="160" width="630" height="70" transform="rotate(-45 288 176)"></rect>
-                    </svg>
+                  <svg viewBox="0 0 576 512" height="1em" className='eyeA' onClick={() => setShowPasswordIconA(!showPasswordIconA)} xmlns="http://www.w3.org/2000/svg">
+                    <path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"></path>
+                    <rect x="-80" y="160" width="630" height="70" transform="rotate(-45 288 176)"></rect>
+                  </svg>
 
-                  ) : (
-                    <svg viewBox="0 0 576 512" height="1em" className='eyeA' onClick={() => setShowPasswordIconA(!showPasswordIconA)} xmlns="http://www.w3.org/2000/svg"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"></path></svg>
-                  )}
+                ) : (
+                  <svg viewBox="0 0 576 512" height="1em" className='eyeA' onClick={() => setShowPasswordIconA(!showPasswordIconA)} xmlns="http://www.w3.org/2000/svg"><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"></path></svg>
+                )}
               </div>
             </div>
           </div>

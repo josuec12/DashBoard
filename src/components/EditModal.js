@@ -87,7 +87,7 @@ const EditModal = ({ registro, onSave }) => {
         <div className='col'>
           <div className='inputGroup'>
             <input type="text" name="financiero" value={editedData.financiero} onChange={handleInputChange} />
-            <label>Financiero:</label>
+            <label>Finan:</label>
           </div>
         </div>
         <div className='col'>

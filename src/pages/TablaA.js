@@ -99,18 +99,21 @@ const TablaA = () => {
     }
   };
 
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com"];
+
+
   const handleGuardarEdicion = async (editedData) => {
     try {
 
-      // Verificar si ya existe un documento con el mismo NIT
+      // Verificar si ya existe un documento con la misma Cedula
       const existingCedula = await checkExistingCedulaID(editedData.cedula, editedData._id);
   
       if (existingCedula) {
-        // El NIT ya existe, muestra una alerta
+        // La Cedula ya existe, muestra una alerta
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
+          text: 'La Cedula ya existe. Por favor, ingresa otra Cedula.',
         });
         return;
       }
@@ -124,6 +127,17 @@ const TablaA = () => {
            icon: 'error',
            title: 'Error',
            text: 'El Email ya existe. Por favor, ingresa otro Email.',
+         });
+         return;
+       }
+
+       const isValidDomain = allowedDomains.some((domain) => editedData.emaila.endsWith(domain));
+
+       if (!isValidDomain) {
+         Swal.fire({
+           icon: 'error',
+           title: 'Error',
+           text: 'Por favor, ingresa un correo electrónico válido.'
          });
          return;
        }
