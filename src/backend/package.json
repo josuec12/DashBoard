@@ -25,10 +25,12 @@
     "cookie": "^0.5.0",
     "cookie-signature": "^1.0.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "debug": "^2.6.9",
     "define-data-property": "^1.1.1",
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
+    "dotenv": "^16.3.1",
     "ee-first": "^1.1.1",
     "encodeurl": "^1.0.2",
     "escape-html": "^1.0.3",
@@ -119,13 +121,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "cross-env NODE_ENV=development nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-  "author": "Besitz",
-  "license": "ISC"
-}
+  }
 }

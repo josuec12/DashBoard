@@ -6,7 +6,9 @@ const Database = require('./config/Database');
 const AdminRouters = require('./routes/Admin');
 const BesitzRouters = require('./routes/Besitz');
 const AuthRouters = require('./routes/Auth')
-const port = 5000;
+require('dotenv').config();
+
+const port = process.env.PORT;
 
 const corsOptions = {
     origin: 'http://localhost:3000', 
