@@ -52,11 +52,15 @@ const Login = () => {
 
       if (result && result.success) {
         const { token } = result;
+        const { tokenA } = result;
         localStorage.setItem('token', token);
+        localStorage.setItem('tokenA', tokenA);
+        console.log('TOKEN');
 
         localStorage.setItem('userType', isAdmin ? 'Admin' : 'Besitz');
 
-        isAdmin ? loginAdmin(result.data) : loginBesitz(result.data);
+        isAdmin ? loginAdmin(result.tokenA) : loginBesitz(result.token);
+
 
         Swal.fire({
           title: '¡Bien hecho!',

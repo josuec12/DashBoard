@@ -17,19 +17,19 @@ import Loading from '../components/Loading.js';
 
 const Ruta = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { Besitz } = useBesitz();
-  const { Admin } = useAdmin();
+  const { authToken } = useBesitz();
+  const { authAdmin } = useAdmin();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   const PrivateRoute = ({ element }) => {
-    return Besitz ? element : <Navigate to="/Login" />;
+    return authToken ? element : <Navigate to="/" />;
   };
 
   const AdminRoute = ({ element }) => {
-    return Admin ? element : <Navigate to="/Login" />;
+    return authAdmin ? element : <Navigate to="/" />;
   };
 
   return (

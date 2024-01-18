@@ -1,23 +1,54 @@
 import React, { createContext, useContext, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const storedAdmin = localStorage.getItem('Admin');
-  const [Admin, setAdmin] = useState(storedAdmin ? JSON.parse(storedAdmin) : null);
+  const storedAdmin = localStorage.getItem('tokenA');
+  const storedDecodedAdmin = localStorage.getItem('decodedAdmin');
+  const [authAdmin, setAuthAdmin] = useState(storedDecodedAdmin ? JSON.parse(storedDecodedAdmin) : null);
 
-  const loginAdmin = (AdminData) => {
-    setAdmin(AdminData);
-    localStorage.setItem('Admin', JSON.stringify(AdminData));
+  console.log('storedAdmin', storedAdmin);
+  console.log('authAdmin', authAdmin);
+
+  const decodeAdmin = async (storedAdmin) => {
+    try {
+      console.log('decodificando tokenA:', storedAdmin)
+      const decodedAdmin = jwtDecode(storedAdmin);
+      console.log('tokenA decodificado:', storedAdmin);
+      if (decodedAdmin && decodedAdmin.exp * 1000 > Date.now()) {
+        setAuthAdmin(decodedAdmin.data);
+        localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdmin.data));
+        console.log('decoded Admin:', decodedAdmin.data);
+      }else{
+        console.log('Sesion expirada')
+        logoutAdmin();
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+        })
+      }
+    } catch (error) {
+      console.error('Error al decodificar el tokenAdmin:', error);
+      logoutAdmin();
+    }
+  }
+
+  const loginAdmin = (storedAdmin) => {
+    decodeAdmin(storedAdmin);
+    localStorage.setItem('storedAdmin', storedAdmin);
   };
 
   const logoutAdmin = () => {
-    setAdmin(null);
-    localStorage.removeItem('Admin');
+    setAuthAdmin(null);
+    localStorage.removeItem('tokenA');
+    localStorage.removeItem('decodedAdmin');
   };
 
   return (
-    <AdminContext.Provider value={{ Admin, loginAdmin, logoutAdmin }}>
+    <AdminContext.Provider value={{ authAdmin, loginAdmin, logoutAdmin }}>
       {children}
     </AdminContext.Provider>
   );

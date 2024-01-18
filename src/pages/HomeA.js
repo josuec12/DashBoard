@@ -8,11 +8,11 @@ import CarruselV from '../components/CarruselV';
 
 const HomeA = () => {
 
-  const { Admin } = useAdmin();
+  const { authAdmin } = useAdmin();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
    // Verifica si el administrador está autenticado
-   if (!Admin) {
+   if (!authAdmin) {
     // Si no está autenticado, redirige a la página de inicio de sesión
     return <Navigate to="/Login" />;
   }

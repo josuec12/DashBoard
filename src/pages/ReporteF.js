@@ -11,14 +11,14 @@ const ReporteF = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const {Besitz} = useBesitz();
+  const {authToken} = useBesitz();
 
-  if(!Besitz){
+  if(!authToken){
     console.log('No esta autenticado')
     return null;
   }
 
-  const besitzFi = Besitz.Besitz.financiero;
+  const besitzFi = authToken.Besitz.financiero;
 
   return (
     <>

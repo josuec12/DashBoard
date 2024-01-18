@@ -4,14 +4,14 @@ import { useBesitz } from '../Context/BesitzContext'
 
 const Nav = ({ toggleSidebar }) => {
 
-  const { Besitz } = useBesitz();
-  if (!Besitz) {
+  const { authToken } = useBesitz();
+  if (!authToken) {
     console.log('No esta autenticado');
     return null;
   }
 
-  const BesitzName = Besitz.Besitz.nombre || 'Cliente';
-  const Besitzlogo = Besitz.Besitz.logo;
+  const BesitzName = authToken.Besitz.nombre || 'Cliente';
+  const Besitzlogo = authToken.Besitz.logo;
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary sombra">
       <div className="container-fluid">

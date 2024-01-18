@@ -2,14 +2,14 @@ import React from 'react'
 import { useAdmin } from '../Context/AdminContext'
 
 const NavA = ({ toggleSidebar }) => {
-    const { Admin } = useAdmin();
+    const { authAdmin } = useAdmin();
 
-    if (!Admin) {
+    if (!authAdmin) {
         console.log('no esta autenticado');
         return null;
     }
 
-    const adminName = Admin.Admin.nom || 'Admin';
+    const adminName = authAdmin.Admin.nom || 'Admin';
 
     return (
         <nav className="navbar navbar-expand-md bg-body-tertiary sombra">

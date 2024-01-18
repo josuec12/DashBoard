@@ -33,7 +33,7 @@ const generateTokenU = (Besitz) => {
     return jwt.sign(
         {
             data: {
-                _id: Besitz._id
+                Besitz
             },
             exp: expiration
         },
@@ -46,7 +46,7 @@ const generateTokenA = (Admin) => {
     return jwt.sign(
         {
             data: {
-                _id: Admin
+                Admin
             },
             exp: expiration
         },
@@ -95,9 +95,9 @@ exports.loginA = async (req, res) => {
         const result = await comparePasswords(body.passw, Admin.passw);
 
         if (result) {
-            const token = generateTokenA(Admin);
+            const tokenA = generateTokenA(Admin);
 
-            res.send({ success: true, data: { Admin}, token: token });
+            res.send({ success: true, data: { Admin}, tokenA: tokenA });
         } else {
             res.send({ success: false, data: 'Contraseña incorrecta.' });
         }

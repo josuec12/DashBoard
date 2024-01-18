@@ -12,15 +12,15 @@ const Home = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const {Besitz} = useBesitz();
+  const {authToken} = useBesitz();
 
-  if(!Besitz){
+  if(!authToken){
     console.log('No esta autenticado')
     return null;
   }
 
-  const besitzBol = Besitz.Besitz.boletin;
-
+  const besitzBol = authToken.Besitz.boletin;
+  
   return (
     <>
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />

@@ -35,7 +35,7 @@ const NavSideA = ({ isOpen }) => {
   const handleLogout = () => {
     console.log('Logging out...');
     logoutAdmin();  
-    navigate('/Login');
+    navigate('/');
   };
 
   const links = [

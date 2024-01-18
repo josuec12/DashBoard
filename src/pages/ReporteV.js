@@ -12,9 +12,9 @@ const ReporteV = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const {Besitz} = useBesitz();
+  const {authToken} = useBesitz();
 
-  const besitzVe = Besitz.Besitz.ventas;
+  const besitzVe = authToken.Besitz.ventas;
 
   return (
     <>
