@@ -2,7 +2,9 @@ const modelU = require('../Models/Besitzss');
 const modelA = require('../Models/Adminss');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
 
+KEY= process.env.KEY_SECRET;
 
 const findUser = (nit) => {
     return modelU.findOne({ nit });
@@ -37,7 +39,7 @@ const generateTokenU = (Besitz) => {
             },
             exp: expiration
         },
-        'llave-secreta-123'
+        KEY
     );
 };
 
@@ -50,7 +52,7 @@ const generateTokenA = (Admin) => {
             },
             exp: expiration
         },
-        'llave-secreta-123'
+        KEY
     );
 };
 
