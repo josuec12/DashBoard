@@ -29,7 +29,7 @@ const comparePasswords = (password, hashedPassword) => {
 };
 
 const generateTokenU = (Besitz) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 100;
     return jwt.sign(
         {
             data: {
@@ -42,7 +42,7 @@ const generateTokenU = (Besitz) => {
 };
 
 const generateTokenA = (Admin) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 100;
     return jwt.sign(
         {
             data: {
@@ -69,8 +69,7 @@ exports.loginU = async (req, res) => {
 
         if (result) {
             const token = generateTokenU(Besitz);
-
-            console.log('Token enviado al cliente:', token);
+            console.log('Token generado:', token);
             res.send({ success: true, data: { Besitz }, token: token });
         } else {
             res.send({ success: false, data: 'Contraseña incorrecta.' });
@@ -96,8 +95,8 @@ exports.loginA = async (req, res) => {
 
         if (result) {
             const tokenA = generateTokenA(Admin);
-
-            res.send({ success: true, data: { Admin}, tokenA: tokenA });
+            console.log('TokenA generado:', tokenA);
+            res.send({ success: true, data: { Admin }, tokenA: tokenA });
         } else {
             res.send({ success: false, data: 'Contraseña incorrecta.' });
         }

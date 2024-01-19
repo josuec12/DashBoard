@@ -9,9 +9,10 @@ const AuthRouters = require('./routes/Auth')
 require('dotenv').config();
 
 const port = process.env.PORT;
+const front = process.env.FRONT;
 
 const corsOptions = {
-    origin: 'http://localhost:3000', 
+    origin: front, 
     optionsSuccessStatus: 200, // Algunos navegadores antiguos (IE11) interpretan mal las respuestas con un código 204
   };
 

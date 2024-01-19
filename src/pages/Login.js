@@ -51,15 +51,14 @@ const Login = () => {
       const result = await response.json();
 
       if (result && result.success) {
-        const { token } = result;
-        const { tokenA } = result;
-        localStorage.setItem('token', token);
+        const { token, tokenA } = result;
         localStorage.setItem('tokenA', tokenA);
-        console.log('TOKEN');
+        localStorage.setItem('token', token);
+        console.log('TOKEN', token);
 
         localStorage.setItem('userType', isAdmin ? 'Admin' : 'Besitz');
 
-        isAdmin ? loginAdmin(result.tokenA) : loginBesitz(result.token);
+        isAdmin ? loginAdmin(tokenA) : loginBesitz(token);
 
 
         Swal.fire({
@@ -113,7 +112,6 @@ const Login = () => {
                     placeholder="654615231"
                     value={nit}
                     onChange={(e) => setNit(e.target.value)}
-                    autoComplete='on'
                   />
                 </div>
                 <div className="inputForm">
@@ -231,7 +229,7 @@ const Login = () => {
                 </div>
               </form>
               <div className="btn-conteiner">
-                <a className="btn-content" onClick={handleToggleUserType}>
+                <span className="btn-content" onClick={handleToggleUserType}>
                   <span className="btn-title">{administrador ? "Cliente" : "Admin"}</span>
                   <span className="icon-arrow">
                     <svg width="66px" height="40px" viewBox="0 0 66 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -242,7 +240,7 @@ const Login = () => {
                       </g>
                     </svg>
                   </span>
-                </a>
+                </span>
               </div>
               {/* Alternar entre "Soy Cliente" y "Soy Administrador" */}
               {/* <button className='swipeS' onClick={handleToggleUserType}>

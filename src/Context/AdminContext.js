@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
@@ -16,12 +16,12 @@ export const AdminProvider = ({ children }) => {
     try {
       console.log('decodificando tokenA:', storedAdmin)
       const decodedAdmin = jwtDecode(storedAdmin);
-      console.log('tokenA decodificado:', storedAdmin);
+      console.log('tokenA decodificado:', decodedAdmin);
       if (decodedAdmin && decodedAdmin.exp * 1000 > Date.now()) {
         setAuthAdmin(decodedAdmin.data);
         localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdmin.data));
         console.log('decoded Admin:', decodedAdmin.data);
-      }else{
+      } else {
         console.log('Sesion expirada')
         logoutAdmin();
         Swal.fire({
@@ -40,6 +40,14 @@ export const AdminProvider = ({ children }) => {
     decodeAdmin(storedAdmin);
     localStorage.setItem('storedAdmin', storedAdmin);
   };
+
+  useEffect( () => {
+    if (storedAdmin) {
+      decodeAdmin(storedAdmin);
+    }else{
+      return undefined;
+    }
+  }, [storedAdmin]);
 
   const logoutAdmin = () => {
     setAuthAdmin(null);

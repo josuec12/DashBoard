@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
@@ -11,6 +11,7 @@ export const BesitzProvider = ({ children }) => {
 
   console.log('storedToken:', storedToken);
   console.log('authToken:', authToken);
+  console.log (new Date());
 
   const decodeToken = async (storedToken) => {
     try {
@@ -39,7 +40,16 @@ export const BesitzProvider = ({ children }) => {
   const loginBesitz = (storedToken) => {
     decodeToken(storedToken);
     localStorage.setItem('storedToken', storedToken);
+    
   };
+
+  useEffect(() => {
+    if (storedToken) {
+      decodeToken(storedToken);
+    } else{
+      return undefined;
+    }
+  }, [storedToken]);
 
   const logoutBesitz = () => {
     setAuthToken(null);
