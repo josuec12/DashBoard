@@ -116,6 +116,17 @@ const RegisterU = () => {
       return;
     }
 
+    if (nit.length !== 9) {
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El NIT debe tener una longitud de 9 dígitos.',
+    });
+    return;
+      
+    }
+
     const passwordStrength = zxcvbn(pass);
 
     
@@ -131,8 +142,8 @@ const RegisterU = () => {
           requirements.push('Debe tener al menos un dígito.');
       }
 
-      if (pass.length < 6) {
-          requirements.push('Debe tener una longitud de al menos 6 caracteres.');
+      if (pass.length < 8) {
+          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
       }
 
       // Mostrar mensaje de error con requisitos no cumplidos

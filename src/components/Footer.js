@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="py-4 bg-light mt-auto">
+        <>
+            <footer className="py-4 bg-light mt-auto footer">
                 <div className="container-fluid px-4">
                     <div className="d-flex align-items-center justify-content-between small">
                         <div className="text-muted">Copyright &copy; Besitz 2023</div>
@@ -16,7 +16,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-        </div>
+        </>
   )
 }
 

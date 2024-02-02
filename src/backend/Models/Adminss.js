@@ -14,14 +14,14 @@ const AdminScheme = new moongose.Schema({
              cedula: {
                  required: true,
                  type: Number,
-                 min: 10,
+                 minlength: 10,
                  unique: true
              },
         
              passw: {
                  required: true,
                  type: String,
-                 minlength: 6,
+                 minlength: 8,
                  maxlength: 128,
                  match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+/             
              },        

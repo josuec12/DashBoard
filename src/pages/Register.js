@@ -3,6 +3,7 @@ import NavSideA from '../components/NavSideA';
 import RegisterU from './RegisertU';
 import RegisteA from './RegisteA';
 import NavA from '../components/NavA';
+import Footer from '../components/Footer';
 
 const Register = () => {
 
@@ -14,7 +15,7 @@ const Register = () => {
 
 
   return (
-    <>
+    <div className='body'>
       <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
 
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
@@ -52,10 +53,13 @@ const Register = () => {
                 </div>
               </div>
             </div>
+            
           </div>
+          
         </div>
+        <Footer />
       </div>
-    </>
+    </div>
   )
 }
 

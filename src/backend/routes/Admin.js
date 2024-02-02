@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const controller = require ('../controllers/Admins')
+const controller = require('../controllers/Admins')
 
 const Path = 'Admin'
 
-const model = require('../Models/Adminss'); 
+const model = require('../Models/Adminss');
 
 router.get(`/checkCedula/:cedula`, async (req, res) => {
     try {

@@ -9,20 +9,13 @@ export const AdminProvider = ({ children }) => {
   const storedDecodedAdmin = localStorage.getItem('decodedAdmin');
   const [authAdmin, setAuthAdmin] = useState(storedDecodedAdmin ? JSON.parse(storedDecodedAdmin) : null);
 
-  console.log('storedAdmin', storedAdmin);
-  console.log('authAdmin', authAdmin);
-
   const decodeAdmin = async (storedAdmin) => {
     try {
-      console.log('decodificando tokenA:', storedAdmin)
       const decodedAdmin = jwtDecode(storedAdmin);
-      console.log('tokenA decodificado:', decodedAdmin);
       if (decodedAdmin && decodedAdmin.exp * 1000 > Date.now()) {
         setAuthAdmin(decodedAdmin.data);
         localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdmin.data));
-        console.log('decoded Admin:', decodedAdmin.data);
       } else {
-        console.log('Sesion expirada')
         logoutAdmin();
         Swal.fire({
           icon: 'error',
@@ -44,8 +37,6 @@ export const AdminProvider = ({ children }) => {
   useEffect( () => {
     if (storedAdmin) {
       decodeAdmin(storedAdmin);
-    }else{
-      return undefined;
     }
   }, [storedAdmin]);
 

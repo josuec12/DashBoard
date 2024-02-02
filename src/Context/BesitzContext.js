@@ -9,19 +9,12 @@ export const BesitzProvider = ({ children }) => {
   const storedDecodedToken = localStorage.getItem('decodedToken');
   const [authToken, setAuthToken] = useState(storedDecodedToken ? JSON.parse(storedDecodedToken) : null);
 
-  console.log('storedToken:', storedToken);
-  console.log('authToken:', authToken);
-  console.log (new Date());
-
   const decodeToken = async (storedToken) => {
     try {
-      console.log('Decodificando token:', storedToken);
       const decodedToken = jwtDecode(storedToken);
-      console.log('Token decodificado:', decodedToken);
       if (decodedToken && decodedToken.exp * 1000 > Date.now()) {
         setAuthToken(decodedToken.data);
         localStorage.setItem('decodedToken', JSON.stringify(decodedToken.data));
-        console.log('Decoded Token:', decodedToken.data);
       } else {
         console.log('Sesion expirada');
         logoutBesitz();
@@ -46,8 +39,6 @@ export const BesitzProvider = ({ children }) => {
   useEffect(() => {
     if (storedToken) {
       decodeToken(storedToken);
-    } else{
-      return undefined;
     }
   }, [storedToken]);
 

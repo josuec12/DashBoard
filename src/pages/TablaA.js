@@ -6,6 +6,9 @@ import withReactContent from 'sweetalert2-react-content';
 import EditModalA from '../components/EditModalA';
 import NavA from '../components/NavA';
 import NavSideA from '../components/NavSideA';
+import Footer from '../components/Footer';
+import zxcvbn from 'zxcvbn'
+
 
 const MySwal = withReactContent(Swal);
 
@@ -107,7 +110,7 @@ const TablaA = () => {
 
       // Verificar si ya existe un documento con la misma Cedula
       const existingCedula = await checkExistingCedulaID(editedData.cedula, editedData._id);
-  
+
       if (existingCedula) {
         // La Cedula ya existe, muestra una alerta
         Swal.fire({
@@ -118,29 +121,73 @@ const TablaA = () => {
         return;
       }
 
-       // Verificar si ya existe un documento con el mismo Email
-       const existingEmaila = await checkExistingEmailaID(editedData.emaila, editedData._id);
-  
-       if (existingEmaila) {
-         // El Email ya existe, muestra una alerta
-         Swal.fire({
-           icon: 'error',
-           title: 'Error',
-           text: 'El Email ya existe. Por favor, ingresa otro Email.',
-         });
-         return;
-       }
+      // Verificar si ya existe un documento con el mismo Email
+      const existingEmaila = await checkExistingEmailaID(editedData.emaila, editedData._id);
 
-       const isValidDomain = allowedDomains.some((domain) => editedData.emaila.endsWith(domain));
+      if (existingEmaila) {
+        // El Email ya existe, muestra una alerta
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El Email ya existe. Por favor, ingresa otro Email.',
+        });
+        return;
+      }
 
-       if (!isValidDomain) {
-         Swal.fire({
-           icon: 'error',
-           title: 'Error',
-           text: 'Por favor, ingresa un correo electrónico válido.'
-         });
-         return;
-       }
+      const isValidDomain = allowedDomains.some((domain) => editedData.emaila.endsWith(domain));
+
+      if (!isValidDomain) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Por favor, ingresa un correo electrónico válido.'
+        });
+        return;
+      }
+
+      const CeduOri =  registros.find((r) => r._id === editedData._id);
+
+        if (CeduOri.cedula !== editedData.cedula) {
+         if (editedData.cedula.length !== 10) {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Advertencia',
+            text: 'La cédula debe tener exactamente 10 dígitos'
+          })
+          return;
+        }
+      }
+       
+
+      const passwordStrength = zxcvbn(editedData.passw);
+
+      if (editedData.passw !== null && passwordStrength.score < 3) {
+        // Construir la lista de requisitos no cumplidos
+        const requirements = [];
+
+        if (!/[A-Z]/.test(editedData.passw)) {
+          requirements.push('Debe tener al menos una letra mayúscula.');
+        }
+
+        if (!/\d/.test(editedData.passw)) {
+          requirements.push('Debe tener al menos un dígito.');
+        }
+
+        if (editedData.passw.length < 8) {
+          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
+        }
+
+        // Mostrar mensaje de error con requisitos no cumplidos
+        Swal.fire({
+          icon: 'error',
+          title: 'Contraseña débil',
+          html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
+                  <ul style="text-align: left;">
+                      ${requirements.map(req => `<li>${req}</li>`).join('')}
+                  </ul>`,
+        });
+        return;
+      }
 
       const response = await axios.put(`http://localhost:5000/Admin/${editedData._id}`, editedData);
       const updatedRegistro = response.data.data;
@@ -198,13 +245,13 @@ const TablaA = () => {
 
   const searchMatches = (registro, term) => {
     const lowerCaseTerm = term.toLowerCase();
-    const cedulaAsString = registro.cedula.toString(); 
+    const cedulaAsString = registro.cedula.toString();
 
-    return( 
-    registro.nom.toLowerCase().includes(lowerCaseTerm) ||
-    registro.ape.toLowerCase().includes(lowerCaseTerm) ||
-    registro.emaila.toLowerCase().includes(lowerCaseTerm) ||
-    cedulaAsString.includes(lowerCaseTerm)
+    return (
+      registro.nom.toLowerCase().includes(lowerCaseTerm) ||
+      registro.ape.toLowerCase().includes(lowerCaseTerm) ||
+      registro.emaila.toLowerCase().includes(lowerCaseTerm) ||
+      cedulaAsString.includes(lowerCaseTerm)
     )
   };
 
@@ -218,9 +265,9 @@ const TablaA = () => {
         <div className="content">
           <div className="dash">
             <div className='card shadow'>
-            <div className="cardHeader">
-              <h2>Registros Admin</h2>
-            </div>
+              <div className="cardHeader">
+                <h2>Registros Admin</h2>
+              </div>
               <div className='psearch'>
                 <div className="groupS">
                   <svg viewBox="0 0 24 24" aria-hidden="true" className="iconSS">
@@ -233,7 +280,7 @@ const TablaA = () => {
                   <input className="inputSS" type="search" placeholder="Search" value={searchTerm}
                     onChange={handleSearch} />
                 </div>
-              </div>                 
+              </div>
               <br></br>
               <div className="table-responsive">
                 <table className="table table-ligth table-striped  table-bordered">
@@ -261,10 +308,10 @@ const TablaA = () => {
                               <svg className="edit-svgIcon" viewBox="0 0 512 512">
                                 <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
                               </svg>
-                            </button>                                                    
+                            </button>
                             <button className="button-delete" onClick={() => handleEliminar(registro._id)}>
                               <svg viewBox="0 0 448 512" className="svgIcon-D"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
-                            </button>                         
+                            </button>
                           </td>
                         </tr>
                       ))
@@ -295,11 +342,12 @@ const TablaA = () => {
                   />
                 </div>
               </div>
-              </div>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
+    </div>
   );
 };
 

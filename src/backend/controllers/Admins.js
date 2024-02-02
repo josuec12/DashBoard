@@ -89,12 +89,13 @@ exports.updateSingle = async (req, res) => {
             updatedDoc.passw = hashedPassword;
         }
 
-           // Actualizar otros campos
-           ['nom', 'ape', 'cedula', 'emaila'].forEach(field => {
-            if (body[field]) {
-                updatedDoc[field] = body[field];
-            }
-        });
+         // Actualizar otros campos solo si se proporcionan y son diferentes al valor actual
+         const fieldsToUpdate = ['nom', 'ape', 'cedula', 'emaila'];
+         fieldsToUpdate.forEach(field => {
+             if (body.hasOwnProperty(field) && body[field] !== updatedDoc[field]) {
+                 updatedDoc[field] = body[field];
+             }
+         });
 
         // Guardar el documento actualizado en la base de datos
         await updatedDoc.save();
@@ -126,4 +127,3 @@ exports.deleteSingle = async (req, res) => {
         res.status(500).send({ error: 'Error al eliminar datos' });
     }
 };
-

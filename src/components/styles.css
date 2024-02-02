@@ -24,7 +24,7 @@
 
   /* Barra de desplazamiento */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
   }
   
   /* Barra de desplazamiento en hover */

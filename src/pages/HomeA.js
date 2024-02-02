@@ -5,6 +5,7 @@ import NavSideA from '../components/NavSideA'
 import NavA from '../components/NavA';
 import Carrusel from '../components/Carrusel';
 import CarruselV from '../components/CarruselV';
+import Footer from '../components/Footer';
 
 const HomeA = () => {
 
@@ -49,6 +50,7 @@ const HomeA = () => {
             <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb"></iframe>
           </div>
       </div>
+      <Footer />
     </div>
     </>
 

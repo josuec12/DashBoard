@@ -33,9 +33,9 @@ const Carrusel = () => {
         className="mySwiper"
       >
         <SwiperSlide className="cardn">
-          <Link className="aa" to="https://www.larepublica.co/especiales/especial-finanzas-e-inversion/el-uso-de-las-normas-niif-internacionaliza-a-las-pyme-para-negocios-y-creditos-2788297">       
-          <img alt="" src="https://img.lalr.co/cms/2018/06/14183547/PYMES_1080X900_73381394_xl.jpg?size=sm"/>
-          <p className="desc">El uso de las Niif internacionaliza a las Pyme para negocios y créditos</p>
+          <Link className="aa" to="https://www.portafolio.co/negocios/empresas/grupo-sura-no-hubo-fraude-contable-en-acuerdos-con-coinversionistas-concluye-investigacion-578640">       
+          <img alt="" src="https://www.portafolio.co/files/listing_secondary/uploads/2021/11/26/61a133d7e7419.jpeg"/>
+          <p className="desc">Grupo Sura: 'No hubo fraude contable en acuerdos con coinversionistas'</p>
           </Link>
         </SwiperSlide>
         <SwiperSlide className="cardn">

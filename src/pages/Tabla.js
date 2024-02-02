@@ -6,7 +6,8 @@ import withReactContent from 'sweetalert2-react-content';
 import EditModal from '../components/EditModal'
 import NavSideA from '../components/NavSideA';
 import NavA from '../components/NavA';
-
+import Footer from '../components/Footer';
+import zxcvbn from 'zxcvbn'
 
 const MySwal = withReactContent(Swal);
 
@@ -140,6 +141,50 @@ const Tabla = () => {
            });
            return;
          }
+
+         const nitOri = registros.find((r) => r._id === editedData._id);
+
+         if (editedData.nit !== nitOri.nit) {
+          if (editedData.nit.length !== 9) {
+            Swal.fire({
+              icon: "warning",
+              title: "Advertencia",
+              text: "La longitud del NIT  debe ser de 9 dígitos.",
+            })
+            return;
+          }  
+         }
+
+         const passwordStrength = zxcvbn(editedData.pass);
+
+    
+         if (passwordStrength.score < 3) {
+           // Construir la lista de requisitos no cumplidos
+           const requirements = [];
+           
+           if (!/[A-Z]/.test(editedData.pass)) {
+               requirements.push('Debe tener al menos una letra mayúscula.');
+           }
+     
+           if (!/\d/.test(editedData.pass)) {
+               requirements.push('Debe tener al menos un dígito.');
+           }
+     
+           if (editedData.pass.length < 8) {
+               requirements.push('Debe tener una longitud de al menos 8 caracteres.');
+           }
+     
+           // Mostrar mensaje de error con requisitos no cumplidos
+           Swal.fire({
+               icon: 'error',
+               title: 'Contraseña débil',
+               html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
+                     <ul style="text-align: left;">
+                         ${requirements.map(req => `<li>${req}</li>`).join('')}
+                     </ul>`,
+           });
+           return;
+       }
 
     // Realiza la solicitud PUT al servidor
     const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData, {
@@ -332,6 +377,7 @@ const Tabla = () => {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     </div>
   );

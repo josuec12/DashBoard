@@ -99,10 +99,20 @@ const RegisteA = () => {
       return;
     }
 
+    if (cedula.length !== 10) {
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: `La cédula debe tener exactamente 10 dígitos.`
+      })
+      return;
+    }
+
     const passwordStrength = zxcvbn(passw);
 
     
-    if (passwordStrength.score < 3) {
+    if (passw !== null && passwordStrength.score < 3) {
       // Construir la lista de requisitos no cumplidos
       const requirements = [];
       
@@ -114,8 +124,8 @@ const RegisteA = () => {
           requirements.push('Debe tener al menos un dígito.');
       }
 
-      if (passw.length < 6) {
-          requirements.push('Debe tener una longitud de al menos 6 caracteres.');
+      if (passw.length < 8) {
+          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
       }
 
       // Mostrar mensaje de error con requisitos no cumplidos
