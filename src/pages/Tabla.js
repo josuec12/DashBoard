@@ -104,114 +104,114 @@ const Tabla = () => {
 
   const handleGuardarEdicion = async (editedData) => {
     try {
-      
-       // Verificar si ya existe un documento con el mismo NIT
-       const existingNit = await checkExistingNitID(editedData.nit, editedData._id);
-  
-       if (existingNit) {
-         // El NIT ya existe, muestra una alerta
-         Swal.fire({
-           icon: 'error',
-           title: 'Error',
-           text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
-         });
-         return;
-       }
 
-         // Verificar si ya existe un documento con el mismo Email
-         const existingEmail = await checkExistingEmailID(editedData.email, editedData._id);
-  
-         if (existingEmail) {
-           // El Email ya existe, muestra una alerta
-           Swal.fire({
-             icon: 'error',
-             title: 'Error',
-             text: 'El Email ya existe. Por favor, ingresa otro Email.',
-           });
-           return;
-         }
+      // Verificar si ya existe un documento con el mismo NIT
+      const existingNit = await checkExistingNitID(editedData.nit, editedData._id);
 
-         const isValidDomain = allowedDomains.some((domain) => editedData.email.endsWith(domain));
+      if (existingNit) {
+        // El NIT ya existe, muestra una alerta
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El NIT ya existe. Por favor, ingresa otro NIT.',
+        });
+        return;
+      }
 
-         if (!isValidDomain) {
-           Swal.fire({
-             icon: 'error',
-             title: 'Error',
-             text: 'Por favor, ingresa un correo electrónico válido.'
-           });
-           return;
-         }
+      // Verificar si ya existe un documento con el mismo Email
+      const existingEmail = await checkExistingEmailID(editedData.email, editedData._id);
 
-         const nitOri = registros.find((r) => r._id === editedData._id);
+      if (existingEmail) {
+        // El Email ya existe, muestra una alerta
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El Email ya existe. Por favor, ingresa otro Email.',
+        });
+        return;
+      }
 
-         if (editedData.nit !== nitOri.nit) {
-          if (editedData.nit.length !== 9) {
-            Swal.fire({
-              icon: "warning",
-              title: "Advertencia",
-              text: "La longitud del NIT  debe ser de 9 dígitos.",
-            })
-            return;
-          }  
-         }
+      const isValidDomain = allowedDomains.some((domain) => editedData.email.endsWith(domain));
 
-         const passwordStrength = zxcvbn(editedData.pass);
+      if (!isValidDomain) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Por favor, ingresa un correo electrónico válido.'
+        });
+        return;
+      }
 
-    
-         if (passwordStrength.score < 3) {
-           // Construir la lista de requisitos no cumplidos
-           const requirements = [];
-           
-           if (!/[A-Z]/.test(editedData.pass)) {
-               requirements.push('Debe tener al menos una letra mayúscula.');
-           }
-     
-           if (!/\d/.test(editedData.pass)) {
-               requirements.push('Debe tener al menos un dígito.');
-           }
-     
-           if (editedData.pass.length < 8) {
-               requirements.push('Debe tener una longitud de al menos 8 caracteres.');
-           }
-     
-           // Mostrar mensaje de error con requisitos no cumplidos
-           Swal.fire({
-               icon: 'error',
-               title: 'Contraseña débil',
-               html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
+      const nitOri = registros.find((r) => r._id === editedData._id);
+
+      if (editedData.nit !== nitOri.nit) {
+        if (editedData.nit.length !== 9) {
+          Swal.fire({
+            icon: "warning",
+            title: "Advertencia",
+            text: "La longitud del NIT  debe ser de 9 dígitos.",
+          })
+          return;
+        }
+      }
+
+      const passwordStrength = zxcvbn(editedData.pass);
+
+
+      if (passwordStrength.score < 3) {
+        // Construir la lista de requisitos no cumplidos
+        const requirements = [];
+
+        if (!/[A-Z]/.test(editedData.pass)) {
+          requirements.push('Debe tener al menos una letra mayúscula.');
+        }
+
+        if (!/\d/.test(editedData.pass)) {
+          requirements.push('Debe tener al menos un dígito.');
+        }
+
+        if (editedData.pass.length < 8) {
+          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
+        }
+
+        // Mostrar mensaje de error con requisitos no cumplidos
+        Swal.fire({
+          icon: 'error',
+          title: 'Contraseña débil',
+          html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
                      <ul style="text-align: left;">
                          ${requirements.map(req => `<li>${req}</li>`).join('')}
                      </ul>`,
-           });
-           return;
-       }
+        });
+        return;
+      }
 
-    // Realiza la solicitud PUT al servidor
-    const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+      // Realiza la solicitud PUT al servidor
+      const response = await axios.put(`http://localhost:5000/Besitz/${editedData._id}`, editedData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-    // Si la solicitud es exitosa, actualiza el estado y muestra un mensaje de éxito
-    const updatedRegistro = response.data.data;
-    console.log('Registro Editado:', updatedRegistro);
+      // Si la solicitud es exitosa, actualiza el estado y muestra un mensaje de éxito
+      const updatedRegistro = response.data.data;
+      console.log('Registro Editado:', updatedRegistro);
 
-    const updatedRegistros = registros.map((r) => (r._id === updatedRegistro._id ? updatedRegistro : r));
-    setRegistros(updatedRegistros);
+      const updatedRegistros = registros.map((r) => (r._id === updatedRegistro._id ? updatedRegistro : r));
+      setRegistros(updatedRegistros);
 
-    MySwal.close();
-    MySwal.fire('¡Éxito!', 'Registro editado correctamente', 'success');
-  } catch (error) {
-    // Si hay un error, imprímelo en la consola
-    console.error('Error al editar el registro', error);
+      MySwal.close();
+      MySwal.fire('¡Éxito!', 'Registro editado correctamente', 'success');
+    } catch (error) {
+      // Si hay un error, imprímelo en la consola
+      console.error('Error al editar el registro', error);
 
-    // Muestra un mensaje de error en caso de un problema
-    MySwal.fire('Error', 'Hubo un problema al editar el registro', 'error');
-  }
-};
-  
-  
+      // Muestra un mensaje de error en caso de un problema
+      MySwal.fire('Error', 'Hubo un problema al editar el registro', 'error');
+    }
+  };
+
+
 
   const handleEliminar = async (id) => {
     const confirmacion = await MySwal.fire({
@@ -324,7 +324,7 @@ const Tabla = () => {
                                 </span>
                               </button>
                             </a>
-                          </td> 
+                          </td>
                           <td>
                             <button className="edit-button" onClick={() => handleEditar(registro._id)}>
                               <svg className="edit-svgIcon" viewBox="0 0 512 512">
@@ -341,15 +341,15 @@ const Tabla = () => {
                       <tr>
                         <td colSpan="8">No hay registros disponibles</td>
                         <td>
-                            <button className="edit-button">
-                              <svg className="edit-svgIcon" viewBox="0 0 512 512">
-                                <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
-                              </svg>
-                            </button>
-                            <button className="button-delete">
-                              <svg viewBox="0 0 448 512" className="svgIcon-D"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
-                            </button>
-                          </td>
+                          <button className="edit-button">
+                            <svg className="edit-svgIcon" viewBox="0 0 512 512">
+                              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+                            </svg>
+                          </button>
+                          <button className="button-delete">
+                            <svg viewBox="0 0 448 512" className="svgIcon-D"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
+                          </button>
+                        </td>
                       </tr>
                     )}
                   </tbody>
@@ -377,7 +377,7 @@ const Tabla = () => {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );

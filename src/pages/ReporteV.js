@@ -12,7 +12,7 @@ const ReporteV = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const {authToken} = useBesitz();
+  const { authToken } = useBesitz();
 
   const besitzVe = authToken.Besitz.ventas;
 
@@ -24,11 +24,11 @@ const ReporteV = () => {
         <Nav isOpen={isSidebarOpen} toggleSidebar={toggle} />
         <div className="content">
           <div className="dash">
-            
-              <div className="cardHeader">
-                <h2>Dashboard Ventas</h2>
-              </div>
-              <div className="iframe-container">
+
+            <div className="cardHeader">
+              <h2>Dashboard Ventas</h2>
+            </div>
+            <div className="iframe-container">
               <iframe
                 title="DASHBOARDWOK"
                 className="dashp"
@@ -37,10 +37,10 @@ const ReporteV = () => {
                 allowFullScreen={true}
               ></iframe>
             </div>
-            
+
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   )

@@ -12,15 +12,15 @@ const Home = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const {authToken} = useBesitz();
+  const { authToken } = useBesitz();
 
-  if(!authToken){
+  if (!authToken) {
     console.log('No esta autenticado')
     return null;
   }
 
   const besitzBol = authToken.Besitz.boletin;
-  
+
   return (
     <>
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />
@@ -41,8 +41,8 @@ const Home = () => {
             <div className="cardHeader">
               <h2>Boletín</h2>
             </div>
-              <iframe title="Boletin" src={`http://localhost:5000/${besitzBol}`} className="cyb"></iframe>
-                     </div>
+            <iframe title="Boletin" src={`http://localhost:5000/${besitzBol}`} className="cyb"></iframe>
+          </div>
           <div className="calendario">
             <div className="cardHeader">
               <h2>Calendario</h2>

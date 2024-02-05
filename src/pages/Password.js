@@ -9,7 +9,7 @@ const Password = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-5">
-                            <div className="card shadow-lg border-0 rounded-lg mt-5 scale-up-center">
+                            <div className="card shadow-lg border-0 rounded-lg scale-up-center">
                                 <div className=""><h3 className="tittle1">Recuperar contraseña</h3></div>
                                 <hr />
                                 <div className="card-body">

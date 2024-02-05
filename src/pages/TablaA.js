@@ -145,10 +145,10 @@ const TablaA = () => {
         return;
       }
 
-      const CeduOri =  registros.find((r) => r._id === editedData._id);
+      const CeduOri = registros.find((r) => r._id === editedData._id);
 
-        if (CeduOri.cedula !== editedData.cedula) {
-         if (editedData.cedula.length !== 10) {
+      if (CeduOri.cedula !== editedData.cedula) {
+        if (editedData.cedula.length !== 10) {
           Swal.fire({
             icon: 'warning',
             title: 'Advertencia',
@@ -157,7 +157,7 @@ const TablaA = () => {
           return;
         }
       }
-       
+
 
       const passwordStrength = zxcvbn(editedData.passw);
 

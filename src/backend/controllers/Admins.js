@@ -1,6 +1,7 @@
 const mongoose  = require('mongoose');
 const model = require('../Models/Adminss');
 const bcrypt = require('bcrypt')
+const nodemailer = require('nodemailer');
 
 const successResponse = { success: true, message: 'Operación exitosa' };
 
@@ -127,3 +128,50 @@ exports.deleteSingle = async (req, res) => {
         res.status(500).send({ error: 'Error al eliminar datos' });
     }
 };
+
+const generateNewPassword = async () => {
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const newPassword = await bcrypt.hash('new_password_generated', salt);
+        return newPassword;
+    } catch (error) {
+        console.error('Error al generar la contraseña:', error);
+        throw error; // Puedes manejar el error según tus necesidades
+    }
+};
+
+// Prueba la función
+generateNewPassword().then(password => console.log('Contraseña generada:', password));
+
+const sendEmail = (emaila, newPassword) => {
+    // Configura el transporter de nodemailer
+    const transporter = nodemailer.createTransport({
+        service: 'godaddy', // Puedes usar otro servicio como 'hotmail' según tus necesidades
+        auth: {
+            user: 'datainnovation@besitz.co',
+            pass: 'Besitz12+',
+        },
+    });
+
+    // Configura el mensaje del correo electrónico
+    const mailOptions = {
+        from: 'datainnovation@besitz.co',
+        to: emaila,
+        subject: 'Recuperación de Contraseña',
+        text: `Tu nueva contraseña es: ${newPassword}`,
+    };
+
+    // Envía el correo electrónico
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.error('Error al enviar el correo electrónico:', error);
+            // Puedes manejar el error según tus necesidades
+        } else {
+            console.log('Correo electrónico enviado:', info.response);
+        }
+    });
+};
+
+// Prueba la función
+const newPassword = generateNewPassword();
+sendEmail('josuecres2015@gmail.com', newPassword);

@@ -122,42 +122,42 @@ const RegisterU = () => {
         icon: 'error',
         title: 'Error',
         text: 'El NIT debe tener una longitud de 9 dígitos.',
-    });
-    return;
-      
+      });
+      return;
+
     }
 
     const passwordStrength = zxcvbn(pass);
 
-    
+
     if (passwordStrength.score < 3) {
       // Construir la lista de requisitos no cumplidos
       const requirements = [];
-      
+
       if (!/[A-Z]/.test(pass)) {
-          requirements.push('Debe tener al menos una letra mayúscula.');
+        requirements.push('Debe tener al menos una letra mayúscula.');
       }
 
       if (!/\d/.test(pass)) {
-          requirements.push('Debe tener al menos un dígito.');
+        requirements.push('Debe tener al menos un dígito.');
       }
 
       if (pass.length < 8) {
-          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
+        requirements.push('Debe tener una longitud de al menos 8 caracteres.');
       }
 
       // Mostrar mensaje de error con requisitos no cumplidos
       Swal.fire({
-          icon: 'error',
-          title: 'Contraseña débil',
-          html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
+        icon: 'error',
+        title: 'Contraseña débil',
+        html: `<p>La contraseña no cumple con los requisitos de fortaleza. Debe cumplir con lo siguiente:</p>
                 <ul style="text-align: left;">
                     ${requirements.map(req => `<li>${req}</li>`).join('')}
                 </ul>`,
       });
       return;
-  }
-  
+    }
+
     try {
 
       const formData = new FormData();

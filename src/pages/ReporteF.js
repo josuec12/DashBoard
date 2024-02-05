@@ -11,9 +11,9 @@ const ReporteF = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const {authToken} = useBesitz();
+  const { authToken } = useBesitz();
 
-  if(!authToken){
+  if (!authToken) {
     console.log('No esta autenticado')
     return null;
   }
@@ -31,15 +31,15 @@ const ReporteF = () => {
               <h2>Dashboard Financiero</h2>
             </div>
             <div className="iframe-container">
-              <iframe 
-              title="DASHBOARDWOK" 
-              className="dashp" 
-              src={besitzFi} 
-              frameBorder="0" 
-              allowFullScreen={true}>
+              <iframe
+                title="DASHBOARDWOK"
+                className="dashp"
+                src={besitzFi}
+                frameBorder="0"
+                allowFullScreen={true}>
               </iframe>
-              </div> 
-          </div>          
+            </div>
+          </div>
         </div>
         <Footer />
       </div>
