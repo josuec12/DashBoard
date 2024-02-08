@@ -1,8 +1,13 @@
-const mongoose  = require('mongoose');
+const mongoose = require('mongoose');
 const model = require('../Models/Besitzss');
 const bcrypt = require('bcrypt')
 const fs = require('fs').promises;
 const path = require('path');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
+
+const CORREO = process.env.CORREO;
+const PASS = process.env.PASS; 
 
 const successResponse = { success: true, message: 'Operación exitosa' };
 
@@ -35,7 +40,7 @@ exports.insertData = async (req, res) => {
             console.log("Documento existente. No se procesarán archivos.");
             return res.status(409).send({ error: 'El nit ya existe.' });
         }
-        
+
         console.log("Continuando con el procesamiento de archivos.");
 
         // Accede a las rutas de los archivos desde req.files
@@ -68,7 +73,7 @@ exports.insertData = async (req, res) => {
 
         // Responder con el documento guardado
         res.json({ data: savedDoc, successResponse });
-    
+
 
     } catch (err) {
         console.error(err);
@@ -96,7 +101,128 @@ exports.updateSingle = async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(body.pass, salt);
             updatedDoc.pass = hashedPassword;
+
+            const plantilla = `<!DOCTYPE html>
+            <html lang="en">            
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">           
+                <style>
+                    p,
+                    a,
+                    h1,
+                    h2,
+                    h3,
+                    h4,
+                    h5,
+                    h6 {
+                        font-family: 'Roboto', sans-serif !important;
+                    }
+            
+                    h1 {
+                        font-size: 30px !important;
+                    }
+            
+                    h2 {
+                        font-size: 25px !important;
+                    }
+            
+                    h3 {
+                        font-size: 18px !important;
+                    }
+            
+                    h4 {
+                        font-size: 16px !important;
+                    }
+            
+                    p,
+                    a {
+                        font-size: 15px !important;
+                    }
+                </style>
+            </head>
+            
+            <body>
+                <div style="width: 100%; background-color: #e3e3e3; border-radius: 10px;">
+                    <div style="padding: 50px 20px 50px 20px;">
+                        <!-- Imagen inicial -->
+                        <div style="background-color: rgb(1, 0, 37); padding: 1px 0px 1px 0px; width: 100%; text-align: center;">
+                            <img src="cid:Lblanco" alt="" style="width: 140px; height: 180px;">
+                        </div>
+                        <!-- Imagen inicial -->
+            
+                        <!-- Contenido principal -->
+                        <div style="background-color: #ffffff; padding: 10px 0px 0px 0px; width: 100%; text-align: center;">
+                            <h1>Contraseña nueva</h1>
+                            <p>La contraseña generada es: ${body.pass}
+                            </p>
+            
+                            <img src="cid:FIRMA" alt="" style="width: 430px; height: 200px;">
+                        
+                            <!-- Contenido principal -->
+            
+                            <!-- Footer -->
+                            <div
+                                style="background-color: #010024; color: #ffffff; padding: 10px 0px 0px 0px; width: 100%; text-align: center; margin-top: 5px;">
+                                <p style="font-size: 13px; padding: 0px 20px 0px 20px;">
+                                    Besitz SAS.<br>
+                                    Barranquilla, Atlantico.<br>
+                                </p>
+                                <p style="background-color: #020013; padding: 10px 0px 10px 0px; font-size: 12px !important;">
+                                    © 2018, todos los derechos reservados.
+                                </p>
+                            </div>
+                            <!-- Footer -->
+                        </div>
+                    </div>
+            </body>            
+            </html>
+            `;
+
+            // Función para enviar la contraseña por correo electrónico
+            const sendEmail = (email) => {
+                // Configura el transporter de nodemailer
+                const transporter = nodemailer.createTransport({
+                    service: 'godaddy',
+                    auth: {
+                        user: CORREO, // Cambia esto por tu dirección de correo electrónico
+                        pass: PASS, // Cambia esto por tu contraseña de correo electrónico
+                    },
+                });
+
+                // Configura el mensaje del correo electrónico
+                const mailOptions = {
+                    from: 'datainnovation@besitz.co',
+                    to: email,
+                    subject: 'Importante: Su Nueva Contraseña',
+                    html: plantilla,
+                    attachments: [{
+                        filename: 'FIRMA.png', // nombre del archivo adjunto
+                        path: path.join(__dirname, '../', '..', 'imagenes', 'FIRMA.png'), // ruta de la imagen
+                        cid: 'FIRMA', // identificador de contenido
+                    },
+                    {
+                        filename: 'Lblanco.png', // nombre del archivo adjunto
+                        path: path.join(__dirname, '..', '..', 'imagenes', 'Lblanco.png'), // ruta de la imagen
+                        cid: 'Lblanco', // identificador de contenido
+                    }]
+                };
+
+                // Envía el correo electrónico
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        console.error('Error al enviar el correo electrónico:', error);
+                    } else {
+                        console.log('Correo electrónico enviado:', info.response);
+                    }
+                });
+            };
+            // Envía la contraseña por correo electrónico
+            sendEmail(body.email);
         }
+
+        
 
         // Actualizar otros campos
         ['nombre', 'apellido', 'nit', 'email', 'ventas', 'financiero'].forEach(field => {
@@ -174,3 +300,4 @@ async function deleteFile(filesFolder, fileName) {
         }
     }
 }
+

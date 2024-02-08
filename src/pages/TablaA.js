@@ -173,8 +173,8 @@ const TablaA = () => {
           requirements.push('Debe tener al menos un dígito.');
         }
 
-        if (editedData.passw.length < 8) {
-          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
+        if (editedData.passw.length < 6) {
+          requirements.push('Debe tener una longitud de al menos 6 caracteres.');
         }
 
         // Mostrar mensaje de error con requisitos no cumplidos

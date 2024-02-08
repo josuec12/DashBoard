@@ -13,7 +13,7 @@ const Nav = ({ toggleSidebar }) => {
   const BesitzName = authToken.Besitz.nombre || 'Cliente';
   const Besitzlogo = authToken.Besitz.logo;
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary sombra">
+    <nav className="navbar navbar-expand-lg sticky-top bg-body-tertiary sombra">
       <div className="container-fluid">
         <div className="toggle" >
           <label className="buttonT" htmlFor="toggle">

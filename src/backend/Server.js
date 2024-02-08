@@ -6,6 +6,7 @@ const Database = require('./config/Database');
 const AdminRouters = require('./routes/Admin');
 const BesitzRouters = require('./routes/Besitz');
 const AuthRouters = require('./routes/Auth')
+const PasswordRouters = require('./routes/Password')
 require('dotenv').config();
 
 const port = process.env.PORT;
@@ -27,6 +28,7 @@ app.use(express.json()); // Permite el análisis de solicitudes con formato JSON
 app.use(BesitzRouters);
 app.use(AdminRouters);
 app.use(AuthRouters)
+app.use(PasswordRouters)
 
 app.use(
     bodyParser.json({   

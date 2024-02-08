@@ -21,9 +21,9 @@ const BesitzScheme = new moongose.Schema({
     pass: {
         required: true,
         type: String,
-        minlength: 8,
+        minlength: 6,
         maxlength: 128,
-        match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).+/
+        match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{6,128}$/
     },
 
     email: {

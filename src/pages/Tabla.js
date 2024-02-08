@@ -157,8 +157,7 @@ const Tabla = () => {
 
       const passwordStrength = zxcvbn(editedData.pass);
 
-
-      if (passwordStrength.score < 3) {
+      if (passwordStrength.score < 3 ) {
         // Construir la lista de requisitos no cumplidos
         const requirements = [];
 
@@ -170,8 +169,8 @@ const Tabla = () => {
           requirements.push('Debe tener al menos un dígito.');
         }
 
-        if (editedData.pass.length < 8) {
-          requirements.push('Debe tener una longitud de al menos 8 caracteres.');
+        if (editedData.pass.length < 6) {
+          requirements.push('Debe tener una longitud de al menos 6 caracteres.');
         }
 
         // Mostrar mensaje de error con requisitos no cumplidos
