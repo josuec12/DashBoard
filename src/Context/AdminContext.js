@@ -5,44 +5,49 @@ import Swal from 'sweetalert2';
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const storedAdmin = localStorage.getItem('tokenA');
-  const storedDecodedAdmin = localStorage.getItem('decodedAdmin');
-  const [authAdmin, setAuthAdmin] = useState(storedDecodedAdmin ? JSON.parse(storedDecodedAdmin) : null);
+  const storedAdminToken = localStorage.getItem('storedAdmin');
+  const storedDecodedAdminToken = localStorage.getItem('decodedAdmin');
+  const [authAdmin, setAuthAdmin] = useState(storedDecodedAdminToken ? JSON.parse(storedDecodedAdminToken) : null);
 
-  const decodeAdmin = async (storedAdmin) => {
+  const decodeAdminToken = async (token) => {
     try {
-      const decodedAdmin = jwtDecode(storedAdmin);
-      if (decodedAdmin && decodedAdmin.exp * 1000 > Date.now()) {
-        setAuthAdmin(decodedAdmin.data);
-        localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdmin.data));
+      if(token){
+      const decodedAdminToken = jwtDecode(token);
+      if (decodedAdminToken && decodedAdminToken.exp * 1000 > Date.now()) {
+        setAuthAdmin(decodedAdminToken.data);
+        localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdminToken.data));
       } else {
         logoutAdmin();
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
-        })
+        });
       }
+    } else{
+      // No hay token, por lo tanto, no hay autenticación de administrador
+      setAuthAdmin(null);
+    }
     } catch (error) {
       console.error('Error al decodificar el tokenAdmin:', error);
       logoutAdmin();
     }
-  }
-
-  const loginAdmin = (storedAdmin) => {
-    decodeAdmin(storedAdmin);
-    localStorage.setItem('storedAdmin', storedAdmin);
   };
 
-  useEffect( () => {
-    if (storedAdmin) {
-      decodeAdmin(storedAdmin);
+  const loginAdmin = (token) => {
+    decodeAdminToken(token);
+    localStorage.setItem('storedAdmin', token);
+  };
+
+  useEffect(() => {
+    if (storedAdminToken) {
+      decodeAdminToken(storedAdminToken);
     }
-  }, [storedAdmin]);
+  }, [storedAdminToken]);
 
   const logoutAdmin = () => {
     setAuthAdmin(null);
-    localStorage.removeItem('tokenA');
+    localStorage.removeItem('storedAdmin');
     localStorage.removeItem('decodedAdmin');
   };
 

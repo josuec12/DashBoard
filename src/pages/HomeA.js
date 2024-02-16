@@ -64,9 +64,9 @@ const HomeA = () => {
             {loading ? (
               <p>Cargando solicitudes...</p>
             ) : solicitudes.length === 0 ? (
-                <div class="contentP">
-                  <div class="textP">NINGUNA SOLICITUD...</div>
-                  <div class="textP">NINGUNA SOLICITUD...</div>
+                <div className="contentP">
+                  <div className="textP">NINGUNA SOLICITUD...</div>
+                  <div className="textP">NINGUNA SOLICITUD...</div>
                 </div>) : (
               <ul className='list'>
                 {solicitudes.map((solicitud) => (
