@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
-  const storedAdminToken = localStorage.getItem('storedAdmin');
+  const [firstLoad, setFirstLoad] = useState(true);
+  const storedAdminToken = localStorage.getItem('storedAdmin') || null;
   const storedDecodedAdminToken = localStorage.getItem('decodedAdmin');
   const [authAdmin, setAuthAdmin] = useState(storedDecodedAdminToken ? JSON.parse(storedDecodedAdminToken) : null);
 
@@ -40,10 +41,11 @@ export const AdminProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (storedAdminToken) {
+    if (!firstLoad && storedAdminToken) {
       decodeAdminToken(storedAdminToken);
     }
-  }, [storedAdminToken]);
+    setFirstLoad(false);
+  }, [firstLoad, storedAdminToken]);
 
   const logoutAdmin = () => {
     setAuthAdmin(null);

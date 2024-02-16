@@ -5,7 +5,8 @@ import Swal from 'sweetalert2';
 const BesitzContext = createContext();
 
 export const BesitzProvider = ({ children }) => {
-  const storedToken = localStorage.getItem('storedToken');
+  const [firstLoad, setFirstLoad] = useState(true);
+  const storedToken = localStorage.getItem('storedToken') || null;
   const storedDecodedToken = localStorage.getItem('decodedToken');
   const [authToken, setAuthToken] = useState(storedDecodedToken ? JSON.parse(storedDecodedToken) : null);
 
@@ -41,10 +42,11 @@ export const BesitzProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (storedToken) {
+    if (!firstLoad && storedToken) {
       decodeToken(storedToken);
     }
-  }, [storedToken]);
+    setFirstLoad(false);
+  }, [firstLoad, storedToken]);
 
   const logoutBesitz = () => {
     setAuthToken(null);
