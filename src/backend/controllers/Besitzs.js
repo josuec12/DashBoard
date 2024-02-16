@@ -5,9 +5,10 @@ const fs = require('fs').promises;
 const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const fss = require('fs');
 
 const CORREO = process.env.CORREO;
-const PASS = process.env.PASS; 
+const PASS = process.env.PASS;
 
 const successResponse = { success: true, message: 'Operación exitosa' };
 
@@ -102,6 +103,15 @@ exports.updateSingle = async (req, res) => {
             const hashedPassword = await bcrypt.hash(body.pass, salt);
             updatedDoc.pass = hashedPassword;
 
+            const LblancoContentPromise = fs.readFile('../imagenes/Lblanco.png', { encoding: 'base64' });
+            const FIRMAContentPromise = fs.readFile('../imagenes/FIRMA.png', { encoding: 'base64' });
+
+            const LblancoContent = await LblancoContentPromise;
+            const FIRMAContent = await FIRMAContentPromise;
+
+            console.log('Lblanco', LblancoContent);
+            console.log('FIRMA', FIRMAContent);
+
             const plantilla = `<!DOCTYPE html>
             <html lang="en">            
             <head>
@@ -148,7 +158,7 @@ exports.updateSingle = async (req, res) => {
                     <div style="padding: 50px 20px 50px 20px;">
                         <!-- Imagen inicial -->
                         <div style="background-color: rgb(1, 0, 37); padding: 1px 0px 1px 0px; width: 100%; text-align: center;">
-                            <img src="cid:Lblanco" alt="" style="width: 140px; height: 180px;">
+                            <img src="data:image/png;base64,${LblancoContent}" alt="" style="width: 140px; height: 180px;">
                         </div>
                         <!-- Imagen inicial -->
             
@@ -158,7 +168,7 @@ exports.updateSingle = async (req, res) => {
                             <p>La contraseña generada es: ${body.pass}
                             </p>
             
-                            <img src="cid:FIRMA" alt="" style="width: 430px; height: 200px;">
+                            <img src="data:image/png;base64,${FIRMAContent}" alt="" style="width: 430px; height: 200px;">
                         
                             <!-- Contenido principal -->
             
@@ -186,8 +196,8 @@ exports.updateSingle = async (req, res) => {
                 const transporter = nodemailer.createTransport({
                     service: 'godaddy',
                     auth: {
-                        user: CORREO, // Cambia esto por tu dirección de correo electrónico
-                        pass: PASS, // Cambia esto por tu contraseña de correo electrónico
+                        user: CORREO,
+                        pass: PASS,
                     },
                 });
 
@@ -197,16 +207,6 @@ exports.updateSingle = async (req, res) => {
                     to: email,
                     subject: 'Importante: Su Nueva Contraseña',
                     html: plantilla,
-                    attachments: [{
-                        filename: 'FIRMA.png', // nombre del archivo adjunto
-                        path: path.join(__dirname, '../', '..', 'imagenes', 'FIRMA.png'), // ruta de la imagen
-                        cid: 'FIRMA', // identificador de contenido
-                    },
-                    {
-                        filename: 'Lblanco.png', // nombre del archivo adjunto
-                        path: path.join(__dirname, '..', '..', 'imagenes', 'Lblanco.png'), // ruta de la imagen
-                        cid: 'Lblanco', // identificador de contenido
-                    }]
                 };
 
                 // Envía el correo electrónico
@@ -222,7 +222,7 @@ exports.updateSingle = async (req, res) => {
             sendEmail(body.email);
         }
 
-        
+
 
         // Actualizar otros campos
         ['nombre', 'apellido', 'nit', 'email', 'ventas', 'financiero'].forEach(field => {

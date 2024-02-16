@@ -158,7 +158,6 @@ const TablaA = () => {
         }
       }
 
-
       const passwordStrength = zxcvbn(editedData.passw);
 
       if (editedData.passw !== null && passwordStrength.score < 3) {

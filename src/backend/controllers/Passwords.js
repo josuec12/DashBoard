@@ -1,5 +1,10 @@
 const PasswordResetRequest = require('../Models/Passwordss');
+const mongoose = require('mongoose');
 const model = require('../Models/Besitzss');
+
+const parseId = (id) => {
+    return new mongoose.Types.ObjectId(id);
+};
 
 exports.getData = async (req, res) => {
     try {
@@ -37,5 +42,50 @@ exports.requestPasswordReset = async (req, res) => {
     } catch (error) {
         console.error('Error al procesar la solicitud de restablecimiento de contraseña:', error);
         res.status(500).json({ error: 'Error interno del servidor.' });
+    }
+};
+
+// Elimina una solicitud de restablecimiento de contraseña por su ID
+exports.deletePasswordReset = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const request = await PasswordResetRequest.findByIdAndDelete(id);
+
+        if (!request) {
+            return res.status(404).json({ error: 'No se encontró la solicitud.' });
+        }
+
+        res.json({ message: 'La solicitud fue eliminada exitosamente.' });
+    } catch (error) {
+        console.log("Error al borrar la solicitud de restablecimiento de contraseña", error);
+        res.status(500).json({ error: "Error interno del servidor." })
+    }
+}
+
+exports.updateSingle = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const body = req.body;
+
+        // Encontrar el documento por ID y actualizarlo, estableciendo 'new' en true para obtener el documento actualizado
+        let updatedDoc = await PasswordResetRequest.findByIdAndUpdate(
+            parseId(id),
+            { $set: body },
+            { new: true }
+        );
+
+        // Verificar si se encontró el documento antes de intentar actualizar
+        if (!updatedDoc) {
+            return res.status(404).json({ error: 'Documento no encontrado' });
+        } 
+            
+            await updatedDoc.save();      
+
+        res.json({ data: updatedDoc });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Error al actualizar datos' });
     }
 };

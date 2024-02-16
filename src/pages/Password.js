@@ -13,7 +13,7 @@ const Password = () => {
 
     try {
       // Enviar la solicitud de restablecimiento de contraseña al backend
-      await axios.post('http://localhost:5000/request', { email });
+      await axios.post('http://localhost:5000/Passwords', { email });
       Swal.fire(
         '¡Exito!',
         'Solicitud enviada correctamente.',
