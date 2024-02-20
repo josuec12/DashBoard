@@ -25,7 +25,7 @@ const ReporteF = () => {
       <NavSide isOpen={isSidebarOpen} toggleSidebar={toggle} />
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <Nav isOpen={isSidebarOpen} toggleSidebar={toggle} />
-        <div className="content" >
+        <div className="contentT" >
           <div className="dash">
             <div className="cardHeader">
               <h2>Dashboard Financiero</h2>

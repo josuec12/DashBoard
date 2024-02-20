@@ -261,7 +261,7 @@ const TablaA = () => {
       <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <NavA isOpen={isSidebarOpen} toggleSidebar={toggle} />
-        <div className="content">
+        <div className="contentT">
           <div className="dash">
             <div className='card shadow'>
               <div className="cardHeader">

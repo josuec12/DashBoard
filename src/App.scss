@@ -634,6 +634,7 @@ body {
   min-height: 100vh;
   background: var(--white);
   transition: 0.5s;
+  margin-bottom: 100px; 
 }
 
 .main.active {
@@ -662,14 +663,29 @@ body {
   color: white;
 }
 
-.content {
+.contentR {
   position: relative;
   width: 100%;
   padding: 15px;
-
+  z-index: 2;
+  margin-bottom: 82px;
 }
 
-.content .dash {
+.contentR .dash {
+  position: relative;
+  background: var(--white);
+  border-color: white;
+}
+
+.contentT {
+  position: relative;
+  width: 100%;
+  padding: 15px;
+  z-index: 2;
+  margin-bottom: 60px;
+}
+
+.contentT .dash {
   position: relative;
   background: var(--white);
   border-color: white;
@@ -783,6 +799,8 @@ body {
   display: grid;
   grid-template-columns: 1.5fr 2fr;
   margin-top: 10px;
+  margin-bottom: 60px;
+  z-index: 2;  
 }
 
 .cont .boletin {
@@ -2143,11 +2161,12 @@ height: 400px;
 width: 470px;
 overflow: auto; 
 }
-// .footer{
-//   position: fixed;
-//   bottom: 0;
-//   width: 100%;
-// }
+ .footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+ }
 
 .contentP {
   position: relative;

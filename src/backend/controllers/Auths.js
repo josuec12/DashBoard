@@ -44,7 +44,7 @@ const generateTokenU = (Besitz) => {
 };
 
 const generateTokenA = (Admin) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 1;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
     return jwt.sign(
         {
             data: {

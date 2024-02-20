@@ -21,7 +21,7 @@ const Register = () => {
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <NavA isOpen={isSidebarOpen} toggleSidebar={toggle} />
 
-        <div className="content">
+        <div className="contentR">
           <div className="dash">
             <div className="accordion shadow" id="accordionExample">
               <div className="accordion-item">
@@ -53,11 +53,10 @@ const Register = () => {
                 </div>
               </div>
             </div>
-
           </div>
-
+          
         </div>
-        <Footer />
+        <Footer/>
       </div>
     </div>
   )

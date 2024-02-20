@@ -22,7 +22,7 @@ const ReporteV = () => {
 
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
         <Nav isOpen={isSidebarOpen} toggleSidebar={toggle} />
-        <div className="content">
+        <div className="contentT">
           <div className="dash">
 
             <div className="cardHeader">
