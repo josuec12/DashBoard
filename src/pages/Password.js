@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 
 const Password = () => {
   const [email, setEmail] = useState('');
+  const [emaila, setEmaila] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -13,17 +14,32 @@ const Password = () => {
 
     try {
       // Enviar la solicitud de restablecimiento de contraseña al backend
-      await axios.post('http://localhost:5000/Passwords', { email });
-      Swal.fire(
-        '¡Exito!',
-        'Solicitud enviada correctamente.',
-        'success'
-      );
+      await axios.post('http://localhost:5000/Passwords', { email, emaila});
+      Swal.fire({
+        position: 'top-end',
+        title: 'Solicitud enviada correctamente.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
+        setEmail('');
+        setEmaila('');
+
     } catch (error) {
       if (error.response) {
         // Si el servidor responde con un error
         const errorMessage = error.response.data.error || 'Error al enviar la solicitud. Por favor, inténtelo de nuevo más tarde.';
-        Swal.fire('Error', errorMessage, 'error');
+        Swal.fire({
+          position: 'top-end',
+          width: 520,
+          icon: 'error',
+          title: errorMessage,
+          showConfirmButton: false,
+          timer: 1500,
+          
+        });
+        // Swal.fire('Error', errorMessage, 'error');
       } else if (error.request) {
         // Si no se recibe respuesta del servidor
         Swal.fire('Error', 'No se pudo conectar al servidor. Por favor, inténtelo de nuevo más tarde.', 'error');
@@ -57,8 +73,8 @@ const Password = () => {
                         id="inputEmail"
                         type="email"
                         placeholder="name@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={email || emaila} 
+                        onChange={(e) => setEmail(e.target.value) || setEmaila(e.target.value)}
                         required
                       />
                       <label htmlFor="inputEmail">Email</label>

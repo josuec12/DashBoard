@@ -128,6 +128,10 @@ const RegisteA = () => {
         requirements.push('Debe tener una longitud de al menos 8 caracteres.');
       }
 
+      if (passwordStrength.score < 3) {
+        requirements.push(`Con un puntaje de fortaleza más alto. El actual es: ${passwordStrength.score}`);
+      }
+
       // Mostrar mensaje de error con requisitos no cumplidos
       Swal.fire({
         icon: 'error',
@@ -159,10 +163,13 @@ const RegisteA = () => {
       const result = await response.json();
 
       if (response.ok) {
+
         Swal.fire({
-          title: '¡Éxito!',
-          text: 'Formulario enviado correctamente',
+          position: 'top-end',
           icon: 'success',
+          title: 'Formulario enviado correctamente',
+          showConfirmButton: false,
+          timer: 1500
         });
 
         // Limpiar los campos después del envío exitoso
@@ -186,8 +193,10 @@ const RegisteA = () => {
       console.error('Error al enviar el formulario:', error);
       Swal.fire({
         icon: 'error',
-        title: 'Error inesperado',
-        text: 'Hubo un error inesperado. Por favor, intenta nuevamente.',
+        title: 'Hubo un error inesperado. Por favor, intenta nuevamente.',
+        showConfirmButton: false,
+        timer: 1500,
+        width: 520
       });
     }
   };

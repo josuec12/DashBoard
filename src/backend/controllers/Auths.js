@@ -31,7 +31,7 @@ const comparePasswords = (password, hashedPassword) => {
 };
 
 const generateTokenU = (Besitz) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 60;
     return jwt.sign(
         {
             data: {
@@ -44,7 +44,7 @@ const generateTokenU = (Besitz) => {
 };
 
 const generateTokenA = (Admin) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 60;
     return jwt.sign(
         {
             data: {

@@ -100,7 +100,7 @@ const Tabla = () => {
     }
   };
 
-  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com"];
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com", 'besitz.co'];
 
   const handleGuardarEdicion = async (editedData) => {
     try {
@@ -157,7 +157,7 @@ const Tabla = () => {
 
       const passwordStrength = zxcvbn(editedData.pass);
 
-      if (passwordStrength.score < 3 ) {
+      if (passwordStrength.score < 3) {
         // Construir la lista de requisitos no cumplidos
         const requirements = [];
 
@@ -171,6 +171,10 @@ const Tabla = () => {
 
         if (editedData.pass.length < 6) {
           requirements.push('Debe tener una longitud de al menos 6 caracteres.');
+        }
+
+        if (passwordStrength.score < 3) {
+          requirements.push(`Con un puntaje de fortaleza más alto. El actual es: ${passwordStrength.score}`);
         }
 
         // Mostrar mensaje de error con requisitos no cumplidos
@@ -200,7 +204,14 @@ const Tabla = () => {
       setRegistros(updatedRegistros);
 
       MySwal.close();
-      MySwal.fire('¡Éxito!', 'Registro editado correctamente', 'success');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Registro editado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
     } catch (error) {
       // Si hay un error, imprímelo en la consola
       console.error('Error al editar el registro', error);
@@ -232,7 +243,14 @@ const Tabla = () => {
         const updatedRegistros = registros.filter((registro) => registro._id !== id);
         setRegistros(updatedRegistros);
 
-        MySwal.fire('¡Éxito!', 'Registro eliminado correctamente', 'success');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registro eliminado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        });
+          
       } catch (error) {
         console.error('Error al eliminar el registro', error);
       }
@@ -244,22 +262,31 @@ const Tabla = () => {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
-
+  
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
     setPageNumber(0);
   };
 
   const searchMatches = (registro, term) => {
+
+    if (!term) {
+      return true;
+    }
+
     const lowerCaseTerm = term.toLowerCase();
     const nitAsString = registro.nit.toString();
+    const palabraClave = lowerCaseTerm.split(' ')
 
-    return (
-      registro.nombre.toLowerCase().includes(lowerCaseTerm) ||
-      registro.apellido.toLowerCase().includes(lowerCaseTerm) ||
-      registro.email.toLowerCase().includes(lowerCaseTerm) ||
-      nitAsString.includes(lowerCaseTerm)
-    )
+    const matches = palabraClave.map(palabra => {
+      return (
+        registro.nombre.toLowerCase() === palabra ||
+        registro.apellido.toLowerCase() === palabra ||
+        registro.email.toLowerCase() === palabra ||
+        nitAsString === palabra
+      )
+    })
+    return  matches.every(match => match === true);
   };
 
   const filteredRegistros = registros.filter((registro) => searchMatches(registro, searchTerm));
@@ -306,6 +333,7 @@ const Tabla = () => {
                   </thead>
                   <tbody>
                     {registros && registros.length > 0 ? (
+                      filteredRegistros.length > 0 ? (
                       filteredRegistros.slice(paginasVisitadas, paginasVisitadas + registrosPorPagina).map((registro) => (
                         <tr key={registro._id}>
                           <td>{registro.nombre}</td>
@@ -336,18 +364,36 @@ const Tabla = () => {
                           </td>
                         </tr>
                       ))
-                    ) : (
+                      ) : (
+                      
+                        <tr>
+                          <td colSpan="8"><div className="terminal-loader">
+                            <div className="terminal-header">
+                              <div className="terminal-title">Status</div>
+                              <div className="terminal-controls">
+                                <div className="control close"></div>
+                                <div className="control minimize"></div>
+                                <div className="control maximize"></div>
+                              </div>
+                            </div>
+                            <div className="text">No hay registros encontrados...</div>
+                          </div>
+                          </td>
+                        </tr>
+                      )
+                    ) : (                
                       <tr>
-                        <td colSpan="8">No hay registros disponibles</td>
-                        <td>
-                          <button className="edit-button">
-                            <svg className="edit-svgIcon" viewBox="0 0 512 512">
-                              <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
-                            </svg>
-                          </button>
-                          <button className="button-delete">
-                            <svg viewBox="0 0 448 512" className="svgIcon-D"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
-                          </button>
+                        <td colSpan="8"><div className="terminal-loader">
+                          <div className="terminal-header">
+                            <div className="terminal-title">Status</div>
+                            <div className="terminal-controls">
+                              <div className="control close"></div>
+                              <div className="control minimize"></div>
+                              <div className="control maximize"></div>
+                            </div>
+                          </div>
+                          <div className="text">No hay registros disponibles...</div>
+                        </div>
                         </td>
                       </tr>
                     )}
@@ -365,7 +411,7 @@ const Tabla = () => {
                     nextLabel={'Next'}
                     pageCount={pageCount}
                     onPageChange={changePage}
-                    containerClassName={'pagination justify-content-end'} /* Alinea la paginación a la derecha */
+                    containerClassName={'pagination justify-content-end'} 
                     previousLinkClassName={'page-link'}
                     nextLinkClassName={'page-link'}
                     disabledClassName={'disabled'}

@@ -29,10 +29,10 @@ const ReporteF = () => {
           <div className="dash">
             <div className="cardHeader">
               <h2>Dashboard Financiero</h2>
-            </div>
+            </div>     
             <div className="iframe-container">
               <iframe
-                title="DASHBOARDWOK"
+                title="DASHF"
                 className="dashp"
                 src={besitzFi}
                 frameBorder="0"

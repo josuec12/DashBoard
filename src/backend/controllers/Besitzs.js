@@ -5,7 +5,6 @@ const fs = require('fs').promises;
 const path = require('path');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
-const fss = require('fs');
 
 const CORREO = process.env.CORREO;
 const PASS = process.env.PASS;
@@ -65,9 +64,6 @@ exports.insertData = async (req, res) => {
             boletin: boletinPath, // Utiliza la ruta del archivo
             logo: logoPath // Utiliza la ruta del archivo
         });
-
-        // Sobreescribir la contraseña en el nuevo documento con la versión encriptada
-        // newDoc.pass = hashedPassword;
 
         // Guardar el nuevo documento en la base de datos
         const savedDoc = await newDoc.save();
@@ -165,7 +161,7 @@ exports.updateSingle = async (req, res) => {
                         <!-- Contenido principal -->
                         <div style="background-color: #ffffff; padding: 10px 0px 0px 0px; width: 100%; text-align: center;">
                             <h1>Contraseña nueva</h1>
-                            <p>La contraseña generada es: ${body.pass}
+                            <p>Estimado/a, ${body.nombre}. Su nueva contraseña generada es: ${body.pass}
                             </p>
             
                             <img src="data:image/png;base64,${FIRMAContent}" alt="" style="width: 430px; height: 200px;">
@@ -226,7 +222,7 @@ exports.updateSingle = async (req, res) => {
 
         // Actualizar otros campos
         ['nombre', 'apellido', 'nit', 'email', 'ventas', 'financiero'].forEach(field => {
-            if (body[field]) {
+            if (body[field] !== undefined && body[field] !== updatedDoc[field]) {
                 updatedDoc[field] = body[field];
             }
         });

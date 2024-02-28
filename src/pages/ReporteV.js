@@ -30,7 +30,7 @@ const ReporteV = () => {
             </div>
             <div className="iframe-container">
               <iframe
-                title="DASHBOARDWOK"
+                title="DASHV"
                 className="dashp"
                 src={besitzVe}
                 frameBorder="0"

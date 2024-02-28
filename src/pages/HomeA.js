@@ -19,24 +19,34 @@ const HomeA = () => {
       try {
         const response = await axios.get('http://localhost:5000/Passwords');
         const newSolicitudes = response.data.docs || [];
-        setSolicitudes(newSolicitudes);
+        
+        // Comprobar si hay nuevas solicitudes
+        if (JSON.stringify(newSolicitudes) !== JSON.stringify(solicitudes)) {
+          setSolicitudes(newSolicitudes);
+        }
+        
         setLoading(false);
-        console.log('data', response);
       } catch (error) {
         console.error('Error al obtener las solicitudes:', error);
         setLoading(false);
       }
     };
-
+  
+    // Realizar la primera solicitud al montar el componente
     fetchSolicitudes();
-  }, []);
+  
+    // Establecer el intervalo para realizar la consulta cada cierto tiempo
+    const intervalId = setInterval(fetchSolicitudes, 5000); // Consultar cada 5 segundos
+  
+    // Limpiar el intervalo al desmontar el componente
+    return () => clearInterval(intervalId);
+  }, [solicitudes]); // Dependencia de efecto para que se ejecute cuando cambian las solicitudes existentes
+  
 
   const handleSolicitud = async (solicitudId) => {
-    try {
-      // Realizar la solicitud para actualizar el estado de la solicitud a "aprobado"
+    try { 
       await axios.delete(`http://localhost:5000/Passwords/${solicitudId}`);
 
-      // Eliminar la solicitud de la lista de solicitudes mostradas
       setSolicitudes(prevSolicitudes => prevSolicitudes.filter(solicitud => solicitud._id !== solicitudId));
     } catch (error) {
       console.error('Error al aprobar la solicitud:', error);

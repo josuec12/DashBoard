@@ -56,7 +56,7 @@ const EditModal = ({ registro, onSave }) => {
         </div>
         <div className='col'>
           <div className='inputGroup'>
-            <input type="text" name="nit" value={editedData.nit} onChange={handleInputChange} />
+            <input type="number" name="nit" value={editedData.nit} onChange={handleInputChange} />
             <label>NIT:</label>
           </div>
         </div>
@@ -71,7 +71,7 @@ const EditModal = ({ registro, onSave }) => {
         </div>
         <div className='col'>
           <div className='inputGroup'>
-            <input type="text" name="email" value={editedData.email} onChange={handleInputChange} />
+            <input type="email" name="email" value={editedData.email} onChange={handleInputChange} />
             <label>Email:</label>
           </div>
         </div>

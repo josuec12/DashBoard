@@ -54,7 +54,7 @@ const RegisterU = () => {
     }
   };
 
-  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com"];
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com", 'besitz.co'];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -146,6 +146,10 @@ const RegisterU = () => {
         requirements.push('Debe tener una longitud de al menos 8 caracteres.');
       }
 
+      if (passwordStrength.score < 3) {
+        requirements.push(`Con un puntaje de fortaleza más alto. El actual es: ${passwordStrength.score}`);
+      }
+
       // Mostrar mensaje de error con requisitos no cumplidos
       Swal.fire({
         icon: 'error',
@@ -183,9 +187,11 @@ const RegisterU = () => {
       if (response.ok) {
 
         Swal.fire({
-          title: "¡Éxito!",
-          text: "Formulario enviado correctamente",
-          icon: "success"
+          position: 'top-end',
+          icon: 'success',
+          title: 'Formulario enviado correctamente',
+          showConfirmButton: false,
+          timer: 1500
         });
 
         // Limpiar los campos después del envío exitoso
@@ -216,8 +222,10 @@ const RegisterU = () => {
       console.error('Error al enviar el formulario:', error);
       Swal.fire({
         icon: 'error',
-        title: 'Error inesperado',
-        text: 'Hubo un error inesperado. Por favor, intenta nuevamente.',
+        title: 'Hubo un error inesperado. Por favor, intenta nuevamente.',
+        showConfirmButton: false,
+        timer: 1500,
+        width: 520
       });
     }
   };

@@ -102,7 +102,7 @@ const TablaA = () => {
     }
   };
 
-  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com"];
+  const allowedDomains = ["gmail.com", "outlook.com", "yahoo.com", "hotmail.com", 'besitz.co'];
 
 
   const handleGuardarEdicion = async (editedData) => {
@@ -176,6 +176,10 @@ const TablaA = () => {
           requirements.push('Debe tener una longitud de al menos 6 caracteres.');
         }
 
+        if (passwordStrength.score < 3) {
+          requirements.push(`Con un puntaje de fortaleza más alto. El actual es: ${passwordStrength.score}`);
+        }
+
         // Mostrar mensaje de error con requisitos no cumplidos
         Swal.fire({
           icon: 'error',
@@ -197,7 +201,14 @@ const TablaA = () => {
       setRegistros(updatedRegistros);
 
       MySwal.close();
-      MySwal.fire('¡Éxito!', 'Registro editado correctamente', 'success');
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Registro editado correctamente',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
     } catch (error) {
       console.error('Error al editar el registro', error);
     }
@@ -224,7 +235,14 @@ const TablaA = () => {
         const updatedRegistros = registros.filter((registro) => registro._id !== id);
         setRegistros(updatedRegistros);
 
-        MySwal.fire('¡Éxito!', 'Registro eliminado correctamente', 'success');
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registro eliminado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
       } catch (error) {
         console.error('Error al eliminar el registro', error);
       }
@@ -243,16 +261,30 @@ const TablaA = () => {
   };
 
   const searchMatches = (registro, term) => {
+
+    if (!term) {
+      return true;
+    }
+
     const lowerCaseTerm = term.toLowerCase();
     const cedulaAsString = registro.cedula.toString();
 
-    return (
-      registro.nom.toLowerCase().includes(lowerCaseTerm) ||
-      registro.ape.toLowerCase().includes(lowerCaseTerm) ||
-      registro.emaila.toLowerCase().includes(lowerCaseTerm) ||
-      cedulaAsString.includes(lowerCaseTerm)
-    )
-  };
+    // Separar el término de búsqueda en palabras clave
+    const palabrasClave = lowerCaseTerm.split(' ');
+
+    const matches = palabrasClave.map(palabra => {
+      return (
+        registro.nom.toLowerCase() === palabra ||
+        registro.ape.toLowerCase() === palabra ||
+        registro.emaila.toLowerCase() === palabra ||
+        cedulaAsString === palabra
+      );
+    });
+    // Devolver true si todas las palabras clave coinciden exactamente con algún campo del registro
+    return matches.every( match => match === true);
+  }
+
+
 
   const filteredRegistros = registros.filter((registro) => searchMatches(registro, searchTerm));
 
@@ -295,6 +327,7 @@ const TablaA = () => {
                   </thead>
                   <tbody>
                     {registros && registros.length > 0 ? (
+                      filteredRegistros.length > 0 ? (
                       filteredRegistros.slice(paginasVisitadas, paginasVisitadas + registrosPorPagina).map((registro) => (
                         <tr key={registro._id}>
                           <td>{registro.nom}</td>
@@ -314,9 +347,36 @@ const TablaA = () => {
                           </td>
                         </tr>
                       ))
+                      ) : (
+                      
+                        <tr>
+                          <td colSpan="8"><div className="terminal-loader">
+                            <div className="terminal-header">
+                              <div className="terminal-title">Status</div>
+                              <div className="terminal-controls">
+                                <div className="control close"></div>
+                                <div className="control minimize"></div>
+                                <div className="control maximize"></div>
+                              </div>
+                            </div>
+                            <div className="text">No hay registros encontrados...</div>
+                          </div>
+                          </td>
+                        </tr>
+                      )
                     ) : (
                       <tr>
-                        <td colSpan="8">No hay registros disponibles</td>
+                        <td colSpan="8"><div className="terminal-loader">
+                          <div className="terminal-header">
+                            <div className="terminal-title">Status</div>
+                            <div className="terminal-controls">
+                              <div className="control close"></div>
+                              <div className="control minimize"></div>
+                              <div className="control maximize"></div>
+                            </div>
+                          </div>
+                          <div className="text">No hay registros disponibles...</div>
+                        </div></td>
                       </tr>
                     )}
                   </tbody>
@@ -333,7 +393,7 @@ const TablaA = () => {
                     nextLabel={'Next'}
                     pageCount={pageCount}
                     onPageChange={changePage}
-                    containerClassName={'pagination justify-content-end'} /* Alinea la paginación a la derecha */
+                    containerClassName={'pagination justify-content-end'} 
                     previousLinkClassName={'page-link'}
                     nextLinkClassName={'page-link'}
                     disabledClassName={'disabled'}

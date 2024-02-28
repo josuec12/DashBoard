@@ -1,6 +1,7 @@
 const PasswordResetRequest = require('../Models/Passwordss');
 const mongoose = require('mongoose');
 const model = require('../Models/Besitzss');
+const modelA = require('../Models/Adminss');
 
 const parseId = (id) => {
     return new mongoose.Types.ObjectId(id);
@@ -18,25 +19,30 @@ exports.getData = async (req, res) => {
 
 exports.requestPasswordReset = async (req, res) => {
     const { email } = req.body;
+    const { emaila } = req.body;
 
     try {
 
         // Verificar si el correo electrónico está registrado
         const user = await model.findOne({ email });
+        const admin = await modelA.findOne({ emaila });
 
-        if (!user) {
+
+        if (!user && !admin) {
             return res.status(404).json({ error: 'El correo electrónico no está registrado.' });
         }
 
         // Verificar si el correo electrónico ya tiene una solicitud pendiente
         const existingRequest = await PasswordResetRequest.findOne({ email, estado: 'pendiente' });
+        const existingRequestA = await PasswordResetRequest.findOne({ emaila, estado: 'pendiente' });
 
-        if (existingRequest) {
+
+        if (existingRequest  && existingRequestA) {
             return res.status(409).json({ error: 'Ya hay una solicitud pendiente para este correo electrónico.' });
         }
 
         // Crear una nueva solicitud de restablecimiento de contraseña con ubicación
-        await PasswordResetRequest.create({ email });
+        await PasswordResetRequest.create({ email, emaila });
 
         res.json({ message: 'Solicitud de restablecimiento de contraseña enviada correctamente.' });
     } catch (error) {

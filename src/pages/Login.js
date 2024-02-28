@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useBesitz } from '../Context/BesitzContext.js';
 import { useAdmin } from '../Context/AdminContext.js';
+import Footer from '../components/Footer.js';
 
 const Login = () => {
   const [nit, setNit] = useState('');
@@ -28,6 +29,8 @@ const Login = () => {
         icon: 'error',
         title: 'Campos incompletos',
         text: 'Por favor, completa todos los campos.',
+        showConfirmButton: false,
+        timer: 1500,
       });
       return;
     }
@@ -57,11 +60,12 @@ const Login = () => {
 
         isAdmin ? loginAdmin(tokenA) : loginBesitz(token);
 
-
         Swal.fire({
-          title: '¡Bien hecho!',
-          text: 'Inicio de sesión exitoso.',
+          position: 'top-end',
+          title: '¡Inicio de sesión exitoso!',
           icon: 'success',
+          showConfirmButton: false,
+          timer: 1500,
         });
 
         navigate(isAdmin ? '/HomeA' : '/Home');
@@ -70,6 +74,8 @@ const Login = () => {
           icon: 'error',
           title: 'Error en el login',
           text: 'El usuario o contraseña son incorrectos.',
+          showConfirmButton: false,
+          timer: 1500,
         });
       }
     } catch (error) {
@@ -89,7 +95,7 @@ const Login = () => {
   };
 
   return (
-    <div className="wrapper kenburns-top">
+    <div className="wrapper">
       <div>
         <Link to="https://besitz.co/">
           <img className="img-login scale-up-center" alt="Logo" src={require('../imagenes/Lblanco.png')} />
@@ -152,7 +158,7 @@ const Login = () => {
                 </div>
                 <div className="Ocontra">
                   <Link className="a" to="/Password">
-                    Olvidó la contraseña?
+                    Olvidó su contraseña?
                   </Link>
                 </div>
                 <div className="btn-login">
@@ -216,7 +222,7 @@ const Login = () => {
                 </div>
                 <div className='Ocontra'>
                   <Link className="a" to="/Password">
-                    Olvidó la contraseña?
+                    Olvidó su contraseña?
                   </Link>
                 </div>
                 <div className="btn-login">

@@ -20,9 +20,11 @@ export const AdminProvider = ({ children }) => {
       } else {
         logoutAdmin();
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Error',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+          showConfirmButton: false,
+          timer: 1500
         });
       }
     } else{

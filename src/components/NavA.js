@@ -12,7 +12,7 @@ const NavA = ({ toggleSidebar }) => {
     const adminName = authAdmin.Admin.nom || 'Admin';
 
     return (
-        <nav className="navbar navbar-expand-md sticky-top bg-body-tertiary shadow">
+        <nav className="navbar navbar-expand-md bg-body-tertiary shadow">
             <div className="container-fluid">
                 <div className="toggle" >
                     <label className="buttonT" htmlFor="toggle">

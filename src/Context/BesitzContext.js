@@ -21,9 +21,11 @@ export const BesitzProvider = ({ children }) => {
         console.log('Sesión expirada');
         logoutBesitz();
         Swal.fire({
-          icon: 'error',
+          icon: 'warning',
           title: 'Error',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+          showConfirmButton: false,
+          timer: 1500
         });
       }
     }else{
