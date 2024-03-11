@@ -14,7 +14,7 @@ const front = process.env.FRONT;
 
 const corsOptions = {
     origin: front, 
-    optionsSuccessStatus: 200, // Algunos navegadores antiguos (IE11) interpretan mal las respuestas con un código 204
+    optionsSuccessStatus: 200, 
   };
 
   app.use(cors(corsOptions));

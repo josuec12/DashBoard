@@ -13,6 +13,7 @@ import Password from '../pages/Password.js';
 import Error404 from '../pages/Error404.js';
 import Error500 from '../pages/Error500.js';
 import TablaA from '../pages/TablaA.js';
+import Location from '../pages/Location.js';
 
 const Ruta = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -71,6 +72,10 @@ const Ruta = () => {
           <Route
             path="/TablaA"
             element={<AdminRoute element={<TablaA isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />}
+          />
+          <Route
+            path="/Location"
+            element={<AdminRoute element={<Location isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />}
           />
         </Routes>
       </Router>

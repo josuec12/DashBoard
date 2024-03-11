@@ -105,9 +105,6 @@ exports.updateSingle = async (req, res) => {
             const LblancoContent = await LblancoContentPromise;
             const FIRMAContent = await FIRMAContentPromise;
 
-            console.log('Lblanco', LblancoContent);
-            console.log('FIRMA', FIRMAContent);
-
             const plantilla = `<!DOCTYPE html>
             <html lang="en">            
             <head>

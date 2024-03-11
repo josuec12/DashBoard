@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { useBesitz } from '../Context/BesitzContext.js';
 import { useAdmin } from '../Context/AdminContext.js';
-import Footer from '../components/Footer.js';
 
 const Login = () => {
   const [nit, setNit] = useState('');

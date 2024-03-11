@@ -5,7 +5,6 @@ const NavA = ({ toggleSidebar }) => {
     const { authAdmin } = useAdmin();
 
     if (!authAdmin) {
-        console.log('no esta autenticado');
         return null;
     }
 

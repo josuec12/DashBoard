@@ -2,7 +2,13 @@ const modelU = require('../Models/Besitzss');
 const modelA = require('../Models/Adminss');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const AccessLog = require('../Models/AccessLog');
+const os = require('os');
+const obtenerUbicacion = require('geoip-lite');
+const UAParser = require('ua-parser-js');
+const moment = require('moment-timezone')
 require('dotenv').config();
+
 
 KEY= process.env.KEY_SECRET;
 
@@ -31,7 +37,7 @@ const comparePasswords = (password, hashedPassword) => {
 };
 
 const generateTokenU = (Besitz) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 60;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
     return jwt.sign(
         {
             data: {
@@ -44,7 +50,7 @@ const generateTokenU = (Besitz) => {
 };
 
 const generateTokenA = (Admin) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 60;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
     return jwt.sign(
         {
             data: {
@@ -55,6 +61,28 @@ const generateTokenA = (Admin) => {
         KEY
     );
 };
+
+exports.getData = async (req, res) => {
+    try {
+        const docs = await AccessLog.find({});
+        res.send({ docs });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Error al obtener datos' });
+    }
+};
+
+function getUserBrowserInfo(userAgent) {
+    const parser = new UAParser();
+    const parsedResult = parser.setUA(userAgent).getResult();
+
+    const browserName = parsedResult.browser.name || 'Desconocido';
+
+    return {
+        name: browserName,
+    };
+}
+
 
 exports.loginU = async (req, res) => {
     const body = req.body;
@@ -71,8 +99,37 @@ exports.loginU = async (req, res) => {
 
         if (result) {
             const token = generateTokenU(Besitz);
-            console.log('Token generado:', token);
             res.send({ success: true, data: { Besitz }, token: token });
+
+            const hostnamee = os.hostname();
+
+            const ipU = '190.242.100.114';
+            const locationU = obtenerUbicacion.lookup(ipU);
+            const latitud = locationU.ll[0];
+            const longitud = locationU.ll[1];
+            console.log(`Las coordenadas de la dirección IP ${ipU} son: Latitud ${latitud}, Longitud ${longitud}`);
+          
+            const timeZoneLocationU = moment.tz.guess(locationU.city);
+            const timeZoneU = moment().tz(timeZoneLocationU);
+            const horaZonaHorariaU = timeZoneU.format('DD/MM/YYYY-HH:mm:ss');
+
+            const userAgentt =  req.headers['user-agent'];
+            const explorador = getUserBrowserInfo(userAgentt);
+
+            // Registrar acceso
+            const accessLogEntry = new AccessLog({
+                userId: Besitz._id,
+                userNom: Besitz.nombre,
+                userType: 'User',
+                tiempo: horaZonaHorariaU,
+                ipAddress: locationU ? `${locationU.city},${locationU.country}`: 'Desconocido',
+                lat: latitud,
+                lng: longitud, 
+                userAgent: explorador.name,
+                hostname: hostnamee
+            });
+            await accessLogEntry.save();
+            
         } else {
             res.send({ success: false, data: 'Contraseña incorrecta.' });
         }
@@ -97,8 +154,34 @@ exports.loginA = async (req, res) => {
 
         if (result) {
             const tokenA = generateTokenA(Admin);
-            console.log('TokenA generado:', tokenA);
             res.send({ success: true, data: { Admin }, tokenA: tokenA });
+
+            const hostnamee = os.hostname();
+
+            const ip = '63.246.153.80';
+            const location = obtenerUbicacion.lookup(ip);
+            const latitud = location.ll[0];
+            const longitud = location.ll[1];
+            const timeZoneLocation = moment.tz.guess(location.city);
+            const timeZone = moment().tz(timeZoneLocation);
+            const horaZonaHoraria = timeZone.format('DD/MM/YYYY-HH:mm:ss');
+
+            const userAgentt =  req.headers['user-agent'];
+            const explorador = getUserBrowserInfo(userAgentt);
+
+            const accessLogEntry = new AccessLog({
+                userId: Admin._id,
+                userNom: Admin.nom,
+                userType: 'Admin',
+                tiempo: horaZonaHoraria,
+                ipAddress: location ? `${location.city},${location.country}`: 'Desconocido',
+                lat: latitud,
+                lng: longitud, 
+                userAgent: explorador.name,
+                hostname: hostnamee
+            });
+            await accessLogEntry.save();
+
         } else {
             res.send({ success: false, data: 'Contraseña incorrecta.' });
         }
@@ -107,8 +190,4 @@ exports.loginA = async (req, res) => {
         res.status(500).send({ success: false, error: 'Error interno del servidor en loginA' });
     }
 };
-
-
-
-
 

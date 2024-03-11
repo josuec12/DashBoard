@@ -58,6 +58,10 @@ const NavSideA = ({ isOpen }) => {
       to: '/Register',
       icon: <ion-icon name="person-add-outline"></ion-icon>,
       title: 'Registrar',
+    },    {
+      to: '/Location',
+      icon: <ion-icon name="compass-outline"></ion-icon>,
+      title: 'Ubicación',
     },
     {
       icon: <ion-icon name="log-out-outline"></ion-icon>,

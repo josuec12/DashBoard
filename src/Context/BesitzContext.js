@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
@@ -10,7 +10,8 @@ export const BesitzProvider = ({ children }) => {
   const storedDecodedToken = localStorage.getItem('decodedToken');
   const [authToken, setAuthToken] = useState(storedDecodedToken ? JSON.parse(storedDecodedToken) : null);
 
-  const decodeToken = async (token) => {
+  // Envuelve la definición de decodeToken en useCallback para evitar la advertencia
+  const decodeToken = useCallback(async (token) => {
     try {
       if(token){
       const decodedToken = jwtDecode(token);
@@ -24,8 +25,6 @@ export const BesitzProvider = ({ children }) => {
           icon: 'warning',
           title: 'Error',
           text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
-          showConfirmButton: false,
-          timer: 1500
         });
       }
     }else{
@@ -36,7 +35,7 @@ export const BesitzProvider = ({ children }) => {
       console.error('Error al decodificar el token:', error);
       logoutBesitz();
     }
-  };
+  }, []);
 
   const loginBesitz = (token) => {
     decodeToken(token);
@@ -48,7 +47,7 @@ export const BesitzProvider = ({ children }) => {
       decodeToken(storedToken);
     }
     setFirstLoad(false);
-  }, [firstLoad, storedToken]);
+  }, [firstLoad, storedToken, decodeToken]); // Agrega decodeToken al array de dependencias
 
   const logoutBesitz = () => {
     setAuthToken(null);

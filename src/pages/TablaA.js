@@ -59,16 +59,15 @@ const TablaA = () => {
   const checkExistingCedulaID = async (cedula, _id) => {
     try {
       const response = await fetch(`http://localhost:5000/checkCedulaID/${cedula}/${_id}`);
-      console.log('Status:', response.status);
 
       if (response.ok) {
         // NIT no existe
-        console.log('entro');
         return false;
+
       } else if (response.status === 409) {
         // NIT ya existe
-        console.log('entro 409');
         return true;
+
       } else {
         // Otro error
         throw new Error('Error en la verificación del NIT');
@@ -82,16 +81,15 @@ const TablaA = () => {
   const checkExistingEmailaID = async (emaila, _id) => {
     try {
       const response = await fetch(`http://localhost:5000/checkEmailaID/${emaila}/${_id}`);
-      console.log('Status:', response.status);
 
       if (response.ok) {
         // Email no existe
-        console.log('entro');
         return false;
+
       } else if (response.status === 409) {
         // Email ya existe
-        console.log('entro 409');
         return true;
+        
       } else {
         // Otro error
         throw new Error('Error en la verificación del Email');
@@ -194,7 +192,6 @@ const TablaA = () => {
 
       const response = await axios.put(`http://localhost:5000/Admin/${editedData._id}`, editedData);
       const updatedRegistro = response.data.data;
-      console.log('Registro Editado:', updatedRegistro);
 
       // Actualizar la lista de registros con el registro editado
       const updatedRegistros = registros.map((r) => (r._id === updatedRegistro._id ? updatedRegistro : r));
@@ -229,7 +226,6 @@ const TablaA = () => {
     if (confirmacion.isConfirmed) {
       try {
         const response = await axios.delete(`http://localhost:5000/Admin/${id}`);
-        console.log('Registro Eliminado:', response.data.data);
 
         // Filtrar el registro eliminado de la lista de registros
         const updatedRegistros = registros.filter((registro) => registro._id !== id);

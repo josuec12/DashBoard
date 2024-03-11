@@ -57,16 +57,15 @@ const Tabla = () => {
   const checkExistingNitID = async (nit, _id) => {
     try {
       const response = await fetch(`http://localhost:5000/checkNitID/${nit}/${_id}`);
-      console.log('Status:', response.status);
 
       if (response.ok) {
         // NIT no existe
-        console.log('entro');
         return false;
+        
       } else if (response.status === 409) {
         // NIT ya existe
-        console.log('entro 409');
         return true;
+
       } else {
         // Otro error
         throw new Error('Error en la verificación del NIT');
@@ -80,16 +79,15 @@ const Tabla = () => {
   const checkExistingEmailID = async (email, _id) => {
     try {
       const response = await fetch(`http://localhost:5000/checkEmailID/${email}/${_id}`);
-      console.log('Status:', response.status);
 
       if (response.ok) {
         // Email no existe
-        console.log('entro');
         return false;
+
       } else if (response.status === 409) {
         // Email ya existe
-        console.log('entro 409');
         return true;
+
       } else {
         // Otro error
         throw new Error('Error en la verificación del Email');
@@ -198,7 +196,6 @@ const Tabla = () => {
 
       // Si la solicitud es exitosa, actualiza el estado y muestra un mensaje de éxito
       const updatedRegistro = response.data.data;
-      console.log('Registro Editado:', updatedRegistro);
 
       const updatedRegistros = registros.map((r) => (r._id === updatedRegistro._id ? updatedRegistro : r));
       setRegistros(updatedRegistros);
@@ -238,7 +235,6 @@ const Tabla = () => {
     if (confirmacion.isConfirmed) {
       try {
         const response = await axios.delete(`http://localhost:5000/Besitz/${id}`);
-        console.log('Registro Eliminado:', response.data.data);
 
         const updatedRegistros = registros.filter((registro) => registro._id !== id);
         setRegistros(updatedRegistros);

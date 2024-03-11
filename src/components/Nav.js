@@ -6,7 +6,6 @@ const Nav = ({ toggleSidebar }) => {
 
   const { authToken } = useBesitz();
   if (!authToken) {
-    console.log('No esta autenticado');
     return null;
   }
 

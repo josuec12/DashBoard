@@ -215,10 +215,7 @@ const RegisterU = () => {
         });
       }
 
-      console.log(result);
-
     } catch (error) {
-      console.log(error);
       console.error('Error al enviar el formulario:', error);
       Swal.fire({
         icon: 'error',

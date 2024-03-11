@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import Swal from 'sweetalert2';
 
@@ -10,32 +10,31 @@ export const AdminProvider = ({ children }) => {
   const storedDecodedAdminToken = localStorage.getItem('decodedAdmin');
   const [authAdmin, setAuthAdmin] = useState(storedDecodedAdminToken ? JSON.parse(storedDecodedAdminToken) : null);
 
-  const decodeAdminToken = async (token) => {
+  // Utiliza useCallback para memoizar la función decodeAdminToken
+  const decodeAdminToken = useCallback(async (token) => {
     try {
-      if(token){
-      const decodedAdminToken = jwtDecode(token);
-      if (decodedAdminToken && decodedAdminToken.exp * 1000 > Date.now()) {
-        setAuthAdmin(decodedAdminToken.data);
-        localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdminToken.data));
+      if (token) {
+        const decodedAdminToken = jwtDecode(token);
+        if (decodedAdminToken && decodedAdminToken.exp * 1000 > Date.now()) {
+          setAuthAdmin(decodedAdminToken.data);
+          localStorage.setItem('decodedAdmin', JSON.stringify(decodedAdminToken.data));
+        } else {
+          logoutAdmin();
+          Swal.fire({
+            icon: 'warning',
+            title: 'Error',
+            text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
+          });
+        }
       } else {
-        logoutAdmin();
-        Swal.fire({
-          icon: 'warning',
-          title: 'Error',
-          text: 'Tu sesión ha expirado. Por favor, vuelve a iniciar sesión.',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        // No hay token, por lo tanto, no hay autenticación de administrador
+        setAuthAdmin(null);
       }
-    } else{
-      // No hay token, por lo tanto, no hay autenticación de administrador
-      setAuthAdmin(null);
-    }
     } catch (error) {
       console.error('Error al decodificar el tokenAdmin:', error);
       logoutAdmin();
     }
-  };
+  }, []);
 
   const loginAdmin = (token) => {
     decodeAdminToken(token);
@@ -47,7 +46,7 @@ export const AdminProvider = ({ children }) => {
       decodeAdminToken(storedAdminToken);
     }
     setFirstLoad(false);
-  }, [firstLoad, storedAdminToken]);
+  }, [firstLoad, storedAdminToken, decodeAdminToken]);
 
   const logoutAdmin = () => {
     setAuthAdmin(null);
