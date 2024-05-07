@@ -1,0 +1,57 @@
+:root{
+  --fc-today-bg-color: #9496ff;
+}
+
+.fc-daygrid,
+.fc-timeGridWeek-view,
+.fc-timeGridDay-view {
+    background-color: #f5f5f4; 
+  }
+
+.fc-daygrid-day-number,
+.fc-timegrid-slot-label-cushion,
+.fc-timegrid-axis-cushion,
+.fc-col-header-cell-cushion,
+.fc-list-day-text,
+.fc-list-day-side-text,
+.fc-event-time,
+.fc-event-title {
+    text-decoration: none;
+    color: #020013;
+  }
+
+.fc-toolbar-title {
+  color: #020013;
+}
+
+.fc-h-event{
+  background-color: #020013;
+  border: #020013 1px solid;
+}
+
+.fc-daygrid-day.fc-day-today{
+  background-color: #020013;
+}
+
+.fc-daygrid-event-dot {
+  border: calc(var(--fc-daygrid-event-dot-width) / 2) solid #020013;
+  border-radius: calc(var(--fc-daygrid-event-dot-width) / 2);
+  box-sizing: content-box;
+  height: 0px;
+  margin: 0px 4px;
+  width: 0px;
+}
+
+.fc .fc-list-event-dot {
+  border: calc(var(--fc-list-event-dot-width) / 2) solid #020013;
+  border-radius: calc(var(--fc-list-event-dot-width) / 2);
+  box-sizing: content-box;
+  display: inline-block;
+  height: 0px;
+  width: 0px;
+}
+
+.popoverStyle{
+  z-index: 999 !important;
+}
+

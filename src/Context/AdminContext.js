@@ -10,7 +10,7 @@ export const AdminProvider = ({ children }) => {
   const storedDecodedAdminToken = localStorage.getItem('decodedAdmin');
   const [authAdmin, setAuthAdmin] = useState(storedDecodedAdminToken ? JSON.parse(storedDecodedAdminToken) : null);
 
-  // Utiliza useCallback para memoizar la función decodeAdminToken
+  // Utiliza useCallback para memorizar la función decodeAdminToken
   const decodeAdminToken = useCallback(async (token) => {
     try {
       if (token) {

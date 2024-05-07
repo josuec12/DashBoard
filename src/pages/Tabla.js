@@ -234,7 +234,8 @@ const Tabla = () => {
 
     if (confirmacion.isConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost:5000/Besitz/${id}`);
+        
+        await axios.delete(`http://localhost:5000/Besitz/${id}`);
 
         const updatedRegistros = registros.filter((registro) => registro._id !== id);
         setRegistros(updatedRegistros);

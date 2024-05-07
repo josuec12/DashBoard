@@ -37,7 +37,7 @@ const comparePasswords = (password, hashedPassword) => {
 };
 
 const generateTokenU = (Besitz) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 100;
     return jwt.sign(
         {
             data: {
@@ -50,7 +50,7 @@ const generateTokenU = (Besitz) => {
 };
 
 const generateTokenA = (Admin) => {
-    const expiration = Math.floor(Date.now() / 1000) + 60 * 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 100;
     return jwt.sign(
         {
             data: {
@@ -103,11 +103,10 @@ exports.loginU = async (req, res) => {
 
             const hostnamee = os.hostname();
 
-            const ipU = '190.242.100.114';
+            const ipU = '87.101.82.92';
             const locationU = obtenerUbicacion.lookup(ipU);
             const latitud = locationU.ll[0];
             const longitud = locationU.ll[1];
-            console.log(`Las coordenadas de la dirección IP ${ipU} son: Latitud ${latitud}, Longitud ${longitud}`);
           
             const timeZoneLocationU = moment.tz.guess(locationU.city);
             const timeZoneU = moment().tz(timeZoneLocationU);
@@ -158,7 +157,7 @@ exports.loginA = async (req, res) => {
 
             const hostnamee = os.hostname();
 
-            const ip = '63.246.153.80';
+            const ip = '91.160.93.4'; // IP fija para prueba
             const location = obtenerUbicacion.lookup(ip);
             const latitud = location.ll[0];
             const longitud = location.ll[1];

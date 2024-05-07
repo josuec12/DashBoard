@@ -99,10 +99,92 @@ const Explorador = () => {
                                     filteredRegistros.slice(paginasVisitadas, paginasVisitadas + registrosPorPagina).map((registro) => (
                                         <tr key={registro._id}>
                                             <td>{registro.userNom}</td>
-                                            <td>{registro.userType}</td>
-                                            <td>{registro.userAgent}</td>
-                                            <td>{registro.ipAddress}</td>
-                                            <td>{registro.tiempo}</td>
+                                            <td>{registro.userType === 'Admin' ? <span className='typeUser'><svg className="w-6 h-6 text-gray-800 dark:text-white" width="26" height="26" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" strokeLinecap="square" strokeLinejoin="round" strokeWidth="2" d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.1 1.9-.7-.7m5.6 5.6-.7-.7m-4.2 0-.7.7m5.6-5.6-.7.7M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                            </svg>Admin</span>
+                                                : <span className='typeUser'><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>User</span>
+                                            }</td>
+                                            <td>{registro.userAgent === 'Chrome' ? <span><img className='logoExp' alt='Chrome' src={require('../imagenes/chrome.png')} />Chrome</span> : registro.userAgent === 'Edge' ? <span><img className='logoEd' alt='Edge' src={require('../imagenes/edge.png')} /> Edge</span> : registro.userAgent === 'Firefox' ? <span><img className='logoEd' alt='Firefox' src={require('../imagenes/mozilla.png')} /> Mozilla</span> : registro.userAgent === 'Opera' ? <span><img className='logoOp' alt='Opera' src={require('../imagenes/opera.png')} />Opera</span> : ''}</td>
+                                            <td>
+                                                <svg
+                                                    version="1.1"
+                                                    id="Layer_1"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                                                    x="0px"
+                                                    y="0px"
+                                                    width="25"
+                                                    height="25"
+                                                    viewBox="0 0 64 64"
+                                                    enableBackground="new 0 0 64 64"
+                                                    xmlSpace="preserve"
+                                                >
+                                                    <path
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M32.001,0.887c17.184,0,31.113,13.929,31.112,31.113
+	C63.114,49.185,49.184,63.115,32,63.113C14.815,63.114,0.887,49.185,0.888,32.001C0.885,14.816,14.815,0.887,32.001,0.887z"
+                                                    ></path>
+                                                    <line
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        x1="32"
+                                                        y1="1"
+                                                        x2="32"
+                                                        y2="63"
+                                                    ></line>
+                                                    <line
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        x1="63"
+                                                        y1="32"
+                                                        x2="1"
+                                                        y2="32"
+                                                    ></line>
+                                                    <path
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M30,1c0,0-14,11-14,31s14,31,14,31"
+                                                    ></path>
+                                                    <path
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M34,1c0,0,14,11,14,31S34,63,34,63"
+                                                    ></path>
+                                                    <path
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M8,12c0,0,5,10,24,10s24-10,24-10"
+                                                    ></path>
+                                                    <path
+                                                        fill="none"
+                                                        stroke="#000000"
+                                                        strokeWidth="2"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        d="M8,52c0,0,5-10,24-10s24,10,24,10"
+                                                    ></path>
+                                                </svg>
+                                                {registro.ipAddress}</td>
+                                            <td><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {registro.tiempo}</td>
                                         </tr>
                                     ))
                                 ) : (

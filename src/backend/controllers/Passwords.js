@@ -26,9 +26,17 @@ exports.requestPasswordReset = async (req, res) => {
         // Verificar si el correo electrónico está registrado
         const user = await model.findOne({ email });
         const admin = await modelA.findOne({ emaila });
+        let name = '';
+        let lastName = '';
 
 
-        if (!user && !admin) {
+        if (user) {
+            name = user.nombre;
+            lastName = user.apellido; // Suponiendo que el nombre del usuario se almacena en el campo 'nombre' del modelo 'model'
+        } else if (admin) {
+            name = admin.nom;
+            lastName = admin.ape; // Suponiendo que el nombre del administrador se almacena en el campo 'nombre' del modelo 'modelA'
+        } else {
             return res.status(404).json({ error: 'El correo electrónico no está registrado.' });
         }
 
@@ -42,7 +50,7 @@ exports.requestPasswordReset = async (req, res) => {
         }
 
         // Crear una nueva solicitud de restablecimiento de contraseña con ubicación
-        await PasswordResetRequest.create({ email, emaila });
+        await PasswordResetRequest.create({ name, lastName});
 
         res.json({ message: 'Solicitud de restablecimiento de contraseña enviada correctamente.' });
     } catch (error) {

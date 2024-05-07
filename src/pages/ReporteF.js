@@ -28,7 +28,7 @@ const ReporteF = () => {
         <div className="contentT" >
           <div className="dash">
             <div className="cardHeader">
-              <h2>Dashboard Financiero</h2>
+              <h2 className='loaderF'>Dashboard Financiero</h2>
             </div>     
             <div className="iframe-container">
               <iframe

@@ -12,7 +12,7 @@ const Error404 = () => {
                             <p className="lead">This requested URL was not found on this server.</p>
                             <Link to="/">
                                 <i className="fas fa-arrow-left me-1"></i>
-                                Regresa
+                                Regresa al home
                             </Link>
                         </div>
                     </div>

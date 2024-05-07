@@ -225,7 +225,8 @@ const TablaA = () => {
 
     if (confirmacion.isConfirmed) {
       try {
-        const response = await axios.delete(`http://localhost:5000/Admin/${id}`);
+        
+        await axios.delete(`http://localhost:5000/Admin/${id}`);
 
         // Filtrar el registro eliminado de la lista de registros
         const updatedRegistros = registros.filter((registro) => registro._id !== id);

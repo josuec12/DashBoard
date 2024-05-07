@@ -26,7 +26,7 @@ const ReporteV = () => {
           <div className="dash">
 
             <div className="cardHeader">
-              <h2>Dashboard Ventas</h2>
+              <h2 className='loader'>Dashboard Ventas </h2>
             </div>
             <div className="iframe-container">
               <iframe

@@ -6,7 +6,6 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-import './StylesV.css';
 
 
 const CarruselV = () => {

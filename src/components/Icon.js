@@ -1,8 +1,8 @@
 import L from 'leaflet'
 
 export const Icon = L.icon({
-    iconUrl: require('../imagenes/location.png'),
-    iconRetinaUrl: require('../imagenes/location.png'),
+    iconUrl: require('../imagenes/pin.gif'),
+    iconRetinaUrl: require('../imagenes/pin.gif'),
     iconAnchor: null,
     shadowUrl: null,
     shadowSize: null,

@@ -7,6 +7,8 @@ const AdminRouters = require('./routes/Admin');
 const BesitzRouters = require('./routes/Besitz');
 const AuthRouters = require('./routes/Auth')
 const PasswordRouters = require('./routes/Password')
+const EventRouters = require('./routes/Event')
+const NameEventRouters = require('./routes/NameEvent')
 require('dotenv').config();
 
 const port = process.env.PORT;
@@ -29,6 +31,8 @@ app.use(BesitzRouters);
 app.use(AdminRouters);
 app.use(AuthRouters)
 app.use(PasswordRouters)
+app.use(EventRouters)
+app.use(NameEventRouters)
 
 app.use(
     bodyParser.json({   

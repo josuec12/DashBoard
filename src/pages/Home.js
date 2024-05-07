@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 import Footer from '../components/Footer';
 import Carrusel from '../components/Carrusel';
 import { useBesitz } from '../Context/BesitzContext';
+import Calendario from '../components/Calendario';
 
 const Home = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -136,7 +137,7 @@ const Home = () => {
             <div className="cardHeader">
               <h2>Calendario</h2>
             </div>
-            <iframe title="calendario" src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site" className="cyb" scrolling=''></iframe>
+            <Calendario/>
           </div>
         </div>
         <Footer />

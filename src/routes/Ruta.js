@@ -14,6 +14,7 @@ import Error404 from '../pages/Error404.js';
 import Error500 from '../pages/Error500.js';
 import TablaA from '../pages/TablaA.js';
 import Location from '../pages/Location.js';
+import Ccalendario from '../pages/Ccalendario.js';
 
 const Ruta = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -38,7 +39,7 @@ const Ruta = () => {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Error404" element={<Error404 />} />
+          <Route path="*" element={<Error404 />} />
           <Route path="/Error500" element={<Error500 />} />
           <Route path="/Password" element={<Password />} />
 
@@ -76,6 +77,10 @@ const Ruta = () => {
           <Route
             path="/Location"
             element={<AdminRoute element={<Location isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />}
+          />
+          <Route
+            path="/Ccalendario"
+            element={<AdminRoute element={<Ccalendario isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />} />}
           />
         </Routes>
       </Router>

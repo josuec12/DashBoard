@@ -4,6 +4,7 @@ import NavA from '../components/NavA';
 import Footer from '../components/Footer';
 import Carrusel from '../components/Carrusel';
 import axios from 'axios';
+import CalendarioA from '../components/CalendarioA';
 
 const HomeA = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -80,8 +81,8 @@ const HomeA = () => {
                 </div>) : (
               <ul className='list'>
                 {solicitudes.map((solicitud) => (
-                  <li className='cardE shadow' key={solicitud._id}>
-                    {solicitud.email}
+                  <li className='cardE shadow text-capitalize' key={solicitud._id}>
+                    {solicitud.name} {solicitud.lastName}
                     <button className="buttonAp" onClick={() => handleSolicitud(solicitud._id)}>
                       <p className="submitAp"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"><polyline fill='none' points="20 6 9 17 4 12"></polyline></svg></p>
                     </button>  
@@ -97,11 +98,7 @@ const HomeA = () => {
             <div className="cardHeader">
               <h2>Calendario</h2>
             </div>
-            <iframe
-              title="calendario"
-              src="https://0f36559d0fbe4ea2a3dad140b07b02ba.elf.site"
-              className="cyb"
-            ></iframe>
+              <CalendarioA/>
           </div>
         </div>
         <Footer/>
