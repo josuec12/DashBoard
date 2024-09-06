@@ -1,4 +1,3 @@
-const moongose = require('mongoose')
 const model = require('../Models/NameEventss')
 
 exports.getData = async (req, res) => {

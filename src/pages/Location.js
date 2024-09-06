@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import NavSideA from '../components/NavSideA'
 import NavA from '../components/NavA'
-import Explorador from './Explorador';
-import Dispositivo from './Dispositivo';
+import Explorador from '../components/Explorador';
+import Dispositivo from '../components/Dispositivo';
 import Footer from '../components/Footer';
 import MapView from '../components/Map';
 

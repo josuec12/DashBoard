@@ -65,9 +65,9 @@ const NavSideA = ({ isOpen }) => {
       title: 'Ubicación',
     },
     {
-      to: '/Ccalendario',
+      to: '/Evento',
       icon: <ion-icon name="calendar"></ion-icon>,
-      title: 'Eventos C',
+      title: 'Eventos',
     },
     {
       icon: <ion-icon name="log-out-outline"></ion-icon>,

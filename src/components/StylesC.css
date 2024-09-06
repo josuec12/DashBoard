@@ -1,23 +1,30 @@
 :root{
-  --fc-today-bg-color: #9496ff;
+  --fc-today-bg-color: #00025aa2;
+  --fc-border-color: #ffffff1c;
 }
 
 .fc-daygrid,
 .fc-timeGridWeek-view,
-.fc-timeGridDay-view {
-    background-color: #f5f5f4; 
+.fc-timeGridDay-view, 
+.fc-multimonth-month,
+.fc-multimonth-daygrid-table{
+    background: linear-gradient(to top, rgba(8, 8, 8, 0.479) 40%, rgba(0, 38, 51, 0.438)), url(../imagenes/calendario.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
   }
 
 .fc-daygrid-day-number,
 .fc-timegrid-slot-label-cushion,
 .fc-timegrid-axis-cushion,
 .fc-col-header-cell-cushion,
-.fc-list-day-text,
+.fc-list-day-text,  
 .fc-list-day-side-text,
 .fc-event-time,
-.fc-event-title {
+.fc-event-title,
+.fc-daygrid-more-link,
+.fc-more-link {
     text-decoration: none;
-    color: #020013;
+    color: rgba(255, 255, 255, 0.945);
   }
 
 .fc-toolbar-title {
@@ -29,12 +36,13 @@
   border: #020013 1px solid;
 }
 
-.fc-daygrid-day.fc-day-today{
+.fc-daygrid-day.fc-day-today,
+.fc-col-header-cell{
   background-color: #020013;
 }
 
 .fc-daygrid-event-dot {
-  border: calc(var(--fc-daygrid-event-dot-width) / 2) solid #020013;
+  border: calc(var(--fc-daygrid-event-dot-width) / 2) solid rgba(255, 255, 255, 0.945);
   border-radius: calc(var(--fc-daygrid-event-dot-width) / 2);
   box-sizing: content-box;
   height: 0px;
@@ -55,3 +63,16 @@
   z-index: 999 !important;
 }
 
+.fc-list-day-cushion.fc-cell-shaded {
+  background-color: #020013;
+}
+
+.fc-multimonth-title{
+  background-color: #cfcfcf7a;
+  color: #020013;
+  border-radius: 10px;
+}
+
+.fc-daygrid-dot-event:hover{
+  background: rgba(39, 49, 109, 0.61);
+}

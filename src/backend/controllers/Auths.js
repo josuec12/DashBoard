@@ -10,7 +10,7 @@ const moment = require('moment-timezone')
 require('dotenv').config();
 
 
-KEY= process.env.KEY_SECRET;
+ const KEY = process.env.KEY_SECRET;
 
 const findUser = (nit) => {
     return modelU.findOne({ nit });
@@ -103,7 +103,7 @@ exports.loginU = async (req, res) => {
 
             const hostnamee = os.hostname();
 
-            const ipU = '87.101.82.92';
+            const ipU = '190.242.100.114';
             const locationU = obtenerUbicacion.lookup(ipU);
             const latitud = locationU.ll[0];
             const longitud = locationU.ll[1];
@@ -157,7 +157,7 @@ exports.loginA = async (req, res) => {
 
             const hostnamee = os.hostname();
 
-            const ip = '91.160.93.4'; // IP fija para prueba
+            const ip = '91.160.93.4'; // IP fija para prueba --- req.ip para ip dinamica
             const location = obtenerUbicacion.lookup(ip);
             const latitud = location.ll[0];
             const longitud = location.ll[1];

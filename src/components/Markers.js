@@ -15,15 +15,15 @@ const Markers = () => {
 
         registros.forEach((registro) => {
           // Comprobamos si ya tenemos un registro para este usuario
-          if (lastLoginsMap.has(registro.userNom)) {
-            const existingLogin = lastLoginsMap.get(registro.userNom);
+          if (lastLoginsMap.has(registro.userId)) {
+            const existingLogin = lastLoginsMap.get(registro.userId);
             // Si el registro actual es más reciente, lo reemplazamos
             if (registro.tiempo > existingLogin.tiempo) {
-              lastLoginsMap.set(registro.userNom, registro);
+              lastLoginsMap.set(registro.userId, registro);
             }
           } else {
             // Si no hay registro para este usuario, lo añadimos
-            lastLoginsMap.set(registro.userNom, registro);
+            lastLoginsMap.set(registro.userId, registro);
           }
         });
 

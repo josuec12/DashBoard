@@ -9,6 +9,8 @@ import { useBesitz } from '../Context/BesitzContext';
 import listPlugin from '@fullcalendar/list';
 import * as bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import esLocale from "@fullcalendar/core/locales/es"
+import multiMonthPlugin from '@fullcalendar/multimonth'
 
 function Calendario() {
   const [events, setEvents] = useState([]);
@@ -34,7 +36,8 @@ function Calendario() {
               event.dateTime.map(dateTime => ({
                 id: event._id,
                 title: event.name,  
-                start: dateTime, 
+                start: new Date(dateTime).toISOString().split('T')[0], 
+                allDay: true 
               })) 
             ));
             setEvents(mappedEvents);
@@ -53,17 +56,21 @@ function Calendario() {
   return (
     <div>
       <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
+        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin, multiMonthPlugin]}
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,listMonth'
+          right: 'dayGridMonth,listMonth,multiMonthYear'
         }}
+        locale={esLocale}
         initialView="dayGridMonth"
         events={events}
+        eventColor='#020013'
+        
         eventDidMount={(info)=>{
           return new bootstrap.Popover(info.el,{
-            title: info.event.title,
+            title: "¡Aviso importante!",
+            content: `Recuerda presentar tu ${info.event.title}`,
             placement: "auto",
             trigger: "hover",
             customClass: "popoverStyle"

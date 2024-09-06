@@ -46,6 +46,7 @@ exports.deleteEvent = async (req, res) => {
 
 exports.getEventsByClient = async (req, res) => {
   const { ClientNit } = req.body;
+
   try {
     const events = await model.find({ nit: ClientNit });
 
@@ -54,92 +55,64 @@ exports.getEventsByClient = async (req, res) => {
     for (const event of events) {
       for (const eventDate of event.dateTime) {
         const daysUntilEvent = moment(eventDate).diff(currentDate, 'days') + 1;
-        console.log('dias que faltan', daysUntilEvent);
 
-        // Verificar si el evento está a 5 días o 1 día de distancia y el correo electrónico no ha sido enviado
         if ((daysUntilEvent <= 5 && daysUntilEvent >= 1) && !event.emailSent) {
-          const LblancoContentPromise = fs.readFile('../imagenes/Lblanco.png', { encoding: 'base64' });
+          const RecordatorioContentPromise = fs.readFile('../imagenes/recordatorio.png', { encoding: 'base64' });
           const FIRMAContentPromise = fs.readFile('../imagenes/FIRMA.png', { encoding: 'base64' });
 
-          const [LblancoContent, FIRMAContent] = await Promise.all([LblancoContentPromise, FIRMAContentPromise]);
+          const [RecordatorioContent] = await Promise.all([RecordatorioContentPromise, FIRMAContentPromise]);
 
           const plantilla = `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <style>
-                    p,
-                    a,
-                    h1,
-                    h2,
-                    h3,
-                    h4,
-                    h5,
-                    h6 {
-                        font-family: 'Roboto', sans-serif !important;
-                    }
-
-                    h1 {
-                        font-size: 30px !important;
-                    }
-
-                    h2 {
-                        font-size: 25px !important;
-                    }
-
-                    h3 {
-                        font-size: 18px !important;
-                    }
-
-                    h4 {
-                        font-size: 16px !important;
-                    }
-
-                    p,
-                    a {
-                        font-size: 15px !important;
-                    }
-                </style>
-            </head>
-
-            <body>
-                <div style="width: 100%; background-color: #e3e3e3; border-radius: 10px;">
-                    <div style="padding: 50px 20px 50px 20px;">
-                        <!-- Imagen inicial -->
-                        <div style="background-color: rgb(1, 0, 37); padding: 1px 0px 1px 0px; width: 100%; text-align: center;">
-                            <img src="data:image/png;base64,${LblancoContent}" alt="" style="width: 140px; height: 180px;">
-                        </div>
-                        <!-- Imagen inicial -->
-
-                        <!-- Contenido principal -->
-                        <div style="background-color: #ffffff; padding: 10px 0px 0px 0px; width: 100%; text-align: center;">
-                            <h1>Recordatorio</h1>
-                            <p>Estimado/a, ${event.cliente}. Recuerde que su <strong>${event.name}</strong> se vence en ${daysUntilEvent} días.</p>
-                            </p>
-
-                            <img src="data:image/png;base64,${FIRMAContent}" alt="" style="width: 430px; height: 200px;">
-
-                            <!-- Contenido principal -->
-
-                            <!-- Footer -->
-                            <div
-                                style="background-color: #010024; color: #ffffff; padding: 10px 0px 0px 0px; width: 100%; text-align: center; margin-top: 5px;">
-                                <p style="font-size: 13px; padding: 0px 20px 0px 20px;">
-                                    Besitz SAS.<br>
-                                    Barranquilla, Atlantico.<br>
-                                </p>
-                                <p style="background-color: #020013; padding: 10px 0px 10px 0px; font-size: 12px !important;">
-                                    © 2018, todos los derechos reservados.
-                                </p>
-                            </div>
-                            <!-- Footer -->
-                        </div>
-                    </div>
-            </body>
-            </html>
-            `;
+                            <html lang="es">
+                              <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordatorio</title>
+</head>
+<body style="display: flex; justify-content: center; align-items: center; background-color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+        <div style="width: 90%; background-color: rgb(111, 0, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; padding: 20px;">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="data:image/png;base64,${RecordatorioContent}" style="width: 30%;">
+                <h1 style="font-size: 50px; font-weight: 800; color: #ffd000;">
+                    ¡No lo<br>olvides!
+                    <p style="font-size: 18px; color: black;">
+                        Se acercan vencimientos en tu <br>
+                        <strong style="background-color: #ffd000; border-radius: 5px; padding: 2px 4px;">calendario tributario.</strong>
+                    </p>
+                </h1>
+            </div>
+        </div>
+        <div>
+        </div>
+        <div style="width: 90%; background-color: #F8F4F9; padding: 20px;">
+                    <p style="font-size: 18px; font-weight: bolder; text-align: center;">
+                Esto es lo que debes tener presente<br>para los próximos días:
+            </p>    
+        <h3 style="font-size: 25px; font-weight: 600; color: #ffd000; text-align: center;">Obligaciones</h3>
+            <hr style="width: 30%; max-width: 600px; border: none; border-top: 2px solid #6F00FF;">
+            <ul style="display: flex; justify-content: center; padding: 0;">
+                <li style="color: black; font-size: 18px;">
+                    ${event.name} vencen en ${daysUntilEvent} días
+                </li>
+            </ul>
+        </div>
+        <div style="width: 90%; background-color: rgb(111, 0, 255); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; padding: 20px;">
+            <div style="text-align: center;">
+                <p style="font-size: 15px; padding: 0 20px; color: #ffd000;">
+                    Besitz SAS.<br>
+                    Barranquilla, Atlantico.<br>
+                </p>
+                <p style="font-size: 13px; padding: 10px 0; color: #ffd000">
+                    © 2024, todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+`;
 
           // Función para enviar el correo electrónico
           const sendEmail = (email) => {
@@ -171,18 +144,25 @@ exports.getEventsByClient = async (req, res) => {
           };
 
           sendEmail(event.email);
-          
+
           // Marcar el evento como emailSent: true en la base de datos
           await model.findByIdAndUpdate(event._id, { emailSent: true });
 
-        } else if (daysUntilEvent >= 0) {
-          // Aquí tomar acciones cuando la fecha del evento haya llegado, como eliminar el evento
-          await deleteEvent(event._id);
-          console.log('Se elimino')
+        } else if (daysUntilEvent < 0) {
+          // Encontrar el índice del evento en la matriz
+          const eventIndex = events.findIndex(e => e._id === event._id);
+          if (eventIndex !== -1) {
+            // Obtener la ID del evento de la base de datos
+            const eventId = events[eventIndex]._id;
+            // Eliminar el evento de la base de datos
+            await model.findByIdAndDelete(eventId);
+            console.log('Se eliminó el evento de la base de datos');
+          } else {
+            console.log('No se encontró el evento en la matriz');
+          }
         }
       }
     }
-
     res.status(200).json(events);
   } catch (error) {
     res.status(500).json({ message: 'Error al recuperar eventos por cliente' });
