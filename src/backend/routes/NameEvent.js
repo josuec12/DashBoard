@@ -4,6 +4,8 @@ const NameEventscontroller = require('../controllers/NameEvents');
 
 router.get('/NameEvent', NameEventscontroller.getData);
 
+router.get('/checkNameEvent', NameEventscontroller.checkNameEvent);
+
 router.post('/NameEvent', NameEventscontroller.createNameEvent);
 
 router.put('/NameEvent/:id', NameEventscontroller.updateNameEvent);

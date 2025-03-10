@@ -6,6 +6,19 @@ const RegisEve = () => {
     const [name, setName] = useState('');
     const [dateTime, setDateTime] = useState([]);
 
+    const checkEventExists = async (eventName) => {
+        try {
+            const response = await fetch(`http://localhost:5000/checkNameEvent?name=${encodeURIComponent(eventName)}`);
+            if (!response.ok) throw new Error('Error en la respuesta del servidor');
+    
+            const result = await response.json();
+            return result.exists;
+        } catch (error) {
+            console.error('Error al verificar el evento:', error);
+            return false;
+        }
+    };    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!name || !dateTime.length) {
@@ -18,6 +31,19 @@ const RegisEve = () => {
             });
             return;
         }
+
+        const eventExists = await checkEventExists(name);
+        if (eventExists) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Evento ya registrado',
+                text: 'Este evento ya existe en la base de datos.',
+                showConfirmButton: false,
+                timer: 3500,
+            });
+            return;
+        }
+
         try {
             const response = await fetch('http://localhost:5000/NameEvent', {
                 method: 'POST',

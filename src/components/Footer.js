@@ -1,14 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
+    const currentYear = new Date().getFullYear();
+
     return (
-        <>
         <div className='footer'>
-            <footer className=" py-4 bg-light">
+            <footer className="py-4 bg-light">
                 <div className="container-fluid px-4">
                     <div className="d-flex align-items-center justify-content-between small">
-                        <div className="text-muted">Copyright &copy; Besitz 2024</div>
+                        <div className="text-muted">Copyright &copy; Besitz {currentYear}</div>
                         <div>
                             <Link className="a" to="#">Privacy Policy</Link>
                             &middot;
@@ -17,9 +18,8 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-            </div>
-        </>
-  )
-}
+        </div>
+    );
+};
 
-export default Footer
+export default Footer;

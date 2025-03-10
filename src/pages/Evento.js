@@ -10,78 +10,83 @@ import DesasignarEve from '../components/DesasignarEve';
 const Ccalendario = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggle = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  // Función para alternar la apertura/cierre del sidebar
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevState) => !prevState);
   };
 
+  // Datos de los acordeones para evitar repetir código
+  const accordionItems = [
+    {
+      id: 'collapseOne',
+      title: 'Registrar Evento',
+      component: <RegisEve />,
+    },
+    {
+      id: 'collapseTwo',
+      title: 'Asignar Evento',
+      component: <AsignarEve />,
+    },
+    {
+      id: 'collapseThree',
+      title: 'Eliminar Evento',
+      component: <DeleteEve />,
+    },
+    {
+      id: 'collapseFour',
+      title: 'Eliminar Asignación',
+      component: <DesasignarEve />,
+    },
+  ];
 
   return (
     <>
-      <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggle} />
+      {/* Sidebar */}
+      <NavSideA isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+      {/* Contenido principal */}
       <div className={`main ${isSidebarOpen ? 'active' : ''}`}>
-        <NavA isOpen={isSidebarOpen} toggleSidebar={toggle} />
+        {/* Barra de navegación superior */}
+        <NavA isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+        {/* Contenido de la página */}
         <div className="contentR">
           <div className="dash">
             <div className="accordion shadow" id="accordionExample">
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button className="accordion-button bg-ligth" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    <div className="cardHeader">
-                      <h2>Registrar Evento</h2>
-                    </div>
-                  </button>
-                </h2>
-                <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                  <div className="accordion-body">
-                    <RegisEve/>
+              {accordionItems.map((item, index) => (
+                <div className="accordion-item" key={item.id}>
+                  <h2 className="accordion-header">
+                    <button
+                      className={`accordion-button bg-light ${
+                        index === 0 ? '' : 'collapsed'
+                      }`}
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#${item.id}`}
+                      aria-expanded={index === 0 ? 'true' : 'false'}
+                      aria-controls={item.id}
+                    >
+                      <div className="cardHeader">
+                        <h2>{item.title}</h2>
+                      </div>
+                    </button>
+                  </h2>
+                  <div
+                    id={item.id}
+                    className={`accordion-collapse collapse ${
+                      index === 0 ? 'show' : ''
+                    }`}
+                    data-bs-parent="#accordionExample"
+                  >
+                    <div className="accordion-body">{item.component}</div>
                   </div>
                 </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button className="accordion-button bg-ligth collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    <div className="cardHeader">
-                      <h2>Asignar Evento</h2>
-                    </div>
-                  </button>
-                </h2>
-                <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                  <div className="accordion-body">
-                    <AsignarEve/>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button className="accordion-button bg-ligth collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    <div className="cardHeader">
-                      <h2>Eliminar Evento</h2>
-                    </div>
-                  </button>
-                </h2>
-                <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                  <div className="accordion-body">
-                    <DeleteEve/>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header">
-                  <button className="accordion-button bg-ligth collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                    <div className="cardHeader">
-                      <h2>Eliminar Asignación</h2>
-                    </div>
-                  </button>
-                </h2>
-                <div id="collapseFour" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                  <div className="accordion-body">
-                    <DesasignarEve/>
-                  </div>
-                </div>
-              </div>              
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Footer */}
         <Footer />
       </div>
     </>

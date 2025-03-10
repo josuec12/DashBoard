@@ -53,6 +53,8 @@ exports.getEventsByClient = async (req, res) => {
     const currentDate = moment();
 
     for (const event of events) {
+      let updatedDates = [];
+
       for (const eventDate of event.dateTime) {
         const daysUntilEvent = moment(eventDate).diff(currentDate, 'days') + 1;
 
@@ -114,9 +116,8 @@ exports.getEventsByClient = async (req, res) => {
 </html>
 `;
 
-          // Función para enviar el correo electrónico
+          // Enviar correo
           const sendEmail = (email) => {
-            // Configurar el transporter de nodemailer
             const transporter = nodemailer.createTransport({
               service: 'godaddy',
               auth: {
@@ -125,7 +126,6 @@ exports.getEventsByClient = async (req, res) => {
               },
             });
 
-            // Configurar el mensaje del correo electrónico
             const mailOptions = {
               from: CORREO,
               to: email,
@@ -133,7 +133,6 @@ exports.getEventsByClient = async (req, res) => {
               html: plantilla,
             };
 
-            // Enviar el correo electrónico
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
                 console.error('Error al enviar el correo electrónico:', error);
@@ -145,26 +144,26 @@ exports.getEventsByClient = async (req, res) => {
 
           sendEmail(event.email);
 
-          // Marcar el evento como emailSent: true en la base de datos
           await model.findByIdAndUpdate(event._id, { emailSent: true });
 
-        } else if (daysUntilEvent < 0) {
-          // Encontrar el índice del evento en la matriz
-          const eventIndex = events.findIndex(e => e._id === event._id);
-          if (eventIndex !== -1) {
-            // Obtener la ID del evento de la base de datos
-            const eventId = events[eventIndex]._id;
-            // Eliminar el evento de la base de datos
-            await model.findByIdAndDelete(eventId);
-            console.log('Se eliminó el evento de la base de datos');
-          } else {
-            console.log('No se encontró el evento en la matriz');
-          }
+        }
+
+        // Filtrar fechas pasadas
+        const updatedDates = event.dateTime.filter(date =>
+          moment(date).isSameOrAfter(currentDate, 'day')
+        );
+
+        if (updatedDates.length === 0) {
+          await model.findByIdAndDelete(event._id);
+        } else {
+          await model.findByIdAndUpdate(event._id, { dateTime: updatedDates });
         }
       }
     }
+
     res.status(200).json(events);
   } catch (error) {
     res.status(500).json({ message: 'Error al recuperar eventos por cliente' });
   }
 };
+

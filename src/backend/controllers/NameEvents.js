@@ -36,3 +36,18 @@ exports.createNameEvent = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
+
+  exports.checkNameEvent = async (req, res) => {
+    try {
+        const { name } = req.query; // Se recibe el nombre como query param
+        if (!name) {
+            return res.status(400).json({ error: "El nombre del evento es requerido" });
+        }
+
+        const eventExists = await model.findOne({ name });
+        res.json({ exists: !!eventExists }); // Devuelve true si existe, false si no
+    } catch (error) {
+        console.error('Error al verificar el evento:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
