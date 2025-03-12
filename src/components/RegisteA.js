@@ -16,11 +16,11 @@ const RegisteA = () => {
       const response = await fetch(`http://localhost:5000/checkCedula/${cedula}`);
 
       if (response.ok) {
-        // NIT no existe
+        // Cedula no existe
         return false;
 
       } else if (response.status === 409) {
-        // NIT ya existe
+        // Cedula ya existe
         return true;
 
       } else {
@@ -76,7 +76,7 @@ const RegisteA = () => {
     const existingCedula = await checkExistingCedula(cedula);
 
     if (existingCedula) {
-      // El NIT ya existe, muestra una alerta
+      // El Cedula ya existe, muestra una alerta
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -88,7 +88,7 @@ const RegisteA = () => {
     const existingEmaila = await checkExistingEmaila(emaila);
 
     if (existingEmaila) {
-      // El NIT ya existe, muestra una alerta
+      // El Cedula ya existe, muestra una alerta
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -158,7 +158,7 @@ const RegisteA = () => {
       const response = await fetch('http://localhost:5000/Admin', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', // Asegúrate de especificar el tipo de contenido JSON
+          'Content-Type': 'application/json', 
         },
         body: JSON.stringify({
           nom,

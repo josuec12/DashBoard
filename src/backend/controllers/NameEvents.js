@@ -51,3 +51,15 @@ exports.createNameEvent = async (req, res) => {
         res.status(500).json({ message: 'Error interno del servidor' });
     }
 };
+
+exports.deleteExpiredEvents = async (req, res) => {
+  try {
+      const now = new Date(); // Obtiene la fecha actual
+      const result = await model.deleteMany({ date: { $lt: now } }); // Elimina eventos con fecha menor a hoy
+
+      res.json({ message: 'Eventos expirados eliminados', deletedCount: result.deletedCount });
+  } catch (error) {
+      console.error('Error al eliminar eventos expirados:', error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};

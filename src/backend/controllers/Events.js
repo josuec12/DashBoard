@@ -53,7 +53,6 @@ exports.getEventsByClient = async (req, res) => {
     const currentDate = moment();
 
     for (const event of events) {
-      let updatedDates = [];
 
       for (const eventDate of event.dateTime) {
         const daysUntilEvent = moment(eventDate).diff(currentDate, 'days') + 1;

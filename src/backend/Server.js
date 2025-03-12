@@ -8,8 +8,10 @@ const BesitzRouters = require('./routes/Besitz');
 const AuthRouters = require('./routes/Auth')
 const PasswordRouters = require('./routes/Password')
 const EventRouters = require('./routes/Event')
-const NameEventRouters = require('./routes/NameEvent')
+const NameEventRouters = require('./routes/NameEvent');
 require('dotenv').config();
+require('./Scheduler/Schedule'); 
+
 
 const port = process.env.PORT;
 const front = process.env.FRONT;
@@ -57,12 +59,7 @@ app.use((err, req, res, next) => {
 
 // Conexión a la base de datos
 Database();
-
 // Iniciar el servidor
 app.listen(port, () => {
     console.log('La app está en línea en el puerto', port);
 });
-
-
-
-

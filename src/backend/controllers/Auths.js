@@ -103,7 +103,7 @@ exports.loginU = async (req, res) => {
 
             const hostnamee = os.hostname();
 
-            const ipU = '190.242.100.114';
+            const ipU = '190.242.100.114'; // IP fija para prueba --- req.ip para ip dinamica
             const locationU = obtenerUbicacion.lookup(ipU);
             const latitud = locationU.ll[0];
             const longitud = locationU.ll[1];
